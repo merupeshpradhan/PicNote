@@ -1,0 +1,16 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "PicNote Backend",
+  "keywords": [
+    "JavaScript",
+    "Backend"
+  ],
+  "license": "ISC",
+  "author": "Rupesh Pradhan",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
