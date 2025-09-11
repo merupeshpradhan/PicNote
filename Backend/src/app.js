@@ -20,6 +20,11 @@ import userRoutes from "./routes/user.routes.js";
 
 app.use("/api/v1/users", userRoutes);
 
+// Import post for upload image
+import postRoutes from "./routes/post.routes.js";
+
+app.use("/api/v1/posts", postRoutes);
+
 // Error Handler
 import { errorHandler } from "./middlewares/error.middleware.js";
 
