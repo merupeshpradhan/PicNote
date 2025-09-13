@@ -6,7 +6,7 @@ import { uploadOnCloudinary } from "../utils/cloudinary.js";
 
 // Create a new post
 const createPost = asyncHandler(async (req, res) => {
-  const { description } = req.body;
+  const { imageName, description } = req.body;
 
   // Validate file
   const imageLocalPath = req.file?.path;
@@ -17,7 +17,12 @@ const createPost = asyncHandler(async (req, res) => {
   // Upload to Cloudinary
   const image = await uploadOnCloudinary(imageLocalPath);
   if (!image) {
-    throw new ApiError(400, "Image upload faild, please tray again.");
+    throw new ApiError(400, "Image upload failed, please try again.");
+  }
+  const imagUrl = image.secure_url || image.url;
+
+  if (!imageName) {
+    throw new ApiError(400, "Please provide image name.");
   }
 
   // Validate description
@@ -28,7 +33,8 @@ const createPost = asyncHandler(async (req, res) => {
   //   create post
   const post = await Post.create({
     user: req.user._id,
-    image: image.url,
+    image: imagUrl,
+    imageName,
     description,
   });
 
