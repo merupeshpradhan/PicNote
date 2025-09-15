@@ -2,7 +2,10 @@ import { Post } from "../models/post.schema.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
-import { uploadOnCloudinary } from "../utils/cloudinary.js";
+import {
+  deleteFromCloudinary,
+  uploadOnCloudinary,
+} from "../utils/cloudinary.js";
 
 // Create a new post
 const createPost = asyncHandler(async (req, res) => {
@@ -34,6 +37,7 @@ const createPost = asyncHandler(async (req, res) => {
   const post = await Post.create({
     user: req.user._id,
     image: imagUrl,
+    imagePublicId: image.public_id,
     imageName,
     description,
   });
@@ -66,4 +70,47 @@ const getuserPosts = asyncHandler(async function (req, res) {
     .json(new ApiResponse(200, posts, "User posts fetch successfully."));
 });
 
-export { createPost, getAllPost, getuserPosts };
+// Update Post
+const updatePost = asyncHandler(async (req, res) => {
+  const { postId } = req.params;
+  const { imageName, description } = req.body;
+
+  // Find the post
+  const post = await Post.findById(postId);
+  if (!post) {
+    throw new ApiError(404, "Post not found");
+  }
+
+  // only the owner can update
+  if (post.user.toString() !== req.user._id.toString()) {
+    throw new ApiError(403, "You are not authorized to edit this post");
+  }
+
+  // If user uploads a new image
+  if (req.file?.path) {
+    // delete old image from Cloudinary
+    if (post.imagePublicId) {
+      await deleteFromCloudinary(post.imagePublicId);
+    }
+
+    // upload new one
+    const uploadedImage = await uploadOnCloudinary(req.file.path);
+    if (!uploadedImage) {
+      throw new ApiError(400, "Image upload failed, please try again.");
+    }
+    post.image = uploadedImage.secure_url;
+    post.imagePublicId = uploadedImage.public_id;
+  }
+
+  // Update text fields if provided
+  if (imageName) post.imageName = imageName;
+  if (description) post.description = description;
+
+  await post.save();
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, post, "Post updated successfully"));
+});
+
+export { createPost, getAllPost, getuserPosts, updatePost };

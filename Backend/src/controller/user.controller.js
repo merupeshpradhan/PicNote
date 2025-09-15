@@ -9,7 +9,7 @@ const userSignup = asyncHandler(async (req, res) => {
 
   const avatarLocalPath = req.file?.path;
   if (!avatarLocalPath) {
-    throw new ApiError(400, "User cannot upload here image.");
+    throw new ApiError(400, "Please provide avatar image.");
   }
 
   const avatar = await uploadOnCloudinary(avatarLocalPath);

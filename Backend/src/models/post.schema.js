@@ -9,6 +9,7 @@ const postScehema = new Schema(
     },
     image: { type: String, required: [true, "Please provide image"] },
     imageName: { type: String, required: [true, "Please provide image name"] },
+    imagePublicId: { type: String },
     description: {
       type: String,
       required: [true, "Please provide description for this image"],
