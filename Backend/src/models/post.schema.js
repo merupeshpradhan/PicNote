@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
-const postScehema = new Schema(
+const postSchema = new Schema(
   {
     user: {
       type: Schema.Types.ObjectId,
@@ -18,4 +18,4 @@ const postScehema = new Schema(
   { timestamps: true }
 );
 
-export const Post = mongoose.model("Post", postScehema);
+export const Post = mongoose.model("Post", postSchema);

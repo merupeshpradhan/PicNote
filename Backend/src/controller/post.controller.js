@@ -113,4 +113,31 @@ const updatePost = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, post, "Post updated successfully"));
 });
 
-export { createPost, getAllPost, getuserPosts, updatePost };
+// Delete post
+const deletePost = asyncHandler(async (req, res) => {
+  const { postId } = req.params;
+
+  // Finde the post
+  const post = await Post.findById(postId);
+  if (!post) {
+    throw new ApiError(404, "Post not found");
+  }
+
+  // Only the owner can delete\
+  if (post.user.toString() !== req.user._id.toString()) {
+    throw new ApiError(403, "You are not authorized to delete this post");
+  }
+
+  // Delete image from Cloudinary if exists
+  if (post.imagePublicId) {
+    await deleteFromCloudinary(post.imagePublicId);
+  }
+  // Delete post from DB
+  await Post.findByIdAndDelete(postId);
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, "Post deleted successfully", {}));
+});
+
+export { createPost, getAllPost, getuserPosts, updatePost, deletePost };
