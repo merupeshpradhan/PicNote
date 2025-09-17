@@ -12,8 +12,6 @@ const userSignup = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Please provide avatar image.");
   }
 
-  const avatar = await uploadOnCloudinary(avatarLocalPath);
-
   if (!userName || !email || !password) {
     throw new ApiError(400, "New user please provide your all detials.");
   }
@@ -23,16 +21,36 @@ const userSignup = asyncHandler(async (req, res) => {
     throw new ApiError(400, "This email user already exist in our area.");
   }
 
-  const user = await User.create({
-    avatar: avatar.secure_url,
-    userName,
-    email,
-    password,
-  });
+  // create user first without avatar
+  let user = new User({ userName, email, password });
+
+  // make unique + friendly publicId using user._id
+  const publicId = `user_${user._id}_avatar`;
+
+  // upload avatar
+  const avatarUpload = await uploadOnCloudinary(avatarLocalPath, publicId);
+  if (!avatarUpload) {
+    throw new ApiError(400, "Avatar upload failed");
+  }
+
+  // save avatar info into user object
+  user.avatar = avatarUpload.secure_url;
+  user.avatarPublicId = avatarUpload.public_id;
+
+  // const user = await User.create({
+  //   avatar: avatar.secure_url,
+  //   userName,
+  //   email,
+  //   password,
+  // });
+
+  // save the user to DB
+  await user.save();
 
   const userData = {
     id: user._id,
     avatar: user.avatar,
+    avatarPublicId: user.avatarPublicId,
     userName: user.userName,
     email: user.email,
   };

@@ -12,17 +12,19 @@ cloudinary.config({
 
 console.log("\n CLOUDINARY KEY : ", process.env.CLOUDINARY_API_KEY);
 
-const uploadOnCloudinary = async (localFilePath) => {
+const uploadOnCloudinary = async (localFilePath,publicId) => {
   try {
     if (!localFilePath) return null;
 
     const response = await cloudinary.uploader.upload(localFilePath, {
       resource_type: "auto",
+      public_id: publicId, // pass unique + friendly name here
+      overwrite: true, // update if same public_id
     });
 
     console.log("\n ✅ Cloudinary upload success  :", response.secure_url);
 
-    fs.unlinkSync(localFilePath);
+    fs.unlinkSync(localFilePath); // remove file from server
     return response;
   } catch (error) {
     console.log("\n ❌ Cloudinary upload error  :", error);

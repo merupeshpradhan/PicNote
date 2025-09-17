@@ -11,33 +11,49 @@ import {
 const createPost = asyncHandler(async (req, res) => {
   const { imageName, description } = req.body;
 
+  // Upload to Cloudinary
+  // const image = await uploadOnCloudinary(imageLocalPath);
+  // if (!image) {
+  //   throw new ApiError(400, "Image upload failed, please try again.");
+  // }
+  // const imagUrl = image.secure_url || image.url;
+
+  // Validate fields
+  if (!imageName) {
+    throw new ApiError(400, "Please provide image name.");
+  }
+
+  if (!description) {
+    throw new ApiError(400, "Please provide description.");
+  }
+
   // Validate file
   const imageLocalPath = req.file?.path;
   if (!imageLocalPath) {
     throw new ApiError(400, "Please provide image to upload.");
   }
 
+  // unique + friendly publicId: userId + post image name
+  
+  //   const cleanName = (imageName || post.imageName).replace(/[^a-zA-Z0-9_-]/g, "_");
+  // const publicId = `user_${req.user._id}_post_${cleanName}`;
+
+  const publicId = `user_${req.user._id}_post_${imageName.replace(
+    /\s+/g,
+    "_"
+  )}`;
+
   // Upload to Cloudinary
-  const image = await uploadOnCloudinary(imageLocalPath);
-  if (!image) {
-    throw new ApiError(400, "Image upload failed, please try again.");
-  }
-  const imagUrl = image.secure_url || image.url;
-
-  if (!imageName) {
-    throw new ApiError(400, "Please provide image name.");
-  }
-
-  // Validate description
-  if (!description) {
-    throw new ApiError(400, "Please provide description.");
+  const imageUpload = await uploadOnCloudinary(imageLocalPath, publicId);
+  if (!imageUpload) {
+    throw new ApiError(400, "Post image upload failed");
   }
 
   //   create post
   const post = await Post.create({
     user: req.user._id,
-    image: imagUrl,
-    imagePublicId: image.public_id,
+    image: imageUpload.secure_url,
+    imagePublicId: imageUpload.public_id,
     imageName,
     description,
   });
@@ -94,7 +110,12 @@ const updatePost = asyncHandler(async (req, res) => {
     }
 
     // upload new one
-    const uploadedImage = await uploadOnCloudinary(req.file.path);
+    const publicId = `user_${req.user._id}_post_${(
+      imageName || post.imageName
+    ).replace(/\s+/g, "_")}`;
+
+    const uploadedImage = await uploadOnCloudinary(req.file.path, publicId);
+
     if (!uploadedImage) {
       throw new ApiError(400, "Image upload failed, please try again.");
     }
@@ -137,7 +158,7 @@ const deletePost = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .json(new ApiResponse(200, "Post deleted successfully", {}));
+    .json(new ApiResponse(200, {}, "Post deleted successfully"));
 });
 
 export { createPost, getAllPost, getuserPosts, updatePost, deletePost };
