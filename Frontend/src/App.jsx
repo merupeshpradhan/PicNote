@@ -1,9 +1,10 @@
 import { Routes, Route } from "react-router-dom";
-import Navbar from "./assets/components/Navbar";
-import Home from "./assets/pages/Home";
-import Login from "./assets/pages/Login";
-import Register from "./assets/pages/Register";
-import Post from "./assets/pages/post";
+import Home from "./pages/Home";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+import Post from "./pages/Post";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/post" element={<Post />} />
       </Routes>
+      <Footer />
     </div>
   );
 }
