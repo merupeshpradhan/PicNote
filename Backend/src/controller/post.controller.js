@@ -34,7 +34,7 @@ const createPost = asyncHandler(async (req, res) => {
   }
 
   // unique + friendly publicId: userId + post image name
-  
+
   //   const cleanName = (imageName || post.imageName).replace(/[^a-zA-Z0-9_-]/g, "_");
   // const publicId = `user_${req.user._id}_post_${cleanName}`;
 
@@ -69,7 +69,7 @@ const getAllPost = asyncHandler(async function (req, res) {
 
   return res
     .status(200)
-    .json(new ApiResponse(200, posts, "Posts fetch successfully."));
+    .json(new ApiResponse(200,posts, "Posts fetch successfully."));
 });
 
 // Get posts by a specific user

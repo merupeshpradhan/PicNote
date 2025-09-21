@@ -7,10 +7,10 @@ function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const userLogin = async (e) => {
+  const userLogin = (e) => {
     e.preventDefault();
 
-    const res = await axios
+    axios
       .post(
         "http://localhost:4000/api/v1/users/login",
         {
