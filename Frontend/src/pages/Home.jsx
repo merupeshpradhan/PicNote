@@ -41,14 +41,16 @@ function Home() {
   }
 
   return (
-    <div>
+    <div className="w-[100%] flex gap-5 p-5">
       {posts.map((post) => (
-        <div key={post._id} className="">
+        <div key={post._id} className="flex flex-col items-center">
           <img
             src={post.image}
             alt={post.imageName}
-            className="w-full h-64 object-cover"
+            className=" h-[48vh] object-cover"
           />
+          <p className="text-xl font-semibold">{post.imageName}</p>
+          {/* <p>{post.description}</p> */}
         </div>
       ))}
     </div>
