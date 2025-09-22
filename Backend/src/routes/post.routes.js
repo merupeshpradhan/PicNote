@@ -18,7 +18,8 @@ router.route("/").post(authMiddleware, upload.single("image"), createPost);
 router.route("/").get(getAllPost);
 
 // Get user posts (only logged in user can access)
-router.route("/user/:userId").get(authMiddleware, getuserPosts);
+// router.route("/user/:userId").get(authMiddleware, getuserPosts);
+router.route("/user/:userId").get( getuserPosts);
 
 // Update post (login required)
 router
