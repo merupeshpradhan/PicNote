@@ -23,7 +23,7 @@ router.route("/user/:userId").get( getuserPosts);
 
 // Update post (login required)
 router
-  .route("/:postId")
+  .route("/update/:postId")
   .put(authMiddleware, upload.single("image"), updatePost);
 
 // Delete post (login required)

@@ -1,0 +1,45 @@
+import axios from "axios";
+import { useEffect } from "react";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
+
+function PostOwnerDetails() {
+  const { userId } = useParams();
+  const [ownerDetails, setOwnerDetails] = useState(null);
+
+  useEffect(() => {
+    const getOwnerDetails = async () => {
+      const res = await axios.get(
+        `http://localhost:4000/api/v1/posts/user/${userId}`
+      );
+
+      console.log("owner details", res.data.data);
+
+      if (res.data.data.length > 0) {
+        setOwnerDetails(res.data.data[0].user);
+      }
+    };
+
+    getOwnerDetails();
+  }, [userId]);
+
+  if (!ownerDetails) {
+    return <div>Loading user details...</div>;
+  }
+
+  return (
+    <div className="bg-blue-200 w-[20vw] h-[100vh]">
+      <div key={ownerDetails._id} className="flex flex-col items-center mt-[3vh] gap-3">
+        <img
+          src={ownerDetails.avatar}
+          alt={ownerDetails.userName}
+          className="w-[50%]"
+        />
+        <h1>{ownerDetails.userName}</h1>
+        <p>{ownerDetails.email}</p>
+      </div>
+    </div>
+  );
+}
+
+export default PostOwnerDetails;
