@@ -116,9 +116,9 @@ const updatePost = asyncHandler(async (req, res) => {
   }
 
   // only the owner can update
-  if (post.user.toString() !== req.user._id.toString()) {
-    throw new ApiError(403, "You are not authorized to edit this post");
-  }
+  // if (post.user.toString() !== req.user._id.toString()) {
+  //   throw new ApiError(403, "You are not authorized to edit this post");
+  // }
 
   // If user uploads a new image
   if (req.file?.path) {
@@ -147,6 +147,8 @@ const updatePost = asyncHandler(async (req, res) => {
 
   await post.save();
 
+  await post.populate("user", "userName avatar email");
+
   return res
     .status(200)
     .json(new ApiResponse(200, post, "Post updated successfully"));
@@ -156,16 +158,18 @@ const updatePost = asyncHandler(async (req, res) => {
 const deletePost = asyncHandler(async (req, res) => {
   const { postId } = req.params;
 
+  // console.log("Deleting postId:", req.params.postId);
+
   // Finde the post
   const post = await Post.findById(postId);
   if (!post) {
     throw new ApiError(404, "Post not found");
   }
 
-  // Only the owner can delete\
-  if (post.user.toString() !== req.user._id.toString()) {
-    throw new ApiError(403, "You are not authorized to delete this post");
-  }
+  // Only the owner can delete
+  // if (post.user.toString() !== req.user._id.toString()) {
+  //   throw new ApiError(403, "You are not authorized to delete this post");
+  // }
 
   // Delete image from Cloudinary if exists
   if (post.imagePublicId) {
