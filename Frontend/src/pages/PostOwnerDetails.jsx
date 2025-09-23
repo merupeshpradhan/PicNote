@@ -28,7 +28,7 @@ function PostOwnerDetails() {
   }
 
   return (
-    <div className="bg-blue-200 w-[20vw] h-[100vh]">
+    <div className="bg-blue-200 w-[14.5%] h-[100vh]">
       <div key={ownerDetails._id} className="flex flex-col items-center mt-[3vh] gap-3">
         <img
           src={ownerDetails.avatar}

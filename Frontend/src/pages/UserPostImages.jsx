@@ -18,6 +18,24 @@ function UserPostImages() {
     getUserPost();
   }, [userId]);
 
+  // DELETE handler
+  const handleDelete = async (postId) => {
+    if (!window.confirm("Are you sure you want to delete this post?")) return;
+
+    try {
+      await axios.delete(`http://localhost:4000/api/v1/posts/${postId}`, {
+        withCredentials: true,
+      });
+      alert("Post deleted successfully!");
+
+      // remove deleted post from the state
+      setUserPosts((prev) => prev.filter((post) => post._id !== postId));
+    } catch (error) {
+      alert(error.response?.data?.message || "Error deleting post");
+      console.log(error);
+    }
+  };
+
   return (
     <div className=" flex gap-5 p-5">
       {userPosts.map((userPost) => (
@@ -32,7 +50,10 @@ function UserPostImages() {
             >
               Update post
             </NavLink>
-            <button className="border rounded-sm px-3 py-1 text-red-500 hover:bg-red-500 hover:text-white font-bold transition duration-200 cursor-pointer">
+            <button
+              onClick={() => handleDelete(userPost._id)}
+              className="border rounded-sm px-3 py-1 text-red-500 hover:bg-red-500 hover:text-white font-bold transition duration-200 cursor-pointer"
+            >
               Delete
             </button>
             <NavLink

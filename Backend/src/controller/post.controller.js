@@ -69,7 +69,7 @@ const getAllPost = asyncHandler(async function (req, res) {
 
   return res
     .status(200)
-    .json(new ApiResponse(200,posts, "Posts fetch successfully."));
+    .json(new ApiResponse(200, posts, "Posts fetch successfully."));
 });
 
 // Get posts by a specific user
@@ -83,7 +83,25 @@ const getuserPosts = asyncHandler(async function (req, res) {
 
   return res
     .status(200)
-    .json(new ApiResponse(200, posts, "User posts fetch successfully."));
+    .json(new ApiResponse(200, posts, "User posts fetched successfully."));
+});
+
+// Get single post by ID
+const getPostById = asyncHandler(async function (req, res) {
+  const { postId } = req.params;
+
+  const post = await Post.findById(postId).populate(
+    "user",
+    "userName avatar email"
+  );
+
+  if (!post) {
+    throw new ApiError(404, "post not found");
+  }
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, post, "Post fetched successfylly"));
 });
 
 // Update Post
@@ -161,4 +179,11 @@ const deletePost = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, {}, "Post deleted successfully"));
 });
 
-export { createPost, getAllPost, getuserPosts, updatePost, deletePost };
+export {
+  createPost,
+  getAllPost,
+  getuserPosts,
+  getPostById,
+  updatePost,
+  deletePost,
+};
