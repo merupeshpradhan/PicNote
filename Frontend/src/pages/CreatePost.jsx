@@ -1,13 +1,13 @@
 import axios from "axios";
 import { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function CreatePost() {
   const [previewImage, setPreviewImage] = useState("");
   const [image, setImage] = useState("");
   const [imageName, setImageName] = useState("");
   const [description, setDescription] = useState("");
-  const navigate = Navigate;
+  const navigate = useNavigate();
 
   const handlePostCreation = async (e) => {
     e.preventDefault();
@@ -48,7 +48,7 @@ function CreatePost() {
             {previewImage ? <div>image</div> : <div>No image</div>}
           </div>
           <div className="">
-           <button>{image?"Change image":"Chose image"}</button>
+            <button>{image ? "Change image" : "Chose image"}</button>
           </div>
         </div>
         <div className="">
