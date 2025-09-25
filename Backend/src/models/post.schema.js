@@ -5,7 +5,9 @@ const postSchema = new Schema(
     user: {
       type: Schema.Types.ObjectId,
       ref: "User",
-      required: true,
+      // required: true, (With Login its required true if did not login then false)
+      // This required without Login
+      required: false,
     },
     image: { type: String, required: [true, "Please provide image"] },
     imageName: { type: String, required: [true, "Please provide image name"] },

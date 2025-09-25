@@ -38,10 +38,17 @@ const createPost = asyncHandler(async (req, res) => {
   //   const cleanName = (imageName || post.imageName).replace(/[^a-zA-Z0-9_-]/g, "_");
   // const publicId = `user_${req.user._id}_post_${cleanName}`;
 
-  const publicId = `user_${req.user._id}_post_${imageName.replace(
-    /\s+/g,
-    "_"
-  )}`;
+  // With Login ->
+  // const publicId = `user_${req.user._id}_post_${imageName.replace(
+  //   /\s+/g,
+  //   "_"
+  // )}`;
+
+  // With out Login ->
+  const userId = req.user?._id || null;
+  const publicId = userId
+    ? `user_${userId}_post_${imageName.replace(/\s+/g, "_")}`
+    : `_post_${imageName.replace(/\s+/g, "_")}`;
 
   // Upload to Cloudinary
   const imageUpload = await uploadOnCloudinary(imageLocalPath, publicId);
@@ -51,7 +58,10 @@ const createPost = asyncHandler(async (req, res) => {
 
   //   create post
   const post = await Post.create({
-    user: req.user._id,
+    // user: req.user._id, ( with Login )
+
+    // Now with out login
+    user: userId,
     image: imageUpload.secure_url,
     imagePublicId: imageUpload.public_id,
     imageName,

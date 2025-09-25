@@ -13,7 +13,8 @@ import { authMiddleware } from "../middlewares/auth.middleware.js";
 const router = Router();
 
 // Create post (login required)
-router.route("/").post(authMiddleware, upload.single("image"), createPost);
+// router.route("/").post(authMiddleware, upload.single("image"), createPost);
+router.route("/").post(upload.single("image"), createPost);
 
 // Get all posts (public or private – your choice)
 router.route("/").get(getAllPost);
