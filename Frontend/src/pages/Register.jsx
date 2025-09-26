@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { FaRegImage } from "react-icons/fa";
 
 function Register() {
   const [previewAvatar, setAvatarPreview] = useState("");
@@ -8,6 +9,8 @@ function Register() {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const userRegister = async (e) => {
     e.preventDefault();
@@ -21,6 +24,8 @@ function Register() {
       alert("Please provide your all detials.");
       return;
     }
+
+    setLoading(true);
 
     try {
       const formData = new FormData();
@@ -38,39 +43,57 @@ function Register() {
 
       console.log("You register successfully!", res);
       alert("You register successfully");
+
+      navigate("/login");
+
+      setAvatar("");
+      setUserName("");
+      setEmail("");
+      setPassword("");
     } catch (error) {
+      console.log(
+        "Please send your all detials.",
+        error.response?.message || error.message
+      );
+
       alert(
         "Oops! Something went wrong. Please check and complete all your details."
       );
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="h-[100vh] w-full flex justify-center items-center">
-      <div className="border border-red-200 shadow-lg shadow-red-300 rounded-2xl h-[full] w-[25%] flex flex-col ">
+      <div className="border border-sky-200 shadow-lg shadow-sky-300 rounded-2xl h-[full] w-[25%] flex flex-col ">
         <div className="flex justify-center py-2">
-          <h1 className="text-xl font-bold tracking-wider">Register</h1>
+          <h1 className="text-xl font-bold tracking-wider text-sky-500">
+            Register
+          </h1>
         </div>
         <form onSubmit={userRegister} className="flex flex-col gap-5 p-5">
-          <div className="flex gap-2 justify-around items-center">
-            <div className="border xl:h-[20vh] xl:w-[42%] rounded-full flex justify-center items-center overflow-hidden">
+          <div className="avatar-section flex gap-2 justify-around items-center">
+            <div className="avatar-preview-container border-2 border-sky-500 xl:h-[20vh] xl:w-[42%] rounded-md flex justify-center items-center overflow-hidden">
               {previewAvatar ? (
-                <div className="">
+                <div className="avatar-preview">
                   <img
                     src={previewAvatar}
                     alt="Avatar preview"
-                    className="w-full h-full object-cover rounded-full"
+                    className="w-full h-full object-cover "
                   />
                 </div>
               ) : (
-                <div className="font-semibold">No image</div>
+                <div className="font-semibold text-sky-500">
+                  <FaRegImage size={40} />
+                </div>
               )}
             </div>
-            <div className="">
+            <div className="avatar-selection">
               <button
                 type="button"
                 onClick={() => document.getElementById("avtarInput").click()}
-                className="bg-yellow-600 px-4 py-2 rounded-full font-semibold text-white text-[14px] hover:bg-yellow-800 cursor-pointer transition duration-200 tracking-wider"
+                className="bg-sky-500 px-4 py-2 rounded-full font-semibold text-white text-[14px] hover:bg-sky-800 cursor-pointer transition duration-200 tracking-wider"
               >
                 {avatar ? "Change your image" : "Provide your image"}
               </button>
@@ -93,51 +116,53 @@ function Register() {
             </div>
           </div>
           <div className="flex gap-2 justify-between items-center">
-            <label className="font-semibold">Full Name</label>
+            <label className="font-semibold text-blue-400">Full Name</label>
             <input
               type="text"
               placeholder="Enter your full name"
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
-              className="border xl:w-[75%] xl:py-1 p-1.5 outline-0"
+              className="border-2 border-sky-500 rounded-md xl:w-[75%] xl:py-1 p-1.5 outline-0 font-mono font-medium tracking-wide xl:text-[16px]"
             />
           </div>
           <div className="flex gap-2 justify-between items-center">
-            <label className="font-semibold">Email</label>
+            <label className="font-semibold text-blue-400">Email</label>
             <input
               type="text"
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="border xl:w-[75%] xl:py-1 p-1.5 outline-0"
+              className="border-2 border-sky-500 rounded-md xl:w-[75%] xl:py-1 p-1.5 outline-0 font-mono font-medium tracking-wide xl:text-[16px]"
             />
           </div>
           <div className="flex gap-2 justify-between items-center">
-            <label className="font-semibold">Password</label>
+            <label className="font-semibold text-blue-400">Password</label>
             <input
               type="password"
               placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="border xl:w-[75%] xl:py-1 p-1.5 outline-0"
+              className="border-2 border-sky-500 rounded-md xl:w-[75%] xl:py-1 p-1.5 outline-0 font-mono font-medium tracking-wide xl:text-[16px]"
             />
           </div>
 
           <div className="flex justify-center">
             <button
               type="submit"
-              className="bg-red-500 xl:w-[20%] p-1.5 rounded-lg text-white font-semibold tracking-wider text-[15px]"
+              className="bg-red-500 xl:py-1.5 xl:w-[33%] rounded-lg text-white xl:font-semibold xl:tracking-wider text-[18px] xl:mt-2 hover:bg-red-700 cursor-pointer transition duration-200"
             >
-              Register
+              {loading ? "Processing..." : "Register"}
             </button>
           </div>
         </form>
-        <div className="py-5">
-          <div className="xl:mt-5 flex justify-center">
-            <hr className="w-[95%]" />
+        <div className="py-1">
+          <div className=" flex justify-center">
+            <hr className="w-[95%] border-sky-500" />
           </div>
-          <Link to={"/login"} className="flex justify-center">
-            Login
+          <Link to={"/login"} className="flex justify-center p-5 ">
+            <button className="bg-green-500 xl:px-7 xl:py-1.5 xl:w-[90%]  rounded-lg xl:font-semibold xl:tracking-wider text-[18px] text-white hover:bg-green-700 cursor-pointer transition duration-200">
+              Login
+            </button>
           </Link>
         </div>
       </div>
