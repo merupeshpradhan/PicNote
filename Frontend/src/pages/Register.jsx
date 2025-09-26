@@ -1,7 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function Register() {
+  const [previewAvatar, setAvatarPreview] = useState("");
   const [avatar, setAvatar] = useState("");
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
@@ -49,24 +51,55 @@ function Register() {
         <div className="flex justify-center py-2">
           <h1 className="text-xl font-bold tracking-wider">Register</h1>
         </div>
-        <form onSubmit={userRegister} className="p-5 flex flex-col gap-5">
-          <div className="flex gap-2 justify-between items-center">
-            <label className="font-semibold">Your image</label>
-            <input
-              type="file"
-              placeholder="Provide your own image"
-              className="border xl:w-[75%] xl:py-1 p-1.5 outline-0"
-              onChange={(e) => setAvatar(e.target.files[0])}
-            />
+        <form onSubmit={userRegister} className="flex flex-col gap-5 p-5">
+          <div className="flex gap-2 justify-around items-center">
+            <div className="border xl:h-[20vh] xl:w-[42%] rounded-full flex justify-center items-center overflow-hidden">
+              {previewAvatar ? (
+                <div className="">
+                  <img
+                    src={previewAvatar}
+                    alt="Avatar preview"
+                    className="w-full h-full object-cover rounded-full"
+                  />
+                </div>
+              ) : (
+                <div className="font-semibold">No image</div>
+              )}
+            </div>
+            <div className="">
+              <button
+                type="button"
+                onClick={() => document.getElementById("avtarInput").click()}
+                className="bg-yellow-600 px-4 py-2 rounded-full font-semibold text-white text-[14px] hover:bg-yellow-800 cursor-pointer transition duration-200 tracking-wider"
+              >
+                {avatar ? "Change your image" : "Provide your image"}
+              </button>
+              <input
+                className="hidden"
+                id="avtarInput"
+                type="file"
+                accept="image/*"
+                placeholder="Provide your own image"
+                onChange={(e) => {
+                  const file = e.target.files[0];
+                  setAvatar(file);
+                  if (file) {
+                    setAvatarPreview(URL.createObjectURL(file));
+                  } else {
+                    setAvatarPreview(null);
+                  }
+                }}
+              />
+            </div>
           </div>
           <div className="flex gap-2 justify-between items-center">
             <label className="font-semibold">Full Name</label>
             <input
               type="text"
               placeholder="Enter your full name"
-              className="border xl:w-[75%] xl:py-1 p-1.5 outline-0"
-              onChange={(e) => setUserName(e.target.value)}
               value={userName}
+              onChange={(e) => setUserName(e.target.value)}
+              className="border xl:w-[75%] xl:py-1 p-1.5 outline-0"
             />
           </div>
           <div className="flex gap-2 justify-between items-center">
@@ -74,9 +107,9 @@ function Register() {
             <input
               type="text"
               placeholder="Enter your email"
-              className="border xl:w-[75%] xl:py-1 p-1.5 outline-0"
-              onChange={(e) => setEmail(e.target.value)}
               value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="border xl:w-[75%] xl:py-1 p-1.5 outline-0"
             />
           </div>
           <div className="flex gap-2 justify-between items-center">
@@ -84,9 +117,9 @@ function Register() {
             <input
               type="password"
               placeholder="Enter your password"
-              className="border xl:w-[75%] xl:py-1 p-1.5 outline-0"
-              onChange={(e) => setPassword(e.target.value)}
               value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="border xl:w-[75%] xl:py-1 p-1.5 outline-0"
             />
           </div>
 
@@ -99,6 +132,14 @@ function Register() {
             </button>
           </div>
         </form>
+        <div className="py-5">
+          <div className="xl:mt-5 flex justify-center">
+            <hr className="w-[95%]" />
+          </div>
+          <Link to={"/login"} className="flex justify-center">
+            Login
+          </Link>
+        </div>
       </div>
     </div>
   );
