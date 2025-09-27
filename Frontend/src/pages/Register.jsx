@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { FaRegImage } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 function Register() {
   const [previewAvatar, setAvatarPreview] = useState("");
@@ -16,12 +17,12 @@ function Register() {
     e.preventDefault();
 
     if (!avatar) {
-      alert("Provide your own image.");
+      toast.error("Provide your own image.");
       return;
     }
 
     if (!userName || !email || !password) {
-      alert("Please provide your all detials.");
+      toast.error("Please provide your all detials.");
       return;
     }
 
@@ -42,7 +43,8 @@ function Register() {
       );
 
       console.log("You register successfully!", res);
-      alert("You register successfully");
+
+      toast.success("You register successfully");
 
       navigate("/login");
 
@@ -56,7 +58,7 @@ function Register() {
         error.response?.message || error.message
       );
 
-      alert(
+      toast.error(
         "Oops! Something went wrong. Please check and complete all your details."
       );
     } finally {
@@ -66,9 +68,9 @@ function Register() {
 
   return (
     <div className="h-[100vh] w-full flex justify-center items-center">
-      <div className="border border-sky-200 shadow-lg shadow-sky-300 rounded-2xl h-[full] w-[25%] flex flex-col ">
+      <div className="border-2 border-sky-200 shadow-lg shadow-sky-300 rounded-2xl h-[full] w-[25%] flex flex-col">
         <div className="flex justify-center py-2">
-          <h1 className="text-xl font-bold tracking-wider text-sky-500">
+          <h1 className="text-xl font-bold tracking-wider text-red-500">
             Register
           </h1>
         </div>
@@ -116,33 +118,33 @@ function Register() {
             </div>
           </div>
           <div className="flex gap-2 justify-between items-center">
-            <label className="font-semibold text-blue-400">Full Name</label>
+            <label className="font-semibold text-gray-700">Full Name</label>
             <input
               type="text"
               placeholder="Enter your full name"
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
-              className="border-2 border-sky-500 rounded-md xl:w-[75%] xl:py-1 p-1.5 outline-0 font-mono font-medium tracking-wide xl:text-[16px]"
+              className="border-2 border-sky-400 focus:border-sky-600 rounded-md xl:w-[75%] xl:py-1 p-1.5 outline-0 font-mono font-medium tracking-wide xl:text-[16px]"
             />
           </div>
           <div className="flex gap-2 justify-between items-center">
-            <label className="font-semibold text-blue-400">Email</label>
+            <label className="font-semibold text-gray-700">Email</label>
             <input
               type="text"
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="border-2 border-sky-500 rounded-md xl:w-[75%] xl:py-1 p-1.5 outline-0 font-mono font-medium tracking-wide xl:text-[16px]"
+              className="border-2 border-sky-400 focus:border-sky-600 rounded-md xl:w-[75%] xl:py-1 p-1.5 outline-0 font-mono font-medium tracking-wide xl:text-[16px]"
             />
           </div>
           <div className="flex gap-2 justify-between items-center">
-            <label className="font-semibold text-blue-400">Password</label>
+            <label className="font-semibold text-gray-700">Password</label>
             <input
               type="password"
               placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="border-2 border-sky-500 rounded-md xl:w-[75%] xl:py-1 p-1.5 outline-0 font-mono font-medium tracking-wide xl:text-[16px]"
+              className="border-2 border-sky-400 focus:border-sky-600 rounded-md xl:w-[75%] xl:py-1 p-1.5 outline-0 font-mono font-medium tracking-wide xl:text-[16px]"
             />
           </div>
 
