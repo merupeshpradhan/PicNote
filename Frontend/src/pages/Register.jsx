@@ -16,16 +16,6 @@ function Register() {
   const userRegister = async (e) => {
     e.preventDefault();
 
-    if (!avatar) {
-      toast.error("Provide your own image.");
-      return;
-    }
-
-    if (!userName || !email || !password) {
-      toast.error("Please provide your all detials.");
-      return;
-    }
-
     setLoading(true);
 
     try {
@@ -53,14 +43,18 @@ function Register() {
       setEmail("");
       setPassword("");
     } catch (error) {
-      console.log(
-        "Please send your all detials.",
-        error.response?.message || error.message
-      );
+      // console.log(
+      //   "Please send your all detials.",
+      //   error.response?.data?.message || error.message
+      // );
 
-      toast.error(
-        "Oops! Something went wrong. Please check and complete all your details."
-      );
+      if (error.response) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error(
+          "Oops! Something went wrong. Please check and complete all your details."
+        );
+      }
     } finally {
       setLoading(false);
     }
@@ -68,13 +62,13 @@ function Register() {
 
   return (
     <div className="h-[100vh] w-full flex justify-center items-center">
-      <div className="border-2 border-sky-200 shadow-lg shadow-sky-300 rounded-2xl h-[full] w-[25%] flex flex-col">
+      <div className="register-container border-2 border-sky-200 shadow-lg shadow-sky-300 rounded-2xl h-[full] w-[25%] flex flex-col">
         <div className="flex justify-center py-2">
           <h1 className="text-xl font-bold tracking-wider text-red-500">
             Register
           </h1>
         </div>
-        <form onSubmit={userRegister} className="flex flex-col gap-5 p-5">
+        <form onSubmit={userRegister} className="register-form flex flex-col gap-5 p-5">
           <div className="avatar-section flex gap-2 justify-around items-center">
             <div className="avatar-preview-container border-2 border-sky-500 xl:h-[20vh] xl:w-[42%] rounded-md flex justify-center items-center overflow-hidden">
               {previewAvatar ? (
@@ -117,7 +111,7 @@ function Register() {
               />
             </div>
           </div>
-          <div className="flex gap-2 justify-between items-center">
+          <div className="fullName flex gap-2 justify-between items-center">
             <label className="font-semibold text-gray-700">Full Name</label>
             <input
               type="text"
@@ -127,7 +121,7 @@ function Register() {
               className="border-2 border-sky-400 focus:border-sky-600 rounded-md xl:w-[75%] xl:py-1 p-1.5 outline-0 font-mono font-medium tracking-wide xl:text-[16px]"
             />
           </div>
-          <div className="flex gap-2 justify-between items-center">
+          <div className="email flex gap-2 justify-between items-center">
             <label className="font-semibold text-gray-700">Email</label>
             <input
               type="text"
@@ -137,7 +131,7 @@ function Register() {
               className="border-2 border-sky-400 focus:border-sky-600 rounded-md xl:w-[75%] xl:py-1 p-1.5 outline-0 font-mono font-medium tracking-wide xl:text-[16px]"
             />
           </div>
-          <div className="flex gap-2 justify-between items-center">
+          <div className="password flex gap-2 justify-between items-center">
             <label className="font-semibold text-gray-700">Password</label>
             <input
               type="password"
@@ -148,7 +142,7 @@ function Register() {
             />
           </div>
 
-          <div className="flex justify-center">
+          <div className="submit-button flex justify-center">
             <button
               type="submit"
               className="bg-red-500 xl:py-1.5 xl:w-[33%] rounded-lg text-white xl:font-semibold xl:tracking-wider text-[18px] xl:mt-2 hover:bg-red-700 cursor-pointer transition duration-200"
@@ -157,7 +151,7 @@ function Register() {
             </button>
           </div>
         </form>
-        <div className="py-1">
+        <div className="link-to-login py-1">
           <div className=" flex justify-center">
             <hr className="w-[95%] border-sky-500" />
           </div>
