@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { FaRegImage } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaRegImage } from "react-icons/fa";
 import { toast } from "react-toastify";
 
 function Register() {
@@ -11,6 +11,7 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const userRegister = async (e) => {
@@ -68,7 +69,10 @@ function Register() {
             Register
           </h1>
         </div>
-        <form onSubmit={userRegister} className="register-form flex flex-col gap-5 p-5">
+        <form
+          onSubmit={userRegister}
+          className="register-form flex flex-col gap-5 p-5"
+        >
           <div className="avatar-section flex gap-2 justify-around items-center">
             <div className="avatar-preview-container border-2 border-sky-500 xl:h-[20vh] xl:w-[42%] rounded-md flex justify-center items-center overflow-hidden">
               {previewAvatar ? (
@@ -118,7 +122,7 @@ function Register() {
               placeholder="Enter your full name"
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
-              className="border-2 border-sky-400 focus:border-sky-600 rounded-md xl:w-[75%] xl:py-1 p-1.5 outline-0 font-mono font-medium tracking-wide xl:text-[16px]"
+              className="border-2 border-sky-400 focus:border-sky-600 rounded-md xl:w-[75%] xl:py-1.5 p-1.5 outline-0 font-mono font-medium tracking-wide xl:text-[16px]"
             />
           </div>
           <div className="email flex gap-2 justify-between items-center">
@@ -128,18 +132,27 @@ function Register() {
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="border-2 border-sky-400 focus:border-sky-600 rounded-md xl:w-[75%] xl:py-1 p-1.5 outline-0 font-mono font-medium tracking-wide xl:text-[16px]"
+              className="border-2 border-sky-400 focus:border-sky-600 rounded-md xl:w-[75%] xl:py-1.5 p-1.5 outline-0 font-mono font-medium tracking-wide xl:text-[16px]"
             />
           </div>
-          <div className="password flex gap-2 justify-between items-center">
+          <div className="password flex gap-2 justify-between items-center relative">
             <label className="font-semibold text-gray-700">Password</label>
-            <input
-              type="password"
-              placeholder="Enter your password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="border-2 border-sky-400 focus:border-sky-600 rounded-md xl:w-[75%] xl:py-1 p-1.5 outline-0 font-mono font-medium tracking-wide xl:text-[16px]"
-            />
+            <div className="xl:w-[75%] relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="border-2 border-sky-400 focus:border-sky-600 rounded-md xl:w-full xl:py-1.5 p-1.5 outline-0 font-mono font-medium tracking-wide xl:text-[16px]"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute inset-y-0 right-2 flex items-center text-gray-600 hover:text-gray-900  cursor-pointer"
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
+            </div>
           </div>
 
           <div className="submit-button flex justify-center">

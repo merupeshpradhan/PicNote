@@ -2,10 +2,12 @@ import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const userLogin = (e) => {
@@ -51,7 +53,10 @@ function Login() {
             Login
           </h1>
         </div>
-        <form onSubmit={userLogin} className="login-form p-5 flex flex-col gap-5">
+        <form
+          onSubmit={userLogin}
+          className="login-form p-5 flex flex-col gap-5"
+        >
           <div className="flex gap-2 justify-between items-center">
             <label className="font-semibold text-green-950">Email</label>
             <input
@@ -62,15 +67,24 @@ function Login() {
               value={email}
             />
           </div>
-          <div className="flex gap-2 justify-between items-center">
+          <div className="flex gap-2 justify-between items-center relative">
             <label className="font-semibold text-green-950">Password</label>
-            <input
-              type="password"
-              placeholder="Enter your password"
-              className="border-2 border-gray-400 focus:border-gray-600  rounded-md xl:w-[75%] xl:py-1.5 p-1.5 outline-0 font-mono font-medium tracking-wide xl:text-[16px]"
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-            />
+            <div className="xl:w-[75%] relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Enter your password"
+                className="border-2 border-gray-400 focus:border-gray-600  rounded-md w-full xl:py-1.5 p-1.5 outline-0 font-mono font-medium tracking-wide xl:text-[16px]"
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute inset-y-0 right-2 flex items-center text-gray-600 hover:text-gray-900 cursor-pointer"
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
+            </div>
           </div>
 
           <div className="login-button flex justify-center">
