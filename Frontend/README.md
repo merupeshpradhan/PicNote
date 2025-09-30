@@ -1,1 +1,0 @@
-# PicNote Frontend

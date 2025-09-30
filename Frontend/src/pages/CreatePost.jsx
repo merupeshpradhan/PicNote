@@ -44,10 +44,10 @@ function CreatePost() {
     <div className="h-[100vh] flex flex-col items-center gap-12 mt-20">
       <form onSubmit={handlePostCreation} className="flex flex-col gap-5">
         <div className="Image-input-and-view flex gap-5 items-center ">
-          <div className="image-view xl:h-[20vh] xl:w-[10vw] rounded-md border flex justify-center items-center">
+          <div className="image-view xl:h-[20vh] xl:w-[10vw] rounded-md border flex justify-center items-center overflow-hidden">
             {ImagePreview ? (
               <div>
-                <img src={ImagePreview} alt="Image preview" />
+                <img src={ImagePreview} alt="Image preview" className="h-full w-full object-cover"/>
               </div>
             ) : (
               <div>No image</div>

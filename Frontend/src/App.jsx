@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
@@ -11,9 +11,13 @@ import CreatePost from "./pages/CreatePost";
 // import DeletePost from "./pages/DeletePost";
 
 function App() {
+  const location = useLocation();
+
+  // Chek if current route is login or register
+  const hideLayout = ["/login", "/register"].includes(location.pathname);
   return (
     <div className="">
-      {/* <Navbar /> */}
+      {!hideLayout && <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
@@ -24,7 +28,7 @@ function App() {
         <Route path="/update/:postId" element={<UpdatePost />} />
         {/* <Route path="/delete/:postId" element={<DeletePost />} /> */}
       </Routes>
-      {/* <Footer /> */}
+      {!hideLayout && <Footer />}
     </div>
   );
 }
