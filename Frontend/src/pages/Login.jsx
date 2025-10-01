@@ -10,41 +10,31 @@ function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
-  const userLogin = (e) => {
+  const userLogin = async (e) => {
     e.preventDefault();
 
-    axios
-      .post(
+    try {
+      const res = await axios.post(
         "http://localhost:4000/api/v1/users/login",
-        {
-          email,
-          password,
-        },
+        { email, password },
         { withCredentials: true }
-      )
-      .then((res) => {
-        console.log("User login successfully", res);
-
-        toast.success("Welcome user to PicNote");
-
-        const user = res.data.data;
-        localStorage.setItem("user", JSON.stringify(user)); // Save user
-        navigate("/");
-
-        setEmail("");
-        setPassword("");
-      })
-      .catch((err) => {
-        // console.log(err);
-
-        if (err.response) {
-          toast.error(err.response.data.message);
-        } else {
-          toast.error(
-            "Somthing went wrong to login, please provide correct email and password."
-          );
-        }
-      });
+      );
+      const userData = res.data.data;
+      localStorage.setItem("userName", userData.userName);
+      localStorage.setItem("avatar", userData.avatar);
+      localStorage.setItem("accessToken", "true");
+      toast.success("Welcome to PicNote!");
+      setEmail("");
+      setPassword("");
+      navigate("/");
+    } catch (err) {
+      setPassword("");
+      if (err.response) {
+        toast.error(err.response.data.message);
+      } else {
+        toast.error("Something went wrong. Please try again.");
+      }
+    }
   };
 
   return (

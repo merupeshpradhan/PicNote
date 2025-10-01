@@ -1,19 +1,80 @@
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 function Navbar() {
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    // Chek if user is logged in
+    const storedUser = localStorage.getItem("userName");
+    const storedAvatar = localStorage.getItem("avatar");
+
+    if (storedUser) {
+      setUser({ userName: storedUser, avatar: storedAvatar });
+    }
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      await axios.post(
+        `http://localhost:4000/api/v1/users/logout`,
+        {},
+        { withCredentials: true }
+      );
+
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("fullName");
+      localStorage.removeItem("avatar");
+
+      // update state so Navbar re-renders
+      setUser(null);
+
+      // Do NOT navigate, user stays on current page
+    } catch (error) {
+      console.error("Logout error:", error);
+      alert("Logout failed. Please try again.");
+    }
+  };
   return (
-    <nav className="bg-white shadow-md py-2.5 px-10 flex justify-between items-center">
+    <nav className="bg-white shadow-md py-3 px-10 flex justify-between items-center">
       <h1 className="text-2xl font-bold text-gray-800 tracking-wider">
         PicNote
       </h1>
       <div className="">
         <ul className="flex gap-5">
-          <li className=" flex items-center bg-green-700 py-1.5 px-4 rounded-md text-md font-semibold text-white">
-            <Link to={"/login"}>Login</Link>
-          </li>
-          <li className="bg-red-700 py-1.5 px-4 rounded-md text-md font-semibold text-white">
-            <Link to={"/register"}>Register</Link>
-          </li>
+          {!user ? (
+            <div className="login-register flex gap-5 justify-center items-center">
+              <li className=" flex items-center bg-green-700 py-1.5 px-4 rounded-md text-md font-semibold text-white">
+                <Link to={"/login"}>Login</Link>
+              </li>
+              <li className="bg-red-700 py-1.5 px-4 rounded-md text-md font-semibold text-white">
+                <Link to={"/register"}>Register</Link>
+              </li>
+            </div>
+          ) : (
+            <div className="uerImg-and-name-and-logout flex gap-5 justify-center items-center">
+              <div className="flex justify-center items-center gap-5">
+                <div className="flex justify-center items-center gap-2">
+                  {user.avatar && (
+                  <img
+                    src={user.avatar}
+                    alt={user.userName}
+                    className="w-10 h-10 rounded-full"
+                  />
+                )}
+                <span className="font-semibold">{user.userName}</span>
+                </div>
+                <button
+                  onClick={handleLogout}
+                  className="border-2 border-red-800 px-2 py-1 rounded-md hover:bg-red-800 hover:text-white font-semibold transition duration-200 cursor-pointer tracking-wide"
+                >
+                  Logout
+                </button>
+              </div>
+            </div>
+          )}
         </ul>
       </div>
     </nav>
