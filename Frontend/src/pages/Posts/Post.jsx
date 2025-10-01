@@ -52,9 +52,9 @@ function Post() {
           />
           <p className="text-xl font-semibold">{post.imageName}</p>
 
-          {/* <NavLink to={`/profile/${post.user._id}`}>
+          <NavLink to={`/profile/${post.user._id}`}>
             Posted by: {post.user.userName}
-          </NavLink> */}
+          </NavLink>
         </div>
       ))}
     </div>

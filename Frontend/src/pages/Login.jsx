@@ -27,6 +27,8 @@ function Login() {
 
         toast.success("Welcome user to PicNote");
 
+        const user = res.data.data;
+        localStorage.setItem("user", JSON.stringify(user)); // Save user
         navigate("/");
 
         setEmail("");

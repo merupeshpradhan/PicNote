@@ -12,11 +12,6 @@ const createPost = asyncHandler(async (req, res) => {
   const { imageName, description } = req.body;
 
   // Upload to Cloudinary
-  // const image = await uploadOnCloudinary(imageLocalPath);
-  // if (!image) {
-  //   throw new ApiError(400, "Image upload failed, please try again.");
-  // }
-  // const imagUrl = image.secure_url || image.url;
 
   // Validate fields
   if (!imageName) {
@@ -34,23 +29,29 @@ const createPost = asyncHandler(async (req, res) => {
   }
 
   // unique + friendly publicId: userId + post image name
-
-  //   const cleanName = (imageName || post.imageName).replace(/[^a-zA-Z0-9_-]/g, "_");
+  // const cleanName = (imageName || post.imageName).replace(/[^a-zA-Z0-9_-]/g, "_");
   // const publicId = `user_${req.user._id}_post_${cleanName}`;
 
-  // With Login ->
-  // const publicId = `user_${req.user._id}_post_${imageName.replace(
-  //   /\s+/g,
-  //   "_"
-  // )}`;
+  // With Login image name ->
+  const publicId = `user_${req.user._id}_post_${imageName.replace(
+    /\s+/g,
+    "_"
+  )}`;
 
-  // With out Login ->
-  const userId = req.user?._id || null;
-  const publicId = userId
-    ? `user_${userId}_post_${imageName.replace(/\s+/g, "_")}`
-    : `_post_${imageName.replace(/\s+/g, "_")}`;
+  // With out Login image name ->
+  // const userId = req.user?._id || null;
+  // const publicId = userId
+  //   ? `user_${userId}_post_${imageName.replace(/\s+/g, "_")}`
+  //   : `_post_${imageName.replace(/\s+/g, "_")}`;
 
-  // Upload to Cloudinary
+  // Upload to Cloudinary 1st way
+  // const image = await uploadOnCloudinary(imageLocalPath);
+  // if (!image) {
+  //   throw new ApiError(400, "Image upload failed, please try again.");
+  // }
+  // const imagUrl = image.secure_url || image.url;
+
+  // Upload to Cloudinary 2nd way
   const imageUpload = await uploadOnCloudinary(imageLocalPath, publicId);
   if (!imageUpload) {
     throw new ApiError(400, "Post image upload failed");
@@ -58,10 +59,12 @@ const createPost = asyncHandler(async (req, res) => {
 
   //   create post
   const post = await Post.create({
-    // user: req.user._id, ( with Login )
+    // with Login
+    user: req.user._id,
 
     // Now with out login
-    user: userId,
+    // user: userId,
+
     image: imageUpload.secure_url,
     imagePublicId: imageUpload.public_id,
     imageName,

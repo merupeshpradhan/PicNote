@@ -18,8 +18,14 @@ function CreatePost() {
       formData.append("imageName", imageName);
       formData.append("description", description);
 
+      const token = localStorage.getItem("accessToken");
+
       await axios.post("http://localhost:4000/api/v1/posts", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
       });
 
       console.log("User post create successfully");
@@ -47,7 +53,11 @@ function CreatePost() {
           <div className="image-view xl:h-[20vh] xl:w-[10vw] rounded-md border flex justify-center items-center overflow-hidden">
             {ImagePreview ? (
               <div>
-                <img src={ImagePreview} alt="Image preview" className="h-full w-full object-cover"/>
+                <img
+                  src={ImagePreview}
+                  alt="Image preview"
+                  className="h-full w-full object-cover"
+                />
               </div>
             ) : (
               <div>No image</div>

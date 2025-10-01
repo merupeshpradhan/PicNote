@@ -7,11 +7,17 @@ function UserPostImages() {
   const [userPosts, setUserPosts] = useState([]);
 
   const getUserPost = async () => {
-    const res = await axios.get(
-      `http://localhost:4000/api/v1/posts/user/${userId}`
-    );
-    setUserPosts(res.data.data);
-    console.log(res.data.data);
+    const token = localStorage.getItem("accessToken");
+    try {
+      const res = await axios.get(
+        `http://localhost:4000/api/v1/posts/user/${userId}`,
+        { headers: { Authorization: `Beare ${token}` }, withCredentials: true }
+      );
+      setUserPosts(res.data.data);
+      console.log(res.data.data);
+    } catch (error) {
+      console.error("Error fetching user posts:", error);
+    }
   };
 
   useEffect(() => {
@@ -21,9 +27,10 @@ function UserPostImages() {
   // DELETE handler
   const handleDelete = async (postId) => {
     if (!window.confirm("Are you sure you want to delete this post?")) return;
-
+    const token = localStorage.getItem("accessToken");
     try {
       await axios.delete(`http://localhost:4000/api/v1/posts/${postId}`, {
+        headers: { Authorization: `Bearer ${token}` },
         withCredentials: true,
       });
       alert("Post deleted successfully!");

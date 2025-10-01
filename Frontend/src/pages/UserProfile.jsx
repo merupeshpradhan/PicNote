@@ -1,5 +1,5 @@
-import PostOwnerDetails from "./PostOwnerDetails";
-import UserPostImages from "./UserPostImages";
+import PostOwnerDetails from "./Posts/PostOwnerDetails";
+import UserPostImages from "./Posts/UserPostImages";
 
 function UserProfile() {
   return (

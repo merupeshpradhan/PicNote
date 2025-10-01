@@ -2,13 +2,13 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-import Post from "./pages/Post";
+import Post from "./pages/Posts/Post";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import UserProfile from "./pages/UserProfile";
-import UpdatePost from "./pages/UpdatePost";
-import CreatePost from "./pages/CreatePost";
-// import DeletePost from "./pages/DeletePost";
+import UpdatePost from "./pages/Posts/UpdatePost";
+import CreatePost from "./pages/Posts/CreatePost";
+import DeletePost from "./pages/Posts/DeletePost";
 
 function App() {
   const location = useLocation();
@@ -26,7 +26,7 @@ function App() {
         <Route path="/createPost/:userId" element={<CreatePost />} />
         <Route path="/profile/:userId" element={<UserProfile />} />
         <Route path="/update/:postId" element={<UpdatePost />} />
-        {/* <Route path="/delete/:postId" element={<DeletePost />} /> */}
+        <Route path="/delete/:postId" element={<DeletePost />} />
       </Routes>
       {!hideLayout && <Footer />}
     </div>

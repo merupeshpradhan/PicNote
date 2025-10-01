@@ -9,14 +9,25 @@ function PostOwnerDetails() {
 
   useEffect(() => {
     const getOwnerDetails = async () => {
-      const res = await axios.get(
-        `http://localhost:4000/api/v1/posts/user/${userId}`
-      );
+      const token = localStorage.getItem("accessToken");
+      console.log(token);
+      try {
+        const res = await axios.get(
+          `http://localhost:4000/api/v1/posts/user/${userId}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+            withCredentials: true,
+          }
+        );
 
-      console.log("owner details", res.data.data);
+        console.log("owner details", res.data.data);
 
-      if (res.data.data.length > 0) {
-        setOwnerDetails(res.data.data[0].user);
+        const post = res.data.data;
+        if (post.length > 0) {
+          setOwnerDetails(post[0].user);
+        }
+      } catch (error) {
+        console.error("Error fetching owner details:", error);
       }
     };
 
@@ -29,7 +40,10 @@ function PostOwnerDetails() {
 
   return (
     <div className="bg-blue-200 w-[14.5%] h-[100vh]">
-      <div key={ownerDetails._id} className="flex flex-col items-center mt-[3vh] gap-3">
+      <div
+        key={ownerDetails._id}
+        className="flex flex-col items-center mt-[3vh] gap-3"
+      >
         <img
           src={ownerDetails.avatar}
           alt={ownerDetails.userName}
