@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function CreatePost() {
   const [ImagePreview, setImagePreview] = useState("");
@@ -37,13 +38,14 @@ function CreatePost() {
       setImageName("");
       setDescription("");
     } catch (error) {
-      alert("Please provide all thing to create post");
-
+      // toast.error("Please log in first to create a post.");
+      toast.error(error.response?.data?.message ||"Error creatingpost.")
       console.error(
         error.response?.data?.message || "Error creation post",
         error
       );
     }
+      // alert("Please provide all thing to create post");
   };
 
   return (

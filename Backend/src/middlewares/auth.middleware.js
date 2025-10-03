@@ -9,7 +9,7 @@ export const authMiddleware = async (req, res, next) => {
       req.cookies.accessToken ||
       req.header("Authorization")?.replace("Bearer ", "").trim();
     if (!token) {
-      throw new ApiError(401, "Not authorized, token missing");
+      throw new ApiError(401, "Please log in first to access this feature");
     }
 
     // Verify token
@@ -18,12 +18,12 @@ export const authMiddleware = async (req, res, next) => {
     // Find user in DB
     req.user = await User.findById(decode.id).select("-password");
     if (!req.user) {
-      throw new ApiError(401, "User not found, invalid token");
+      throw new ApiError(401, "User not found. Please login again.");
     }
 
     // Continue
     next();
   } catch (error) {
-    next(new ApiError(401, "Not Authorized, invalid token"));
+    next(new ApiError(401, "Please log in first to access this feature"));
   }
 };

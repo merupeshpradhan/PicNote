@@ -13,6 +13,12 @@ const createPost = asyncHandler(async (req, res) => {
 
   // Upload to Cloudinary
 
+  // Validate file
+  const imageLocalPath = req.file?.path;
+  if (!imageLocalPath) {
+    throw new ApiError(400, "Please provide image to upload.");
+  }
+
   // Validate fields
   if (!imageName) {
     throw new ApiError(400, "Please provide image name.");
@@ -20,12 +26,6 @@ const createPost = asyncHandler(async (req, res) => {
 
   if (!description) {
     throw new ApiError(400, "Please provide description.");
-  }
-
-  // Validate file
-  const imageLocalPath = req.file?.path;
-  if (!imageLocalPath) {
-    throw new ApiError(400, "Please provide image to upload.");
   }
 
   // unique + friendly publicId: userId + post image name

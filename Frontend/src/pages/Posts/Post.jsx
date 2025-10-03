@@ -1,11 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Post() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -29,6 +31,15 @@ function Post() {
     fetchPost();
   }, []);
 
+  const handleUserClick = (post) => {
+    const logedInUser = localStorage.getItem("user");
+    if (!logedInUser) {
+      toast.error("Please log in first!");
+      return;
+    }
+    navigate(`/profile/${post.user._id}`);
+  };
+
   if (loading) {
     return <div className="text-center mt-10">Loading post...</div>;
   }
@@ -51,10 +62,12 @@ function Post() {
             className=" h-[48vh] object-cover"
           />
           <p className="text-xl font-semibold">{post.imageName}</p>
-
-          <NavLink to={`/profile/${post.user._id}`}>
-            Posted by: {post.user.userName}
-          </NavLink>
+          <button onClick={() => handleUserClick(post)} className="flex gap-1">
+            Posted by:
+            <h1 className="text-blue-500 hover:text-blue-700 cursor-pointer">
+              {post.user.userName}
+            </h1>
+          </button>
         </div>
       ))}
     </div>

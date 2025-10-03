@@ -20,9 +20,7 @@ function Login() {
         { withCredentials: true }
       );
       const userData = res.data.data;
-      localStorage.setItem("userName", userData.userName);
-      localStorage.setItem("avatar", userData.avatar);
-      localStorage.setItem("accessToken", "true");
+      localStorage.setItem("user", JSON.stringify(userData));
       toast.success("Welcome to PicNote!");
       setEmail("");
       setPassword("");
