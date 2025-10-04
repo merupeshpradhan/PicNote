@@ -53,7 +53,7 @@ function Post() {
   }
 
   return (
-    <div className="w-[100%] flex gap-5 p-5">
+    <div className=" w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 p-5">
       {posts.map((post) => (
         <div key={post._id} className="flex flex-col items-center gap-2">
           <img
