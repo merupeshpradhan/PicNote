@@ -10,7 +10,7 @@ function UserDetials() {
     }
   }, []);
   return (
-    <div className="min-h-[100vh] flex justify-center bg-amber-50">
+    <div className="min-h-[100vh] flex justify-center ">
       {!userDetials ? (
         <div>Please wait</div>
       ) : (

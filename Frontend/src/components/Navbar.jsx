@@ -54,18 +54,16 @@ function Navbar() {
           ) : (
             <div className="uerImg-and-name-and-logout flex gap-5 justify-center items-center">
               <div className="flex justify-center items-center gap-5">
-                <div className="flex justify-center items-center gap-2">
-                  <Link to={'/userDetials'}>
-                    {user.avatar && (
-                      <img
-                        src={user.avatar}
-                        alt={user.userName}
-                        className="w-10 h-10 rounded-full"
-                      />
-                    )}
-                  </Link>
+                <Link to={"/userDetials"} className="flex justify-center items-center gap-2">
+                  {user.avatar && (
+                    <img
+                      src={user.avatar}
+                      alt={user.userName}
+                      className="w-10 h-10 rounded-full"
+                    />
+                  )}
                   <span className="font-semibold">{user.userName}</span>
-                </div>
+                </Link>
                 <button
                   onClick={handleLogout}
                   className="border-2 border-red-800 px-2 py-1 rounded-md hover:bg-red-800 hover:text-white font-semibold transition duration-200 cursor-pointer tracking-wide"
