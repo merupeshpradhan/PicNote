@@ -9,6 +9,7 @@ import UserProfile from "./pages/UserProfile";
 import UpdatePost from "./pages/Posts/UpdatePost";
 import CreatePost from "./pages/Posts/CreatePost";
 import DeletePost from "./pages/Posts/DeletePost";
+import UserDetials from "./pages/Users/UserDetials";
 
 function App() {
   const location = useLocation();
@@ -22,6 +23,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/userDetials" element={<UserDetials />} />
         <Route path="/post" element={<Post />} />
         <Route path="/createPost/:userId" element={<CreatePost />} />
         <Route path="/profile/:userId" element={<UserProfile />} />

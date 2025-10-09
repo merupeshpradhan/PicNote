@@ -37,7 +37,9 @@ function Navbar() {
   };
   return (
     <nav className="bg-white shadow-md py-3 px-10 flex justify-between items-center">
-      <Link to="/" className="text-2xl font-bold text-gray-800 tracking-wider">PicNote</Link>
+      <Link to="/" className="text-2xl font-bold text-gray-800 tracking-wider">
+        PicNote
+      </Link>
       <div className="">
         <ul className="flex gap-5">
           {!user ? (
@@ -53,13 +55,15 @@ function Navbar() {
             <div className="uerImg-and-name-and-logout flex gap-5 justify-center items-center">
               <div className="flex justify-center items-center gap-5">
                 <div className="flex justify-center items-center gap-2">
-                  {user.avatar && (
-                    <img
-                      src={user.avatar}
-                      alt={user.userName}
-                      className="w-10 h-10 rounded-full"
-                    />
-                  )}
+                  <Link to={'/userDetials'}>
+                    {user.avatar && (
+                      <img
+                        src={user.avatar}
+                        alt={user.userName}
+                        className="w-10 h-10 rounded-full"
+                      />
+                    )}
+                  </Link>
                   <span className="font-semibold">{user.userName}</span>
                 </div>
                 <button
