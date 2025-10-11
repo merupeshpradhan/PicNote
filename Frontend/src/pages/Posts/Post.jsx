@@ -38,7 +38,7 @@ function Post() {
       return;
     }
     navigate(`/profile/${post.user._id}`);
-  };
+  }; 
 
   if (loading) {
     return <div className="text-center mt-10">Loading post...</div>;
