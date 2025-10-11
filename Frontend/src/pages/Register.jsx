@@ -67,7 +67,7 @@ function Register() {
           </div>
 
           {/* Illustration  */}
-          <div className="relative">
+          <div className="relative mt-[10%]">
             <img src="/Sign-up-amico.png" alt="Preview" className="" />
           </div>
         </div>
@@ -165,7 +165,7 @@ function Register() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-2 flex items-center text-gray-500 hover:text-gray-700"
+                  className="absolute inset-y-0 right-2 flex items-center text-gray-500 hover:text-gray-700 cursor-pointer"
                 >
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </button>
@@ -184,7 +184,7 @@ function Register() {
 
           {/* Login Redirect */}
           <p className="text-center text-gray-600 mt-6">
-            Already have an account?{" "}
+            Already have an account?
             <Link
               to="/login"
               className="text-pink-500 font-semibold hover:underline"
