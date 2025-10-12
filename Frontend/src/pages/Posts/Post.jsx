@@ -38,7 +38,7 @@ function Post() {
       return;
     }
     navigate(`/profile/${post.user._id}`);
-  }; 
+  };
 
   if (loading) {
     return <div className="text-center mt-10">Loading post...</div>;
@@ -53,15 +53,18 @@ function Post() {
   }
 
   return (
-    <div className=" w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 p-5">
+    <div className="w-full grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 p-5">
       {posts.map((post) => (
-        <div key={post._id} className="flex flex-col items-center gap-2">
+        <div
+          key={post._id}
+          className="w-[350px] flex flex-col items-center gap-2 bg-white shadow-md rounded-2xl p-3"
+        >
           <img
             src={post.image}
             alt={post.imageName}
-            className=" h-[48vh] object-cover"
+            className="w-full h-[350px] object-cover rounded-xl"
           />
-          <p className="text-xl font-semibold">{post.imageName}</p>
+          <p className="text-lg font-semibold mt-2">{post.imageName}</p>
           <button onClick={() => handleUserClick(post)} className="flex gap-1">
             Posted by:
             <h1 className="text-blue-500 hover:text-blue-700 cursor-pointer">
