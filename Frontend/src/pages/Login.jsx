@@ -107,7 +107,7 @@ function Login() {
               disabled={loading}
               className="w-full bg-pink-500 text-white py-2 rounded-md font-semibold hover:bg-pink-600 transition"
             >
-              {loading ? "Processing..." : "Login"}
+              {loading ? "Processing..." : "Sign In"}
             </button>
           </form>
 
@@ -118,7 +118,7 @@ function Login() {
               to="/register"
               className="text-pink-500 font-semibold hover:underline"
             >
-              Register
+              Sign Up
             </Link>
           </p>
         </div>

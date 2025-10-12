@@ -189,7 +189,7 @@ function Register() {
               to="/login"
               className="text-pink-500 font-semibold hover:underline"
             >
-              Login
+              Sign In
             </Link>
           </p>
         </div>
