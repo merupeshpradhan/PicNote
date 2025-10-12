@@ -36,7 +36,7 @@ function Navbar() {
     }
   };
   return (
-    <nav className="bg-white shadow-md py-3 px-10 flex justify-between items-center">
+    <nav className="fixed top-0 left-0 w-full bg-white shadow-md py-3 px-10 flex justify-between items-center z-50">
       <Link to="/" className="text-2xl font-bold text-gray-800 tracking-wider">
         PicNote
       </Link>
