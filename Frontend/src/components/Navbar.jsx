@@ -37,8 +37,10 @@ function Navbar() {
   };
   return (
     <nav className="fixed top-0 left-0 w-full bg-white shadow-md py-3 px-10 flex justify-between items-center z-50">
-      <Link to="/" className="text-2xl font-bold text-gray-800 tracking-wider">
-        PicNote
+      <Link to="/">
+        <h1 className="text-3xl font-extrabold text-pink-600 tracking-wide">
+          Pic<span className="text-gray-800">Note</span>
+        </h1>
       </Link>
       <div className="">
         <ul className="flex gap-5">
@@ -54,7 +56,10 @@ function Navbar() {
           ) : (
             <div className="uerImg-and-name-and-logout flex gap-5 justify-center items-center">
               <div className="flex justify-center items-center gap-5">
-                <Link to={"/userDetials"} className="flex justify-center items-center gap-2">
+                <Link
+                  to={"/userDetials"}
+                  className="flex justify-center items-center gap-2"
+                >
                   {user.avatar && (
                     <img
                       src={user.avatar}

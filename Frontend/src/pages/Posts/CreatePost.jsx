@@ -51,7 +51,7 @@ function CreatePost() {
   };
 
   return (
-    <div className="h-[90vh] flex flex-col justify-between items-center gap-12 mt-25">
+    <div className="bg-indigo-50 h-[100vh] flex flex-col justify-between items-center gap-12 pt-25">
       <form onSubmit={handlePostCreation} className="flex flex-col gap-5">
         <div className="Image-input-and-view flex gap-5 items-center ">
           <div className="image-view xl:h-[35vh] xl:w-[15vw] rounded-md border flex justify-center items-center overflow-hidden">

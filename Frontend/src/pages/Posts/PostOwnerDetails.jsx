@@ -39,7 +39,7 @@ function PostOwnerDetails() {
   }
 
   return (
-    <div className="fixed bg-blue-200  w-[14.5%] h-[100vh] pt-[60px]">
+    <div className="fixed flex flex-col  justify-between bg-red-50 w-[14.5%] h-[100vh] pt-[60px]">
       <div
         key={ownerDetails._id}
         className="flex flex-col items-center mt-[3vh] gap-3"
@@ -49,16 +49,21 @@ function PostOwnerDetails() {
           alt={ownerDetails.userName}
           className="w-[50%] rounded-md"
         />
-        <h1>{ownerDetails.userName}</h1>
-        <p>{ownerDetails.email}</p>
+        <div className="flex flex-col items-center gap-1">
+          <h1 className="xl:text-3xl text-yellow-800 font-bold">
+            {ownerDetails.userName}
+          </h1>
+          <p className="xl:text-sm tracking-wider text-yellow-950 font-semibold">
+            {ownerDetails.email}
+          </p>
+        </div>
+        <NavLink
+          to={"/"}
+          className="border border-green-500 rounded-sm  px-4 py-1 text-green-500 hover:bg-green-500 hover:text-white font-bold transition duration-200 mt-[20px]"
+        >
+          Go to Home
+        </NavLink>
       </div>
-
-      <NavLink
-        to={"/"}
-        className="border rounded-sm px-3 py-1 text-green-500 hover:bg-green-500 hover:text-white font-bold transition duration-200"
-      >
-        Go to Home
-      </NavLink>
     </div>
   );
 }

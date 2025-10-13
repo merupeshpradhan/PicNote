@@ -7,7 +7,7 @@ function Home() {
   const hideLayout = ["/login", "/register"].includes(location.pathname);
 
   return (
-    <div className="flex flex-col justify-between min-h-screen relative items-center pt-17 bg-indigo-50">
+    <div className="bg-indigo-50 flex flex-col justify-between min-h-screen relative items-center pt-17">
       <Post />
 
       <Link
