@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Footer from "../../components/Footer";
 
 function CreatePost() {
   const [ImagePreview, setImagePreview] = useState("");
@@ -9,6 +10,7 @@ function CreatePost() {
   const [imageName, setImageName] = useState("");
   const [description, setDescription] = useState("");
   const navigate = useNavigate();
+  const hideLayout = ["/login", "/register"].includes(location.pathname);
 
   const handlePostCreation = async (e) => {
     e.preventDefault();
@@ -39,20 +41,20 @@ function CreatePost() {
       setDescription("");
     } catch (error) {
       // toast.error("Please log in first to create a post.");
-      toast.error(error.response?.data?.message ||"Error creatingpost.")
+      toast.error(error.response?.data?.message || "Error creatingpost.");
       console.error(
         error.response?.data?.message || "Error creation post",
         error
       );
     }
-      // alert("Please provide all thing to create post");
+    // alert("Please provide all thing to create post");
   };
 
   return (
-    <div className="h-[100vh] flex flex-col items-center gap-12 mt-20">
+    <div className="h-[90vh] flex flex-col justify-between items-center gap-12 mt-25">
       <form onSubmit={handlePostCreation} className="flex flex-col gap-5">
         <div className="Image-input-and-view flex gap-5 items-center ">
-          <div className="image-view xl:h-[20vh] xl:w-[10vw] rounded-md border flex justify-center items-center overflow-hidden">
+          <div className="image-view xl:h-[35vh] xl:w-[15vw] rounded-md border flex justify-center items-center overflow-hidden">
             {ImagePreview ? (
               <div>
                 <img
@@ -92,20 +94,22 @@ function CreatePost() {
         </div>
         <div className="Image-name-with-description">
           <div className="flex flex-col gap-3">
+          {/* Image Name */}
             <input
               type="text"
               placeholder="Image name"
               value={imageName}
               onChange={(e) => setImageName(e.target.value)}
-              className="border w-[20vw] py-1 px-5 font-semibold"
+              className="border w-[24vw] xl:py-2 px-5 font-semibold rounded-md"
             />
-            <input
-              type="text"
-              placeholder="Image description"
+            {/* Description */}
+            <textarea
+              placeholder="Write description..."
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="border w-[20vw] py-1 px-5 font-semibold"
-            />
+              className="border p-2 rounded-md outline-none h-24 resize-none"
+              required
+            ></textarea>
           </div>
         </div>
         <div className="flex justify-center">
@@ -114,6 +118,7 @@ function CreatePost() {
           </button>
         </div>
       </form>
+      <div className="z-50 w-full">{!hideLayout && <Footer />}</div>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
+import Footer from "../../components/Footer";
 
 function UserPostImages() {
   const { userId } = useParams(); // get userId from URL
@@ -44,7 +45,7 @@ function UserPostImages() {
   };
 
   return (
-    <div className=" flex gap-5 p-5">
+    <div className="w-full grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5flex gap-5 p-5 pt-[80px] pl-[33vh]">
       {userPosts.map((userPost) => (
         <div key={userPost._id} className="flex flex-col gap-3 items-center">
           <img src={userPost.image} className="w-full h-[48vh] object-cover" />

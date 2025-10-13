@@ -41,15 +41,15 @@ function Post() {
   };
 
   if (loading) {
-    return <div className="text-center mt-10">Loading post...</div>;
+    return <div className="text-center mt-10 text-3xl">Loading post...</div>;
   }
 
   if (error) {
-    return <div className="text-center mt-10 text-red-500">{error}</div>;
+    return <div className="text-center mt-10 text-red-500 text-3xl">{error}</div>;
   }
 
   if (!posts.length) {
-    return <div className="text-center mt-10">No post available.</div>;
+    return <div className="text-center mt-10 text-3xl">No post available.</div>;
   }
 
   return (

@@ -30,7 +30,7 @@ function App() {
         <Route path="/update/:postId" element={<UpdatePost />} />
         <Route path="/delete/:postId" element={<DeletePost />} />
       </Routes>
-      {!hideLayout && <Footer />}
+      {/* {!hideLayout && <Footer />} */}
     </div>
   );
 }

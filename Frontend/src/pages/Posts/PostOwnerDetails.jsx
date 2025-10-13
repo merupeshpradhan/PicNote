@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 function PostOwnerDetails() {
   const { userId } = useParams();
   const [ownerDetails, setOwnerDetails] = useState(null);
-
+  
   useEffect(() => {
     const getOwnerDetails = async () => {
       const token = localStorage.getItem("accessToken");
@@ -39,14 +39,14 @@ function PostOwnerDetails() {
   }
 
   return (
-    <div className="bg-blue-200 w-[14.5%] h-[100vh]">
+    <div className="bg-blue-200 w-[14.5%] h-[100vh] pt-[50px] fixed">
       <div
         key={ownerDetails._id}
         className="flex flex-col items-center mt-[3vh] gap-3"
       >
         <img
           src={ownerDetails.avatar}
-          alt={ownerDetails.userName}
+          alt={ownerDetails.userName}                   
           className="w-[50%]"
         />
         <h1>{ownerDetails.userName}</h1>
