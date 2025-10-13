@@ -43,8 +43,20 @@ function UserPostImages() {
     }
   };
 
+  const userFromStorage = localStorage.getItem("user");
+  let loggedInUserId = null;
+
+  if (userFromStorage) {
+    try {
+      const loggedInUser = JSON.parse(userFromStorage);
+      loggedInUserId = loggedInUser?._id || loggedInUser?.id;
+    } catch (error) {
+      console.log("Error Analysis user:", error);
+    }
+  }
+
   return (
-    <div className="w-full bg-green-50 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5flex gap-8 p-5 pt-[80px] pl-[33vh]">
+    <div className="w-full min-h-[100vh] bg-green-50 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5flex gap-8 p-5 pt-[80px] pl-[33vh]">
       {userPosts.map((userPost) => (
         <div
           key={userPost._id}
@@ -56,29 +68,25 @@ function UserPostImages() {
           />
           <p>{userPost.imageName}</p>
           <p>{userPost.description}</p>
-          <div className="flex flex-col gap-3">
-            <div className="flex justify-between gap-5">
-              <NavLink
-                to={`/update/${userPost._id}`}
-                className="border rounded-sm px-3 py-1 text-yellow-500 hover:bg-yellow-500 hover:text-white font-bold transition duration-200"
+          {/* Show Update/Delete only if current user is owner */}
+          {userPost.user?._id === loggedInUserId && (
+            <div className="flex gap-3">
+              <div className="flex justify-between gap-5">
+                <NavLink
+                  to={`/update/${userPost._id}`}
+                  className="border rounded-sm px-3 py-1 text-yellow-500 hover:bg-yellow-500 hover:text-white font-bold transition duration-200"
+                >
+                  Update post
+                </NavLink>
+              </div>
+              <button
+                onClick={() => handleDelete(userPost._id)}
+                className="border rounded-sm px-3 py-1 text-red-500 hover:bg-red-500 hover:text-white font-bold transition duration-200 cursor-pointer"
               >
-                Update post
-              </NavLink>
-
-              <NavLink
-                to={"/"}
-                className="border rounded-sm px-3 py-1 text-green-500 hover:bg-green-500 hover:text-white font-bold transition duration-200"
-              >
-                Go to Home
-              </NavLink>
+                Delete
+              </button>
             </div>
-            <button
-              onClick={() => handleDelete(userPost._id)}
-              className="border rounded-sm px-3 py-1 text-red-500 hover:bg-red-500 hover:text-white font-bold transition duration-200 cursor-pointer"
-            >
-              Delete
-            </button>
-          </div>
+          )}
         </div>
       ))}
     </div>

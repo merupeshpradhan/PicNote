@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 
 function PostOwnerDetails() {
   const { userId } = useParams();
   const [ownerDetails, setOwnerDetails] = useState(null);
-  
+
   useEffect(() => {
     const getOwnerDetails = async () => {
       const token = localStorage.getItem("accessToken");
@@ -20,7 +20,7 @@ function PostOwnerDetails() {
           }
         );
 
-        console.log("owner details", res.data.data);
+        // console.log("owner details", res.data.data);
 
         const post = res.data.data;
         if (post.length > 0) {
@@ -39,19 +39,26 @@ function PostOwnerDetails() {
   }
 
   return (
-    <div className="bg-blue-200 w-[14.5%] h-[100vh] pt-[60px] fixed">
+    <div className="fixed bg-blue-200  w-[14.5%] h-[100vh] pt-[60px]">
       <div
         key={ownerDetails._id}
         className="flex flex-col items-center mt-[3vh] gap-3"
       >
         <img
           src={ownerDetails.avatar}
-          alt={ownerDetails.userName}                   
+          alt={ownerDetails.userName}
           className="w-[50%] rounded-md"
         />
         <h1>{ownerDetails.userName}</h1>
         <p>{ownerDetails.email}</p>
       </div>
+
+      <NavLink
+        to={"/"}
+        className="border rounded-sm px-3 py-1 text-green-500 hover:bg-green-500 hover:text-white font-bold transition duration-200"
+      >
+        Go to Home
+      </NavLink>
     </div>
   );
 }

@@ -135,7 +135,7 @@ function UpdatePost() {
         </div>
         <div className="flex justify-center">
           <button className="bg-green-400 xl:px-6 xl:py-1.5 hover:bg-green-800 rounded transition duration-200 font-semibold tracking-wider text-lg text-white cursor-pointer">
-            {loading ? "Processing" : "Create"}
+            {loading ? "Processing" : "Update"}
           </button>
         </div>
       </form>

@@ -12,7 +12,7 @@ function Home() {
 
       <Link
         to={"/createPost/:userId"}
-        className="fixed bottom-6 flex justify-center bg-green-600 text-white p-3.5 rounded-full shadow-lg z-10 hover:bg-green-700 transition duration-300 cursor-pointer"
+        className="fixed bottom-4 flex justify-center bg-green-600 text-white p-3.5 rounded-full shadow-lg z-10 hover:bg-green-700 transition duration-300 cursor-pointer"
       >
         <FaPlus size={20} />
       </Link>
