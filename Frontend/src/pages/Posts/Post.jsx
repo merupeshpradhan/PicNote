@@ -53,11 +53,12 @@ function Post() {
   }
 
   return (
-    <div className="w-full grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 p-5">
+    <div>
+      <div className="w-full grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-x-10 gap-y-10 p-5">
       {posts.map((post) => (
         <div
           key={post._id}
-          className="w-[350px] flex flex-col items-center gap-2 bg-white shadow-md rounded-2xl p-3"
+          className="xL:w-[380px] flex flex-col items-center gap-2 bg-white shadow-md rounded-2xl p-3"
         >
           <img
             src={post.image}
@@ -73,6 +74,7 @@ function Post() {
           </button>
         </div>
       ))}
+    </div>
     </div>
   );
 }

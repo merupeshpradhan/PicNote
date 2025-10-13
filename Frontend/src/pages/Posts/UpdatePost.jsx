@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Footer from "../../components/Footer";
 
 function UpdatePost() {
   const { postId } = useParams();
@@ -11,6 +12,7 @@ function UpdatePost() {
     description: "",
   });
   const navigate = useNavigate();
+  const hideLayout = ["/login", "/register"].includes(location.pathname);
 
   const [preview, setPreview] = useState("");
   const [loading, setLoading] = useState(false);
@@ -72,7 +74,6 @@ function UpdatePost() {
 
       const post = res.data.data;
       navigate(`/profile/${post.user._id}`);
-
     } catch (error) {
       alert(error.response?.data?.message || "Error updating post");
       console.error("Error updating post:", error);
@@ -82,42 +83,63 @@ function UpdatePost() {
   };
 
   return (
-    <div className="flex flex-col w-full items-center gap-6">
-      <h1 className="flex items-center">UpdatePost</h1>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-        {preview && <img src={preview} alt="Preview" className="h-[26.5vw]" />}
-        <input
-          type="file"
-          name="image"
-          onChange={handleChange}
-          className="border p-1.5"
-        />
-        <input
-          type="text"
-          name="imageName"
-          placeholder="Image name"
-          value={formData.imageName}
-          onChange={handleChange}
-          className="border p-1.5"
-        />
-        <input
-          type="text"
-          name="description"
-          placeholder="Image description"
-          value={formData.description}
-          onChange={handleChange}
-          className="border p-1.5"
-        />
+    <div className="h-[100vh] bg-blue-50 flex flex-col justify-between items-center gap-12 pt-25">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+        <div className="Image-input-and-view flex gap-5 items-center ">
+          <div className="image-view xl:h-[35vh] xl:w-[15vw] rounded-md border flex justify-center items-center overflow-hidden">
+            {preview && (
+              <img
+                src={preview}
+                alt="Image preview"
+                className="w-full h-[350px] object-cover"
+              />
+            )}
+          </div>
+          <div className="image-input">
+            <button
+              type="button"
+              onClick={() => document.getElementById("fileInput").click()}
+              className="bg-yellow-500 rounded-full p-2.5 transition duration-200 w-[8vw] font-semibold text-white hover:bg-yellow-900 cursor-pointer"
+            >
+              Change image
+            </button>
+            <input
+              id="fileInput"
+              className="hidden"
+              type="file"
+              name="image"
+              onChange={handleChange}
+            />
+          </div>
+        </div>
+        <div className="Image-name-with-description">
+          <div className="flex flex-col gap-3">
+            {/* Image Name */}
+            <input
+              type="text"
+              name="imageName"
+              placeholder="Image name"
+              value={formData.imageName}
+              onChange={handleChange}
+              className="border w-[24vw] xl:py-2 px-3 font-semibold rounded-md outline-0"
+            />
+            {/* Description */}
+            <textarea
+              name="description"
+              placeholder="Write description..."
+              value={formData.description}
+              onChange={handleChange}
+              className="border px-3 p-2 rounded-md outline-none h-24 resize-none"
+            ></textarea>
+          </div>
+        </div>
         <div className="flex justify-center">
-          <button
-            type="submit"
-            disabled={loading}
-            className="font-bold tracking-wider border w-[40%] p-1.5"
-          >
-            {loading ? "Updating..." : "Update"}
+          <button className="bg-green-400 xl:px-6 xl:py-1.5 hover:bg-green-800 rounded transition duration-200 font-semibold tracking-wider text-lg text-white cursor-pointer">
+            {loading ? "Processing" : "Create"}
           </button>
         </div>
       </form>
+      <div className="z-50 w-full">{!hideLayout && <Footer />}</div>
     </div>
   );
 }

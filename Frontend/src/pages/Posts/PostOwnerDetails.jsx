@@ -39,7 +39,7 @@ function PostOwnerDetails() {
   }
 
   return (
-    <div className="bg-blue-200 w-[14.5%] h-[100vh] pt-[50px] fixed">
+    <div className="bg-blue-200 w-[14.5%] h-[100vh] pt-[60px] fixed">
       <div
         key={ownerDetails._id}
         className="flex flex-col items-center mt-[3vh] gap-3"
@@ -47,7 +47,7 @@ function PostOwnerDetails() {
         <img
           src={ownerDetails.avatar}
           alt={ownerDetails.userName}                   
-          className="w-[50%]"
+          className="w-[50%] rounded-md"
         />
         <h1>{ownerDetails.userName}</h1>
         <p>{ownerDetails.email}</p>

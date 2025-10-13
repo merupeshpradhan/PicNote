@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
-import Footer from "../../components/Footer";
 
 function UserPostImages() {
   const { userId } = useParams(); // get userId from URL
@@ -45,31 +44,40 @@ function UserPostImages() {
   };
 
   return (
-    <div className="w-full grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5flex gap-5 p-5 pt-[80px] pl-[33vh]">
+    <div className="w-full bg-green-50 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5flex gap-8 p-5 pt-[80px] pl-[33vh]">
       {userPosts.map((userPost) => (
-        <div key={userPost._id} className="flex flex-col gap-3 items-center">
-          <img src={userPost.image} className="w-full h-[48vh] object-cover" />
+        <div
+          key={userPost._id}
+          className="xl:w-[380px] flex flex-col gap-3 items-center bg-white shadow-md rounded-2xl p-3"
+        >
+          <img
+            src={userPost.image}
+            className="h-[350px] object-cover bject-cover rounded-xl"
+          />
           <p>{userPost.imageName}</p>
           <p>{userPost.description}</p>
-          <div className="flex gap-5">
-            <NavLink
-              to={`/update/${userPost._id}`}
-              className="border rounded-sm px-3 py-1 text-yellow-500 hover:bg-yellow-500 hover:text-white font-bold transition duration-200"
-            >
-              Update post
-            </NavLink>
+          <div className="flex flex-col gap-3">
+            <div className="flex justify-between gap-5">
+              <NavLink
+                to={`/update/${userPost._id}`}
+                className="border rounded-sm px-3 py-1 text-yellow-500 hover:bg-yellow-500 hover:text-white font-bold transition duration-200"
+              >
+                Update post
+              </NavLink>
+
+              <NavLink
+                to={"/"}
+                className="border rounded-sm px-3 py-1 text-green-500 hover:bg-green-500 hover:text-white font-bold transition duration-200"
+              >
+                Go to Home
+              </NavLink>
+            </div>
             <button
               onClick={() => handleDelete(userPost._id)}
               className="border rounded-sm px-3 py-1 text-red-500 hover:bg-red-500 hover:text-white font-bold transition duration-200 cursor-pointer"
             >
               Delete
             </button>
-            <NavLink
-              to={"/"}
-              className="border rounded-sm px-3 py-1 text-green-500 hover:bg-green-500 hover:text-white font-bold transition duration-200"
-            >
-              Go to Home
-            </NavLink>
           </div>
         </div>
       ))}

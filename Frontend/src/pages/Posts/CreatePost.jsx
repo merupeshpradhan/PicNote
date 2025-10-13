@@ -60,11 +60,11 @@ function CreatePost() {
                 <img
                   src={ImagePreview}
                   alt="Image preview"
-                  className="h-full w-full object-cover"
+                  className="w-full h-[350px] object-cover"
                 />
               </div>
             ) : (
-              <div>No image</div>
+              <div className="font-semibold text-lime-800">No image</div>
             )}
           </div>
           <div className="image-input">
@@ -100,15 +100,14 @@ function CreatePost() {
               placeholder="Image name"
               value={imageName}
               onChange={(e) => setImageName(e.target.value)}
-              className="border w-[24vw] xl:py-2 px-5 font-semibold rounded-md"
+              className="border w-[24vw] xl:py-2 px-5 font-semibold rounded-md outline-0"
             />
             {/* Description */}
             <textarea
               placeholder="Write description..."
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="border p-2 rounded-md outline-none h-24 resize-none"
-              required
+              className="border  p-2 rounded-md outline-none h-24 resize-none"
             ></textarea>
           </div>
         </div>

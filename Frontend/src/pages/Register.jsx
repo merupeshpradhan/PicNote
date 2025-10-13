@@ -2,7 +2,6 @@ import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash, FaRegImage, FaUser } from "react-icons/fa";
-import { HiUserGroup } from "react-icons/hi2";
 import { toast } from "react-toastify";
 
 function Register() {
