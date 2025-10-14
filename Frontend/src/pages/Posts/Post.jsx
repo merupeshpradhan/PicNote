@@ -22,7 +22,7 @@ function Post() {
         }
       } catch (err) {
         console.error("Error fetching posts:", err);
-        setError("Failed to load posts.");
+        setError(err.response?.data?.message)
       } finally {
         setLoading(false);
       }
