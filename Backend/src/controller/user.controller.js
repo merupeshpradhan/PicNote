@@ -102,12 +102,13 @@ const userLogin = asyncHandler(async (req, res) => {
 });
 
 const updateUserDetails = asyncHandler(async (req, res) => {
-  const { userName, email, password } = req.body;
+  const { userName, email } = req.body;
   const avatarLocalPath = req.file?.path;
   const user = req.user; // from authMiddleware
 
   if (!user) throw new ApiError(401, "Unauthorized request");
 
+  // Upload new avatar if provided
   if (avatarLocalPath) {
     const publicId = `user_${user._id}_avatar`;
     const uploadeAvatar = await uploadOnCloudinary(avatarLocalPath, publicId);
@@ -119,18 +120,44 @@ const updateUserDetails = asyncHandler(async (req, res) => {
 
   if (userName) user.userName = userName;
   if (email) user.email = email;
-  if (password) user.password = password;
 
   await user.save();
 
-  const updatedDate = {
+  const updatedData = {
     id: user._id,
     avatar: user.avatar,
     userName: user.userName,
     email: user.email,
   };
 
-  return res.status(2001)
+  return res
+    .status(200)
+    .json(new ApiResponse(200, updatedData, "Profile updated successfully."));
+});
+
+const changePassword = asyncHandler(async (req, res) => {
+  const { oldPassword, newPassword, confirmPassword } = req.body;
+  const user = req.user; // from authMiddleware
+
+  if (!oldPassword || !newPassword || !confirmPassword) {
+    throw new ApiError(400, "All password fields are required");
+  }
+
+  if (newPassword !== confirmPassword) {
+    throw new ApiError(400, "New password and confirm password do not match");
+  }
+
+  const isMatch = await user.comparePassword(oldPassword);
+  if (!isMatch) {
+    throw new ApiError(400, "Old password is incorrect");
+  }
+
+  user.password = newPassword;
+  await user.save();
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, {}, "Password changed successfully"));
 });
 
 const userLogout = asyncHandler(async (req, res) => {
@@ -142,4 +169,4 @@ const userLogout = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, {}, "User logout successfully."));
 });
 
-export { userSignup, userLogin, updateUserDetails, userLogout };
+export { userSignup, userLogin, updateUserDetails, changePassword, userLogout };

@@ -87,7 +87,7 @@ function UserDetials() {
     } catch (error) {
       toast.error(error.response?.data?.message || "Update failed");
     } finally {
-      setLoading(false);
+      setLoadinging(false);
     }
   };
 
