@@ -100,6 +100,41 @@ const userLogin = asyncHandler(async (req, res) => {
     .status(200)
     .json(new ApiResponse(200, userData, "User login successfully."));
 });
+
+const updateUserDetails = asyncHandler(async (req, res) => {
+  const { userName, email, password } = req.body;
+  const avatarLocalPath = req.file?.path;
+  const user = req.user; // from authMiddleware
+
+  if (!user) throw new ApiError(401, "Unauthorized request");
+
+  if (avatarLocalPath) {
+    const publicId = `user_${user._id}_avatar`;
+    const uploadeAvatar = await uploadOnCloudinary(avatarLocalPath, publicId);
+    if (uploadeAvatar) {
+      user.avatar = uploadeAvatar.secure_url;
+      user.avatarPublicId = uploadeAvatar.public_id;
+    }
+  }
+
+  if (userName) user.userName = userName;
+  if (email) user.email = email;
+  if (password) user.password = password;
+
+  await user.save();
+
+  const updatedDate = {
+    id: user._id,
+    avatar: user.avatar,
+    userName: user.userName,
+    email: user.email,
+  };
+
+  return res
+    .status(201)
+    .json(new ApiResponse(200, updatedDate, "You Update Successfully."));
+});
+
 const userLogout = asyncHandler(async (req, res) => {
   res.clearCookie("accessToken");
   res.clearCookie("refreshToken");
@@ -109,4 +144,4 @@ const userLogout = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, {}, "User logout successfully."));
 });
 
-export { userSignup, userLogin, userLogout };
+export { userSignup, userLogin, updateUserDetails, userLogout };
