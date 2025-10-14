@@ -8,7 +8,6 @@ function UserDetials() {
   const hideLayout = ["/login", "/register"].includes(location.pathname);
   const [userDetails, setUserDetials] = useState(null);
   const [editMode, setEditMode] = useState(false);
-  const [showPasswordPanel, setShowPasswordPanel] = useState(false);
   const [previewAvatar, setPreviewAvatar] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -24,12 +23,6 @@ function UserDetials() {
     confirmPassword: "",
   });
 
-   const [showPassword, setShowPassword] = useState({
-    old: false,
-    new: false,
-    confirm: false,
-  });
-
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
@@ -39,7 +32,6 @@ function UserDetials() {
         avatar: null,
         userName: user.userName,
         email: user.email,
-        password: "",
       });
       setPreviewAvatar(user.avatar);
     }
@@ -87,33 +79,7 @@ function UserDetials() {
     } catch (error) {
       toast.error(error.response?.data?.message || "Update failed");
     } finally {
-      setLoadinging(false);
-    }
-  };
-
-  // Change password
-  const handlePasswordChange = async (e) => {
-    e.preventDefault();
-    if (passwordData.newPassword !== passwordData.confirmPassword) {
-      toast.error("New password do not match!");
-      return;
-    }
-    try {
-      const res = await axios.put(
-        "http://localhost:4000/api/v1/users/change-password",
-        passwordData,
-        { withCredentials: true }
-      );
-
-      toast.success(res.data?.message || "Password change successfully!");
-      setShowPasswordPanel(false);
-      setPasswordData({
-        oldPassword: "",
-        newPassword: "",
-        confirmPassword: "",
-      });
-    } catch (error) {
-      toast.error(error.response?.data?.message || "Password change failed!");
+      setLoading(false);
     }
   };
 
@@ -126,7 +92,7 @@ function UserDetials() {
           <img
             src={previewAvatar}
             alt="user avatar"
-            className="h-[40vh] border-2 border-amber-500 rounded-xl object-cover"
+            className="w-[18vw] h-[40vh] border-2 border-amber-500 rounded-xl"
           />
 
           {editMode ? (
@@ -170,7 +136,7 @@ function UserDetials() {
                 <button
                   type="button"
                   onClick={() => setEditMode(false)}
-                  className="bg-gray-400 text-white px-4 py-2 rounded-md hover:bg-gray-500 transition duration-200 cursor-pointer" 
+                  className="bg-gray-400 text-white px-4 py-2 rounded-md hover:bg-gray-500 transition duration-200 cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -187,117 +153,9 @@ function UserDetials() {
                 >
                   Edit Profile
                 </button>
-                <button
-                  onClick={() => setShowPasswordPanel(true)}
-                  className="bg-orange-500 text-white px-4 py-2 rounded-md cursor-pointer"
-                >
-                  Change Password
-                </button>
               </div>
             </div>
           )}
-        </div>
-      )}
-
-       {/* Password side panel */}
-      {showPasswordPanel && (
-        <div className="fixed top-0 right-0 w-[30vw] h-full bg-white shadow-2xl p-6 z-50 flex flex-col justify-center animate-slide-left">
-          <h2 className="text-2xl font-bold mb-4">Change Password</h2>
-          <form onSubmit={handlePasswordChange} className="space-y-4">
-            {/* Old Password */}
-            <div className="relative">
-              <input
-                type={showPassword.old ? "text" : "password"}
-                name="oldPassword"
-                placeholder="Current password"
-                value={passwordData.oldPassword}
-                onChange={(e) =>
-                  setPasswordData({
-                    ...passwordData,
-                    oldPassword: e.target.value,
-                  })
-                }
-                className="w-full border-2 border-gray-400 px-3 py-2 rounded-md"
-              />
-              <span
-                className="absolute right-3 top-3 cursor-pointer text-gray-600"
-                onClick={() =>
-                  setShowPassword({ ...showPassword, old: !showPassword.old })
-                }
-              >
-                {showPassword.old ? <FaEyeSlash /> : <FaEye />}
-              </span>
-            </div>
-
-            {/* New Password */}
-            <div className="relative">
-              <input
-                type={showPassword.new ? "text" : "password"}
-                name="newPassword"
-                placeholder="New password"
-                value={passwordData.newPassword}
-                onChange={(e) =>
-                  setPasswordData({
-                    ...passwordData,
-                    newPassword: e.target.value,
-                  })
-                }
-                className="w-full border-2 border-gray-400 px-3 py-2 rounded-md"
-              />
-              <span
-                className="absolute right-3 top-3 cursor-pointer text-gray-600"
-                onClick={() =>
-                  setShowPassword({ ...showPassword, new: !showPassword.new })
-                }
-              >
-                {showPassword.new ? <FaEyeSlash /> : <FaEye />}
-              </span>
-            </div>
-
-            {/* Confirm Password */}
-            <div className="relative">
-              <input
-                type={showPassword.confirm ? "text" : "password"}
-                name="confirmPassword"
-                placeholder="Confirm new password"
-                value={passwordData.confirmPassword}
-                onChange={(e) =>
-                  setPasswordData({
-                    ...passwordData,
-                    confirmPassword: e.target.value,
-                  })
-                }
-                className="w-full border-2 border-gray-400 px-3 py-2 rounded-md"
-              />
-              <span
-                className="absolute right-3 top-3 cursor-pointer text-gray-600"
-                onClick={() =>
-                  setShowPassword({
-                    ...showPassword,
-                    confirm: !showPassword.confirm,
-                  })
-                }
-              >
-                {showPassword.confirm ? <FaEyeSlash /> : <FaEye />}
-              </span>
-            </div>
-
-            <div className="flex justify-between mt-4">
-              <button
-                type="button"
-                onClick={() => setShowPasswordPanel(false)}
-                className="bg-gray-400 text-white px-4 py-2 rounded-md cursor-pointer"
-              >
-                Cancel
-              </button>
-              <button
-                type="submit"
-                className="bg-green-500 text-white px-4 py-2 rounded-md cursor-pointer"
-              >
-                Save Password
-              </button>
-            </div>
-          </form>
         </div>
       )}
 

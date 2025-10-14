@@ -1,6 +1,5 @@
 import { Router } from "express";
 import {
-  changePassword,
   updateUserDetails,
   userLogin,
   userLogout,
@@ -19,6 +18,5 @@ router.route("/logout").post(userLogout);
 router
   .route("/update-profile")
   .put(authMiddleware, upload.single("avatar"), updateUserDetails);
-router.route("/change-password").put(authMiddleware, changePassword);
 
 export default router;

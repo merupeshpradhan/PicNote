@@ -135,31 +135,6 @@ const updateUserDetails = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, updatedData, "Profile updated successfully."));
 });
 
-const changePassword = asyncHandler(async (req, res) => {
-  const { oldPassword, newPassword, confirmPassword } = req.body;
-  const user = req.user; // from authMiddleware
-
-  if (!oldPassword || !newPassword || !confirmPassword) {
-    throw new ApiError(400, "All password fields are required");
-  }
-
-  if (newPassword !== confirmPassword) {
-    throw new ApiError(400, "New password and confirm password do not match");
-  }
-
-  const isMatch = await user.comparePassword(oldPassword);
-  if (!isMatch) {
-    throw new ApiError(400, "Old password is incorrect");
-  }
-
-  user.password = newPassword;
-  await user.save();
-
-  return res
-    .status(200)
-    .json(new ApiResponse(200, {}, "Password changed successfully"));
-});
-
 const userLogout = asyncHandler(async (req, res) => {
   res.clearCookie("accessToken");
   res.clearCookie("refreshToken");
@@ -169,4 +144,4 @@ const userLogout = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, {}, "User logout successfully."));
 });
 
-export { userSignup, userLogin, updateUserDetails, changePassword, userLogout };
+export { userSignup, userLogin, updateUserDetails, userLogout };
