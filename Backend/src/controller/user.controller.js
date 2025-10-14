@@ -130,9 +130,7 @@ const updateUserDetails = asyncHandler(async (req, res) => {
     email: user.email,
   };
 
-  return res
-    .status(201)
-    .json(new ApiResponse(200, updatedDate, "You Update Successfully."));
+  return res.status(2001)
 });
 
 const userLogout = asyncHandler(async (req, res) => {
