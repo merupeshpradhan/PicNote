@@ -72,6 +72,9 @@ function UserDetials() {
 
       const updateUser = res.data.data;
       localStorage.setItem("user", JSON.stringify(updateUser));
+
+      window.dispatchEvent(new Event("userUpdated"));
+
       setUserDetials(updateUser);
       toast.success("Profile updated successfully!");
       setEditMode(false);
@@ -165,7 +168,9 @@ function UserDetials() {
                 alt="user avatar"
                 className="w-[18vw] h-[40vh] border-2 border-amber-500 rounded-xl"
               />
-              <h1 className="text-2xl font-bold mt-2">{userDetails.userName}</h1>
+              <h1 className="text-2xl font-bold mt-2">
+                {userDetails.userName}
+              </h1>
               <h1 className="text-lg text-gray-700">{userDetails.email}</h1>
               <div className="flex gap-4 mt-4">
                 <button

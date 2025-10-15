@@ -7,13 +7,27 @@ function Navbar() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    // Chek if user is logged in
+    // Chek if user is logged in and any update of user
+    const updateUser = () => {
+      const storedUser = localStorage.getItem("user");
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+      } else {
+        setUser(null);
+      }
+    };
 
-    const storedUser = localStorage.getItem("user");
+    updateUser();
 
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
+    // Listen for user updates
+    window.addEventListener("userUpdated", updateUser);
+
+    // Optional: also listen for changes from other tabs
+    window.addEventListener("storage", updateUser);
+    return () => {
+      window.removeEventListener("userUpdated", updateUser);
+      window.removeEventListener("storage", updateUser);
+    };
   }, []);
 
   const handleLogout = async () => {
@@ -25,6 +39,8 @@ function Navbar() {
       );
 
       localStorage.removeItem("user");
+
+      navigate("/");
 
       // update state so Navbar re-renders
       setUser(null);
