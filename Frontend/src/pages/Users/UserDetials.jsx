@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Footer from "../../components/Footer";
 import { toast } from "react-toastify";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 function UserDetials() {
   const hideLayout = ["/login", "/register"].includes(location.pathname);
@@ -89,23 +88,32 @@ function UserDetials() {
         <div>Loading...</div>
       ) : (
         <div className="pt-20 flex flex-col items-center">
-          <img
-            src={previewAvatar}
-            alt="user avatar"
-            className="w-[18vw] h-[40vh] border-2 border-amber-500 rounded-xl"
-          />
-
           {editMode ? (
             <form
               onSubmit={handleSubmit}
               className="flex flex-col items-center mt-5 space-y-3"
             >
-              <input
-                type="file"
-                name="avatar"
-                onChange={handleChange}
-                className="border-2 border-lime-500 w-full px-2 py-2 rounded-md"
+              <img
+                src={previewAvatar}
+                alt="user avatar"
+                className="w-[18vw] h-[40vh] border-2 border-amber-500 rounded-xl"
               />
+              <div className="new-avatar-input">
+                <button
+                  type="button"
+                  onClick={() => document.getElementById("newAvatar").click()}
+                  className="border-2 border-lime-500 w-[8vw] px-4 font-semibold  py-2 rounded-md"
+                >
+                  {formData.avatar ? "Change avatar" : "Chose avatar"}
+                </button>
+                <input
+                  className="hidden"
+                  type="file"
+                  name="avatar"
+                  id="newAvatar"
+                  onChange={handleChange}
+                />
+              </div>
               <input
                 type="text"
                 name="userName"
@@ -135,7 +143,15 @@ function UserDetials() {
                 {/* Cancel Button */}
                 <button
                   type="button"
-                  onClick={() => setEditMode(false)}
+                  onClick={() => {
+                    setEditMode(false);
+                    setFormData({
+                      avatar: null,
+                      userName: userDetails.userName,
+                      email: userDetails.email,
+                    });
+                    setPreviewAvatar(userDetails.avatar);
+                  }}
                   className="bg-gray-400 text-white px-4 py-2 rounded-md hover:bg-gray-500 transition duration-200 cursor-pointer"
                 >
                   Cancel
@@ -144,7 +160,12 @@ function UserDetials() {
             </form>
           ) : (
             <div className="flex flex-col items-center mt-4">
-              <h1 className="text-2xl font-bold">{userDetails.userName}</h1>
+              <img
+                src={userDetails.avatar}
+                alt="user avatar"
+                className="w-[18vw] h-[40vh] border-2 border-amber-500 rounded-xl"
+              />
+              <h1 className="text-2xl font-bold mt-2">{userDetails.userName}</h1>
               <h1 className="text-lg text-gray-700">{userDetails.email}</h1>
               <div className="flex gap-4 mt-4">
                 <button
