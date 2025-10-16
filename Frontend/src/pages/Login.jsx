@@ -94,7 +94,7 @@ function Login() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-2 flex items-center justify-center text-gray-500 hover:text-gray-700"
+                  className="absolute inset-y-0 right-2 flex items-center  text-[13px]  justify-center text-gray-500 hover:text-gray-700"
                 >
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </button>
@@ -105,18 +105,19 @@ function Login() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-pink-500 mt-3 md:mt-0 text-white py-2 rounded-md font-semibold hover:bg-pink-600 transition"
+                            className="w-full bg-pink-500 mt-3 md:mt-0 text-white py-1.5 md:py-2 rounded-md md:font-semibold hover:bg-pink-600 transition"
+
             >
               {loading ? "Processing..." : "Sign In"}
             </button>
           </form>
 
           {/* Register Redirect */}
-          <p className="text-center text-gray-600 mt-3 md:mt-6">
+          <p className="text-center text-gray-600 mt-3 md:mt-6 text-[14px] tracking-wide">
             Don't have an account?
             <Link
               to="/register"
-              className="text-pink-500 font-semibold hover:underline"
+              className="text-pink-500 md:font-semibold hover:underline"
             >
               Sign Up
             </Link>

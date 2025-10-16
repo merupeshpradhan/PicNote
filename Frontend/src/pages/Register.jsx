@@ -51,10 +51,10 @@ function Register() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-pink-100 px-4">
-      <div className="md:bg-white md:rounded-2xl md:shadow-2xl flex flex-col md:flex-row max-w-5xl w-full overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-pink-100 py-4 px-4">
+      <div className="md:bg-white rounded-2xl shadow-2xl md:rounded-2xl md:shadow-2xl flex flex-col md:flex-row max-w-5xl w-full overflow-hidden">
         {/* Left Section */}
-        <div className="w-full md:w-1/2 med:bg-pink-50 flex md:flex-col items-center justify-between p-3 md:p-6">
+        <div className="w-full md:w-1/2 med:bg-pink-50 flex md:flex-col items-center justify-between md:justify-normal   p-3 md:p-6">
           {/* Project Name */}
           <div className="text-center mb-6 mt-[17px]">
             <h1 className="text-2xl md:text-4xl font-extrabold text-pink-600 tracking-wide">
@@ -81,15 +81,15 @@ function Register() {
           <h2 className="text-xl md:text-3xl font-semibold text-gray-700 mb-1 md:mb-2">
             Create Your Account
           </h2>
-          <p className="text-gray-500 text-sm sm:text-md lg:text-[15px] mb-6">
+          <p className="text-gray-500 text-sm sm:text-md lg:text-[15px] mb-4 md:mb-6">
             Join PicNote to save, organize, and remember your notes and images
             securely.
           </p>
 
-          <form onSubmit={userRegister} className="space-y-2 md:space-y-5">
+          <form onSubmit={userRegister} className="space-y-1.5 md:space-y-5">
             {/* Avatar Upload */}
-            <div className="flex gap-7">
-              <div className="avatar-preview-container border-2 border-pink-500 xl:h-[20vh] xl:w-[42%] rounded-md flex justify-center items-center overflow-hidden">
+            <div className="flex justify-between md:justify-start md:gap-7 mb-3">
+              <div className="avatar-preview-container border-2 border-pink-500 w-[50%] h-[20vh]  xl:h-[20vh] xl:w-[42%] rounded-md flex justify-center items-center overflow-hidden">
                 {previewAvatar ? (
                   <div className="avatar-preview">
                     <img
@@ -104,15 +104,15 @@ function Register() {
                   </div>
                 )}
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex  items-center lg:gap-3">
                 <button
                   type="button"
                   onClick={() => document.getElementById("avatarInput").click()}
-                  className="bg-pink-500 text-white py-2 px-4 rounded-md font-semibold hover:bg-pink-600 transition cursor-pointer"
+                  className="bg-pink-500 text-white text-[11px] sm:text-[12px] w-[130px] md:w-[130px] py-2 rounded-md md:font-semibold hover:bg-pink-600 transition cursor-pointer"
                 >
                   {avatar ? "Change your image" : "Provide your image"}
                 </button>
-                <FaRegImage className="text-pink-500 text-xl" />
+                <FaRegImage className="text-pink-500 hidden lg:block md:text-xl" />
               </div>
               <input
                 id="avatarInput"
@@ -133,43 +133,45 @@ function Register() {
 
             {/* Full Name */}
             <div>
-              <label className="font-semibold text-gray-700">Full Name</label>
+              <label className="md:font-semibold text-gray-700">
+                Full Name
+              </label>
               <input
                 type="text"
                 placeholder="Enter your full name"
                 value={userName}
                 onChange={(e) => setUserName(e.target.value)}
-                className="w-full border border-pink-300 rounded-md p-2 focus:border-pink-500 focus:outline-none"
+                className="w-full border text-[15px] border-pink-300 rounded-md p-2 focus:border-pink-500 focus:outline-none"
               />
             </div>
 
             {/* Email */}
             <div>
-              <label className="font-semibold text-gray-700">E-mail</label>
+              <label className="md:font-semibold text-gray-700">E-mail</label>
               <input
                 type="email"
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full border border-pink-300 rounded-md p-2 focus:border-pink-500 focus:outline-none"
+                className="w-full border text-[15px] border-pink-300 rounded-md p-2 focus:border-pink-500 focus:outline-none"
               />
             </div>
 
             {/* Password */}
             <div className="relative">
-              <label className="font-semibold text-gray-700">Password</label>
+              <label className="md:font-semibold text-gray-700">Password</label>
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="Enter your password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full border border-pink-300 rounded-md p-2 pr-10 focus:border-pink-500 focus:outline-none"
+                  className="w-full border text-[15px] border-pink-300 rounded-md p-2 focus:border-pink-500 focus:outline-none"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-2 flex items-center text-gray-500 hover:text-gray-700 cursor-pointer"
+                  className="absolute inset-y-0 right-2 flex items-center text-[13px] text-gray-500 hover:text-gray-700 cursor-pointer"
                 >
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </button>
@@ -180,18 +182,18 @@ function Register() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-pink-500 mt-3 md:mt-0 text-white py-2 rounded-md font-semibold hover:bg-pink-600 transition"
+              className="w-full bg-pink-500 mt-3 md:mt-0 text-white py-1.5 md:py-2 rounded-md md:font-semibold hover:bg-pink-600 transition"
             >
               {loading ? "Processing..." : "Sign Up"}
             </button>
           </form>
 
           {/* Login Redirect */}
-          <p className="text-center text-gray-600 mt-3 md:mt-6">
+          <p className="text-center text-gray-600 mt-3 md:mt-6 text-[14px] tracking-wide">
             Already have an account?
             <Link
               to="/login"
-              className="text-pink-500 font-semibold hover:underline"
+              className="text-pink-500 md:font-semibold hover:underline"
             >
               Sign In
             </Link>
