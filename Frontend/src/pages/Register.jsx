@@ -52,9 +52,9 @@ function Register() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-pink-100 py-4 px-4">
-      <div className="md:bg-white rounded-2xl shadow-2xl md:rounded-2xl md:shadow-2xl flex flex-col md:flex-row max-w-5xl w-full overflow-hidden">
+      <div className="bg-white rounded-2xl shadow-2xl md:rounded-2xl md:shadow-2xl flex flex-col md:flex-row max-w-5xl w-full overflow-hidden">
         {/* Left Section */}
-        <div className="w-full md:w-1/2 med:bg-pink-50 flex md:flex-col items-center justify-between md:justify-normal   p-3 md:p-6">
+        <div className="w-full md:w-1/2 bg-pink-50 flex md:flex-col items-center justify-between md:justify-normal   p-3 md:p-6">
           {/* Project Name */}
           <div className="text-center mb-6 mt-[17px]">
             <h1 className="text-2xl md:text-4xl font-extrabold text-pink-600 tracking-wide">
