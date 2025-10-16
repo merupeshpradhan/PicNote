@@ -94,7 +94,7 @@ function UserDetials() {
           {editMode ? (
             <form
               onSubmit={handleSubmit}
-              className="flex flex-col items-center mt-5 space-y-3"
+              className="flex flex-col items-center mt-3 space-y-3"
             >
               <img
                 src={previewAvatar}
@@ -105,7 +105,7 @@ function UserDetials() {
                 <button
                   type="button"
                   onClick={() => document.getElementById("newAvatar").click()}
-                  className="border-2 border-lime-500 md:w-[8vw] px-4 text-[14px] md:text-[16px] font-semibold py-2 rounded-md"
+                  className="border-2 border-lime-500 hover:bg-lime-500 hover:text-white tracking-wider cursor-pointer md:w-[9vw] px-4 text-[14px] md:text-[16px] font-semibold py-2 rounded-md"
                 >
                   {formData.avatar ? "Change avatar" : "Chose avatar"}
                 </button>
