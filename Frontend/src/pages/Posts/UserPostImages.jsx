@@ -47,7 +47,7 @@ function UserPostImages() {
   let loggedInUserId = null;
 
   if (userFromStorage) {
-    try {
+    try {  
       const loggedInUser = JSON.parse(userFromStorage);
       loggedInUserId = loggedInUser?._id || loggedInUser?.id;
     } catch (error) {
@@ -56,21 +56,21 @@ function UserPostImages() {
   }
 
   return (
-    <div className="w-full min-h-[100vh] bg-green-50 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5flex gap-8 p-5 pt-[80px] pl-[33vh]">
+    <div className="w-full min-h-[100vh] bg-green-50  items-center grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 p-5 pt-[160px] lg:pt-[85px] md:pl-[32vw] lg:pl-[50vh] mt-[85px] lg:mt-0">
       {userPosts.map((userPost) => (
         <div
           key={userPost._id}
-          className="xl:w-[380px] flex flex-col gap-3 items-center bg-white shadow-md rounded-2xl p-3"
+          className="lg:w-[250px] flex flex-col gap-1 items-center bg-white shadow-md rounded-2xl p-3"
         >
           <img
             src={userPost.image}
-            className="h-[350px] object-cover bject-cover rounded-xl"
+            className="w-full h-[350px] md:h-[250px] object-cover bject-cover rounded-xl"
           />
           <p>{userPost.imageName}</p>
           <p>{userPost.description}</p>
           {/* Show Update/Delete only if current user is owner */}
           {userPost.user?._id === loggedInUserId && (
-            <div className="flex gap-3">
+            <div className="flex gap-3 mt-3">
               <div className="flex justify-between gap-5">
                 <NavLink
                   to={`/update/${userPost._id}`}
