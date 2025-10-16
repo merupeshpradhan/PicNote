@@ -177,7 +177,7 @@ function UserDetials() {
               <div className="flex gap-4 mt-4">
                 <button
                   onClick={() => setEditMode(true)}
-                  className="bg-blue-500 text-white text-[12px] px-2 py-2 md:px-4  rounded-md cursor-pointer hover:bg-blue-600 transition duration-200"
+                  className="bg-blue-500 text-white text-[12px] md:text-[16px] px-2 py-2 md:px-4  rounded-md cursor-pointer hover:bg-blue-600 transition duration-200"
                 >
                   Edit Profile
                 </button>
