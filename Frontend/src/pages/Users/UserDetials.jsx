@@ -99,13 +99,13 @@ function UserDetials() {
               <img
                 src={previewAvatar}
                 alt="user avatar"
-                className="w-[18vw] h-[40vh] border-2 border-amber-500 rounded-xl"
+                className="w-[80%] md:w-[18vw] md:h-[40vh] border-2 border-amber-500 rounded-xl"
               />
               <div className="new-avatar-input">
                 <button
                   type="button"
                   onClick={() => document.getElementById("newAvatar").click()}
-                  className="border-2 border-lime-500 w-[8vw] px-4 font-semibold  py-2 rounded-md"
+                  className="border-2 border-lime-500 md:w-[8vw] px-4 text-[14px] md:text-[16px] font-semibold py-2 rounded-md"
                 >
                   {formData.avatar ? "Change avatar" : "Chose avatar"}
                 </button>
@@ -123,7 +123,7 @@ function UserDetials() {
                 value={formData.userName}
                 onChange={handleChange}
                 placeholder="Enter name"
-                className="border-2 border-lime-500 w-full px-2 py-2 rounded-md"
+                className="border-2 border-lime-500 w-[80%] md:w-full px-2 py-2 rounded-md"
               />
               <input
                 type="email"
@@ -131,14 +131,14 @@ function UserDetials() {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="Enter email"
-                className="border-2 border-lime-500 w-full px-2 py-2 rounded-md"
+                className="border-2 border-lime-500 w-[80%] md:w-full px-2 py-2 rounded-md"
               />
               <div className="flex gap-3 mt-2">
                 {/* Cancel Button */}
                 <button
                   type="submit"
                   disabled={loading}
-                  className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition duration-200 cursor-pointer"
+                  className="bg-green-500 text-white text-[15px] md:text-[16px] px-4 py-1 md:py-2 rounded-md hover:bg-green-600 transition duration-200 cursor-pointer md:font-semibold tracking-wider"
                 >
                   {loading ? "Saving..." : "Save"}
                 </button>
@@ -155,7 +155,7 @@ function UserDetials() {
                     });
                     setPreviewAvatar(userDetails.avatar);
                   }}
-                  className="bg-gray-400 text-white px-4 py-2 rounded-md hover:bg-gray-500 transition duration-200 cursor-pointer"
+                  className="bg-gray-400 text-white px-4 py-1 md:py-2 rounded-md hover:bg-gray-500 transition duration-200 cursor-pointer md:font-semibold tracking-wider"
                 >
                   Cancel
                 </button>
@@ -166,16 +166,18 @@ function UserDetials() {
               <img
                 src={userDetails.avatar}
                 alt="user avatar"
-                className="w-[18vw] h-[40vh] border-2 border-amber-500 rounded-xl"
+                className="w-[80%] md:w-[18vw] md:h-[40vh] border-2 border-amber-500 rounded-xl"
               />
               <h1 className="text-2xl font-bold mt-2">
                 {userDetails.userName}
               </h1>
-              <h1 className="text-lg text-gray-700">{userDetails.email}</h1>
+              <h1 className="text-sm md:text-lg mt-1 text-gray-700">
+                {userDetails.email}
+              </h1>
               <div className="flex gap-4 mt-4">
                 <button
                   onClick={() => setEditMode(true)}
-                  className="bg-blue-500 text-white px-4 py-2 rounded-md cursor-pointer"
+                  className="bg-blue-500 text-white text-[12px] px-2 py-2 md:px-4  rounded-md cursor-pointer hover:bg-blue-600 transition duration-200"
                 >
                   Edit Profile
                 </button>

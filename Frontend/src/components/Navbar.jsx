@@ -62,10 +62,10 @@ function Navbar() {
         <ul className="flex gap-5">
           {!user ? (
             <div className="login-register flex gap-3 md:gap-5 justify-center items-center">
-              <li className="flex items-center bg-green-700 py-0.5 px-1.5 md:py-1.5 md:px-4 rounded-md text-md md:font-semibold tracking-wider text-white">
+              <li className="flex items-center bg-green-700 py-0.5 px-1.5 md:py-1.5 md:px-4 rounded-md text-md md:font-semibold tracking-wider text-white transition duration-200">
                 <Link to={"/login"}>Login</Link>
               </li>
-              <li className="bg-red-700 py-0.5 px-1.5 md:py-1.5 md:px-4 rounded-md text-md md:font-semibold tracking-wider text-white">
+              <li className="bg-red-700 py-0.5 px-1.5 md:py-1.5 md:px-4 rounded-md text-md md:font-semibold tracking-wider text-white transition duration-200">
                 <Link to={"/register"}>Register</Link>
               </li>
             </div>
