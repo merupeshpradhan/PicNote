@@ -39,27 +39,33 @@ function PostOwnerDetails() {
   }
 
   return (
-    <div className="fixed flex flex-col  justify-between bg-red-50 w-[14.5%] h-[100vh] pt-[60px]">
+    <div className="fixed flex flex-col justify-between bg-red-50 w-full h-[21.5vh] rounded-2xl md:rounded-none shadow-lg shadow-amber-600 z-20 md:w-[14.5%] md:h-[100vh] pt-[38px] md:pt-[60px]">
       <div
         key={ownerDetails._id}
-        className="flex flex-col items-center mt-[3vh] gap-3"
+        className="flex md:flex-col justify-center items-center mt-[3vh] gap-3"
       >
         <img
           src={ownerDetails.avatar}
           alt={ownerDetails.userName}
-          className="w-[50%] rounded-md"
+          className="w-[20%] md:w-[50%] rounded-md"
         />
         <div className="flex flex-col items-center gap-1">
-          <h1 className="xl:text-3xl text-yellow-800 font-bold">
+          <h1 className="md:text-3xl text-yellow-800 font-bold">
             {ownerDetails.userName}
           </h1>
-          <p className="xl:text-sm tracking-wider text-yellow-950 font-semibold">
+          <p className="text-[12px] md:text-sm tracking-wider text-yellow-950 font-semibold">
             {ownerDetails.email}
           </p>
+          <NavLink
+            to={"/"}
+            className="border border-green-500 rounded-sm block md:hidden text-[12px] px-4 py-1 text-green-500 hover:bg-green-500 hover:text-white font-bold transition duration-200 mt-0.5"
+          >
+            Go to Home
+          </NavLink>
         </div>
         <NavLink
           to={"/"}
-          className="border border-green-500 rounded-sm  px-4 py-1 text-green-500 hover:bg-green-500 hover:text-white font-bold transition duration-200 mt-[20px]"
+          className="border border-green-500 rounded-sm hidden md:block text-[12px] px-4 py-1 text-green-500 hover:bg-green-500 hover:text-white font-bold transition duration-200 mt-[20px]"
         >
           Go to Home
         </NavLink>
