@@ -54,7 +54,7 @@ function Post() {
 
   return (
     <div>
-      <div className="w-full grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-x-10 gap-y-10 p-5">
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-10 gap-y-5 md:gap-y-10 p-3.5 md:p-5">
       {posts.map((post) => (
         <div
           key={post._id}
@@ -63,12 +63,12 @@ function Post() {
           <img
             src={post.image}
             alt={post.imageName}
-            className="w-full h-[350px] object-cover rounded-xl"
+            className="w-full h-[350px] rounded-xl"
           />
           <p className="text-lg font-semibold mt-2">{post.imageName}</p>
           <button onClick={() => handleUserClick(post)} className="flex gap-1">
             Posted by:
-            <h1 className="text-blue-500 hover:text-blue-700 cursor-pointer">
+            <h1 className="text-blue-500 hover:text-blue-700 cursor-pointer font-bold">
               {post.user.userName}
             </h1>
           </button>
