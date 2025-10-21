@@ -25,7 +25,7 @@ function Home() {
   };
 
   return (
-    <div className="bg-indigo-50 flex flex-col justify-between min-h-screen relative items-center pt-12 md:pt-15">
+    <div className="bg-indigo-50 flex flex-col justify-between min-h-screen relative items-center pt-28 lg:pt-16">
       <Post />
 
       <button
