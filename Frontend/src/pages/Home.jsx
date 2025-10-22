@@ -11,7 +11,7 @@ function Home() {
     const user = localStorage.getItem("user");
     if (user) {
       const parsedUser = JSON.parse(user);
-      navigate(`/createPost/${parsedUser._id}`);
+      navigate(`/createPost/${parsedUser.id}`);
     } else {
       toast.error("Please Login first", {
         style: {
@@ -25,7 +25,7 @@ function Home() {
   };
 
   return (
-    <div className="bg-indigo-50 flex flex-col justify-between min-h-screen relative items-center pt-28 lg:pt-16">
+    <div className="bg-indigo-50 flex flex-col justify-between min-h-screen relative items-center pt-16">
       <Post />
 
       <button

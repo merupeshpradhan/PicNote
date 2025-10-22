@@ -74,7 +74,7 @@ function CreatePost() {
             <button
               type="button"
               onClick={() => document.getElementById("fileInput").click()}
-              className="bg-yellow-500 rounded-full py-2 md:p-2.5 transition duration-200 text-[15px] w-[28vw] md:w-[8vw] font-medium md:font-semibold text-white hover:bg-yellow-900 cursor-pointer"
+              className="bg-yellow-500 rounded-full py-2 md:p-2 transition duration-200 text-[15px] w-[28vw] md:w-[9vw] font-medium md:font-semibold text-white hover:bg-yellow-900 cursor-pointer"
             >
               {image ? "Change image" : "Chose image"}
             </button>
