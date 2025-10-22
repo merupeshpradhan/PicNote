@@ -56,16 +56,16 @@ function Post() {
 
   return (
     <div>
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-10 gap-y-5 md:gap-y-10 p-3.5 md:p-5">
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-x-10 gap-y-5 md:gap-y-10 p-3.5 md:p-5">
         {posts.map((post) => (
           <div
             key={post._id}
-            className="md:w-[300px] flex flex-col gap-2 bg-white shadow-md rounded-2xl p-3"
+            className="md:w-[360px] lg:w-[300px] flex flex-col gap-2 bg-white shadow-md rounded-2xl p-3"
           >
             <img
               src={post.image}
               alt={post.imageName}
-              className="w-full h-[300px] object-cover rounded-xl"
+              className="w-full h-[400px] lg:h-[300px] object-cover rounded-xl"
             />
             <div className="text-center">
               <p className="text-lg font-bold  mt-2 mb-2">{post.imageName}</p>
