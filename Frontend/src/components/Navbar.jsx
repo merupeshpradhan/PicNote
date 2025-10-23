@@ -52,7 +52,7 @@ function Navbar() {
     }
   };
   return (
-    <nav className="fixed top-0 left-0 w-full md:h-[8vh] lg:h-[9vh] bg-white shadow-md py-2.5 md:py-2 lg:py-7 2xl:py-3.5 px-5 md:px-10 flex justify-between items-center z-50">
+    <nav className="fixed top-0 left-0 w-full bg-white shadow-md py-2.5 md:py-2 lg:py-7 2xl:py-3.5 px-5 md:px-10 flex justify-between items-center z-50">
         <Link to="/">
           <h1 className="text-2xl md:text-4xl lg:text-3xl font-extrabold text-pink-600 tracking-wide">
             Pic<span className="text-gray-800">Note</span>
@@ -62,10 +62,10 @@ function Navbar() {
         <ul className="flex gap-5">
           {!user ? (
             <div className="login-register flex gap-3 md:gap-5 justify-center items-center">
-              <li className="flex items-center bg-green-700 py-1 px-2.5 md:py-2.5 md:px-5 lg:py-1.5 lg:px-4 rounded-md text-md md:text-xl lg:text-sm md:font-semibold tracking-wider text-white transition duration-200 cursor-pointer">
+              <li className="flex items-center bg-green-700 py-1 px-2.5 lg:py-1 lg:px-4 rounded-md text-md md:font-semibold tracking-wider text-white transition duration-200 cursor-pointer">
                 <Link to={"/login"}>Login</Link>
               </li>
-              <li className="bg-red-700 py-1 px-2.5 md:py-2.5 md:px-4 lg:py-1.5 rounded-md text-md md:text-xl lg:text-sm md:font-semibold tracking-wider text-white transition duration-200 cursor-pointer">
+              <li className="bg-red-700 py-1 px-2.5 lg:py-1 rounded-md text-md md:font-semibold tracking-wider text-white transition duration-200 cursor-pointer">
                 <Link to={"/register"}>Register</Link>
               </li>
             </div>

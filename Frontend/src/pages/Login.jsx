@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { FaEye, FaEyeSlash, FaUser } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaSpinner} from "react-icons/fa";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -53,8 +53,12 @@ function Login() {
               Capture. Save. Remember.
             </p>
           </div>
-           <div className="relative flex items-center justify-center">
-            <img src="/Tablet-login-bro.png" alt="Preview" className="w-[150px] md:w-full" />
+          <div className="relative flex items-center justify-center">
+            <img
+              src="/Tablet-login-bro.png"
+              alt="Preview"
+              className="w-[150px] md:w-full"
+            />
           </div>
         </div>
 
@@ -76,7 +80,7 @@ function Login() {
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full border border-pink-300 rounded-md p-1.5 md: focus:border-pink-500 focus:outline-none"
+                className="w-full border border-pink-300 rounded-md p-1.5 focus:border-pink-500 focus:outline-none"
               />
             </div>
 
@@ -94,7 +98,7 @@ function Login() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-2 flex items-center  text-[13px]  justify-center text-gray-500 hover:text-gray-700"
+                  className="absolute inset-y-0 right-2 flex items-center text-[13px] justify-center text-gray-500 hover:text-gray-700"
                 >
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </button>
@@ -105,10 +109,17 @@ function Login() {
             <button
               type="submit"
               disabled={loading}
-                            className="w-full bg-pink-500 mt-3 md:mt-0 text-white py-1.5 md:py-2 rounded-md md:font-semibold hover:bg-pink-600 transition"
-
+              className={`w-full bg-pink-500 mt-3 md:mt-0 text-white py-1.5 md:py-2 rounded-md md:font-semibold hover:bg-pink-600 transition cursor-pointer flex justify-center items-center gap-2 ${
+                loading && "opacity-70 cursor-not-allowed"
+              }`}
             >
-              {loading ? "Processing..." : "Sign In"}
+              {loading ? (
+                  <>
+                    <FaSpinner className="animate-spin text-xl" /> Sign In...
+                  </>
+              ) : (
+                "Sign In"
+              )}
             </button>
           </form>
 

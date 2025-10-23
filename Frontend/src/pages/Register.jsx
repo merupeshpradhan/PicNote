@@ -1,7 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { FaEye, FaEyeSlash, FaRegImage, FaUser } from "react-icons/fa";
+import {
+  FaEye,
+  FaEyeSlash,
+  FaRegImage,
+  FaSpinner,
+  FaUser,
+} from "react-icons/fa";
 import { toast } from "react-toastify";
 
 function Register() {
@@ -54,9 +60,9 @@ function Register() {
     <div className="min-h-screen flex items-center justify-center bg-pink-100 py-4 px-4">
       <div className="bg-white rounded-2xl shadow-2xl md:rounded-2xl md:shadow-2xl flex flex-col md:flex-row max-w-5xl w-full overflow-hidden">
         {/* Left Section */}
-        <div className="w-full md:w-1/2 bg-pink-50 flex md:flex-col items-center justify-between md:justify-normal   p-3 md:p-6">
+        <div className="w-full md:w-1/2 bg-pink-50 flex md:flex-col items-center justify-between md:justify-normal p-3 md:p-6">
           {/* Project Name */}
-          <div className="text-center mb-6 mt-[17px]">
+          <div className="text-center mb-6 mt-[10px]">
             <h1 className="text-2xl md:text-4xl font-extrabold text-pink-600 tracking-wide">
               Pic<span className="text-gray-800">Note</span>
             </h1>
@@ -76,7 +82,7 @@ function Register() {
         </div>
 
         {/* Right Section - Form */}
-        <div className="md:w-1/2 pt-4 pb-4 px-6 md:p-12">
+        <div className="md:w-1/2 pt-4 pb-4 px-6 md:p-9">
           {/* Form Header */}
           <h2 className="text-xl md:text-3xl font-semibold text-gray-700 mb-1 md:mb-2">
             Create Your Account
@@ -86,7 +92,7 @@ function Register() {
             securely.
           </p>
 
-          <form onSubmit={userRegister} className="space-y-1.5 md:space-y-5">
+          <form onSubmit={userRegister} className="space-y-1.5 md:space-y-3">
             {/* Avatar Upload */}
             <div className="flex justify-between md:justify-start md:gap-7 mb-3">
               <div className="avatar-preview-container border-2 border-pink-500 w-[50%] h-[20vh]  xl:h-[20vh] xl:w-[42%] rounded-md flex justify-center items-center overflow-hidden">
@@ -182,9 +188,17 @@ function Register() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-pink-500 mt-3 md:mt-0 text-white py-1.5 md:py-2 rounded-md md:font-semibold hover:bg-pink-600 transition"
+              className={`w-full bg-pink-500 mt-3 md:mt-0 text-white py-1.5 md:py-2 rounded-md md:font-semibold hover:bg-pink-600 transition flex justify-center items-center gap-2 ${
+                loading && "opacity-70 cursor-not-allowed"
+              }`}
             >
-              {loading ? "Processing..." : "Sign Up"}
+              {loading ? (
+                <>
+                  <FaSpinner className="animate-spin text-xl" /> Sign Up...
+                </>
+              ) : (
+                "Sign Up"
+              )}
             </button>
           </form>
 
