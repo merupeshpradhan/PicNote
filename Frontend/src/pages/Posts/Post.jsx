@@ -65,20 +65,18 @@ function Post() {
         {posts.map((post) => (
           <div
             key={post._id}
-            onClick={() => navigate(`/postDetail/${post._id}`)}
-            className="w-[170px] lg:w-[300px] flex flex-col gap-2 bg-white shadow-md rounded-2xl p-3"
+            className="w-[170px] lg:w-[290px] flex flex-col gap-2 bg-white shadow-md rounded-2xl p-3"
           >
-            <div className="flex flex-col gap-1 items-center">
-              <img
-                src={post.image}
-                alt={post.imageName}
-                className="w-full lg:h-[200px] object-cover rounded-xl"
-              />
-              <p className="text-sm md:text-lg font-bold mt-2">
+            <img
+              src={post.image}
+              alt={post.imageName}
+              className="w-full lg:h-[208px] object-cover rounded-xl cursor-pointer"
+              onClick={() => navigate(`/postDetail/${post._id}`)}
+            />
+            <div className="text-center">
+              <p className="text-sm md:text-lg font-bold mt-1 mb-1.5">
                 {post.imageName}
               </p>
-            </div>
-            <div className="text-center">
               <button
                 onClick={() => handleUserClick(post)}
                 className="flex flex-col md:flex-row justify-center gap-1 mx-auto text-sm"
