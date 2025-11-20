@@ -78,7 +78,7 @@ const createPost = asyncHandler(async (req, res) => {
 
 // Get all posts
 const getAllPost = asyncHandler(async function (req, res) {
-  const posts = await Post.find().populate("user", "userName avatar email");
+  const posts = await Post.find().populate("user", "firstName lastName avatar email");
 
   return res
     .status(200)
@@ -91,7 +91,7 @@ const getuserPosts = asyncHandler(async function (req, res) {
 
   const posts = await Post.find({ user: userId }).populate(
     "user",
-    "userName avatar email"
+    "firstName lastName avatar email"
   );
 
   return res
@@ -105,7 +105,7 @@ const getPostById = asyncHandler(async function (req, res) {
 
   const post = await Post.findById(postId).populate(
     "user",
-    "userName avatar email"
+    "firstName lastName avatar email"
   );
 
   if (!post) {
@@ -160,7 +160,7 @@ const updatePost = asyncHandler(async (req, res) => {
 
   await post.save();
 
-  await post.populate("user", "userName avatar email");
+  await post.populate("user", "firstName lastName  avatar email");
 
   return res
     .status(200)

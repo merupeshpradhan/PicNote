@@ -61,27 +61,32 @@ function Post() {
 
   return (
     <div>
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-10 gap-y-5 md:gap-y-10 p-3.5 md:p-5 2xl:mt-2 2xl:mb-2">
+      <div className="w-full flex md:grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-5 md:gap-x-10 gap-y-5 md:gap-y-10 p-3.5 md:p-5 2xl:mt-2 2xl:mb-2">
         {posts.map((post) => (
           <div
             key={post._id}
-            className="w-[340px] flex flex-col gap-2 bg-white shadow-md rounded-2xl p-3"
+            onClick={() => navigate(`/postDetail/${post._id}`)}
+            className="w-[170px] lg:w-[300px] flex flex-col gap-2 bg-white shadow-md rounded-2xl p-3"
           >
-            <img
-              src={post.image}
-              alt={post.imageName}
-              className="w-full h-[360px] object-cover rounded-xl"
-            />
+            <div className="flex flex-col gap-1 items-center">
+              <img
+                src={post.image}
+                alt={post.imageName}
+                className="w-full lg:h-[200px] object-cover rounded-xl"
+              />
+              <p className="text-sm md:text-lg font-bold mt-2">
+                {post.imageName}
+              </p>
+            </div>
             <div className="text-center">
-              <p className="text-lg font-bold  mt-2 mb-2">{post.imageName}</p>
               <button
                 onClick={() => handleUserClick(post)}
-                className="flex justify-center gap-1 mx-auto"
+                className="flex flex-col md:flex-row justify-center gap-1 mx-auto text-sm"
               >
-                Posted by:
-                <h1 className="text-blue-500 hover:text-blue-700 cursor-pointer font-semibold transition duration-200">
-                  {post.user.userName}
-                </h1>
+                Posted by :
+                <span className="text-blue-500 hover:text-blue-700 cursor-pointer font-semibold transition duration-200">
+                  {post.user.firstName} {post.user.lastName}
+                </span>
               </button>
             </div>
           </div>

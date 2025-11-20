@@ -53,11 +53,11 @@ function Navbar() {
   };
   return (
     <nav className="fixed top-0 left-0 w-full bg-white shadow-md py-2.5 md:py-2 lg:py-7 2xl:py-3.5 px-5 md:px-10 flex justify-between items-center z-50">
-        <Link to="/">
-          <h1 className="text-2xl md:text-4xl lg:text-3xl font-extrabold text-pink-600 tracking-wide">
-            Pic<span className="text-gray-800">Note</span>
-          </h1>
-        </Link>
+      <Link to="/">
+        <h1 className="text-2xl md:text-4xl lg:text-3xl font-extrabold text-pink-600 tracking-wide">
+          Pic<span className="text-gray-800">Note</span>
+        </h1>
+      </Link>
       <div className="block">
         <ul className="flex gap-5">
           {!user ? (
@@ -79,12 +79,12 @@ function Navbar() {
                   {user.avatar && (
                     <img
                       src={user.avatar}
-                      alt={user.userName}
+                      alt={user.firstName}
                       className="w-7 h-7 md:w-10 md:h-10 rounded-full"
                     />
                   )}
                   <span className="font-semibold hidden md:block">
-                    {user.userName}
+                    {user.firstName} {user.lastName}
                   </span>
                 </Link>
                 <button
