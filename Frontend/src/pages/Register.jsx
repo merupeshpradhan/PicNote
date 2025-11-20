@@ -13,7 +13,8 @@ import { toast } from "react-toastify";
 function Register() {
   const [previewAvatar, setAvatarPreview] = useState("");
   const [avatar, setAvatar] = useState("");
-  const [userName, setUserName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -27,7 +28,8 @@ function Register() {
     try {
       const formData = new FormData();
       formData.append("avatar", avatar);
-      formData.append("userName", userName);
+      formData.append("firstName", firstName);
+      formData.append("lastName", lastName);
       formData.append("email", email);
       formData.append("password", password);
 
@@ -42,7 +44,8 @@ function Register() {
       navigate("/login");
 
       setAvatar("");
-      setUserName("");
+      setFirstName("");
+      setLastName("");
       setEmail("");
       setPassword("");
     } catch (error) {
@@ -72,7 +75,7 @@ function Register() {
           </div>
 
           {/* Illustration  */}
-          <div className="relative mt-[10%]">
+          <div className="relative">
             <img
               src="/Sign-up-amico.png"
               alt="Preview"
@@ -92,10 +95,10 @@ function Register() {
             securely.
           </p>
 
-          <form onSubmit={userRegister} className="space-y-1.5 md:space-y-3">
+          <form onSubmit={userRegister} className="space-y-1 md:space-y-5">
             {/* Avatar Upload */}
             <div className="flex justify-between md:justify-start md:gap-7 mb-3">
-              <div className="avatar-preview-container border-2 border-pink-500 w-[50%] h-[20vh]  xl:h-[20vh] xl:w-[42%] rounded-md flex justify-center items-center overflow-hidden">
+              <div className="avatar-preview-container border-2 border-pink-500 w-[50%] h-[20vh] xl:h-[26vh] xl:w-[42%] rounded-md flex justify-center items-center overflow-hidden">
                 {previewAvatar ? (
                   <div className="avatar-preview">
                     <img
@@ -137,50 +140,69 @@ function Register() {
               />
             </div>
 
-            {/* Full Name */}
-            <div>
-              <label className="md:font-semibold text-gray-700">
-                Full Name
-              </label>
-              <input
-                type="text"
-                placeholder="Enter your full name"
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
-                className="w-full border text-[15px] border-pink-300 rounded-md p-2 focus:border-pink-500 focus:outline-none"
-              />
-            </div>
-
-            {/* Email */}
-            <div>
-              <label className="md:font-semibold text-gray-700">E-mail</label>
-              <input
-                type="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full border text-[15px] border-pink-300 rounded-md p-2 focus:border-pink-500 focus:outline-none"
-              />
-            </div>
-
-            {/* Password */}
-            <div className="relative">
-              <label className="md:font-semibold text-gray-700">Password</label>
-              <div className="relative">
+            {/* First Name && Last Name*/}
+            <div className="w-full flex items-center justify-center gap-2">
+              <div className="firstName w-full">
+                <label className="md:font-semibold text-gray-700">
+                  First Name
+                </label>
                 <input
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Enter your password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  type="text"
+                  placeholder="Enter your full name"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
                   className="w-full border text-[15px] border-pink-300 rounded-md p-2 focus:border-pink-500 focus:outline-none"
                 />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-2 flex items-center text-[13px] text-gray-500 hover:text-gray-700 cursor-pointer"
-                >
-                  {showPassword ? <FaEyeSlash /> : <FaEye />}
-                </button>
+              </div>
+              <div className="lastName w-full">
+                <label className="md:font-semibold text-gray-700">
+                  Last Name
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter your full name"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  className="w-full border text-[15px] border-pink-300 rounded-md p-2 focus:border-pink-500 focus:outline-none"
+                />
+              </div>
+            </div>
+
+            {/* Email && Password */}
+            <div className="w-full flex items-center justify-center gap-2">
+              {/* Email */}
+              <div className="w-full">
+                <label className="md:font-semibold text-gray-700">E-mail</label>
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full border text-[15px] border-pink-300 rounded-md p-2 focus:border-pink-500 focus:outline-none"
+                />
+              </div>
+
+              {/* Password */}
+              <div className="relative w-full">
+                <label className="md:font-semibold text-gray-700">
+                  Password
+                </label>
+                <div className="relative w-full">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Enter your password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="w-full border text-[15px] border-pink-300 rounded-md p-2 focus:border-pink-500 focus:outline-none"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute inset-y-0 right-2 flex items-center text-[13px] text-gray-500 hover:text-gray-700 cursor-pointer"
+                  >
+                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -188,7 +210,7 @@ function Register() {
             <button
               type="submit"
               disabled={loading}
-              className={`w-full bg-pink-500 mt-3 md:mt-0 text-white py-1.5 md:py-2 rounded-md md:font-semibold hover:bg-pink-600 transition flex justify-center items-center gap-2 ${
+              className={`w-full bg-pink-500 mt-3 text-white py-1.5 md:py-2 rounded-md md:font-semibold hover:bg-pink-600 transition flex justify-center items-center gap-2 ${
                 loading && "opacity-70 cursor-not-allowed"
               }`}
             >

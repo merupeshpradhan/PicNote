@@ -5,24 +5,24 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 
 const userSignup = asyncHandler(async (req, res) => {
-  const { userName, email, password } = req.body;
+  const { firstName, lastName, email, password } = req.body;
 
   const avatarLocalPath = req.file?.path;
   if (!avatarLocalPath) {
     throw new ApiError(400, "Please provide avatar image.");
   }
 
-  if (!userName || !email || !password) {
-    throw new ApiError(400, "New user please provide your all detials.");
+  if (!firstName || !lastName || !email || !password) {
+    throw new ApiError(400, "Please provide all required details.");
   }
 
   const otherEmail = await User.findOne({ email });
   if (otherEmail) {
-    throw new ApiError(400, "This email user already exist in our area.");
+    throw new ApiError(400, "This email is already registered.");
   }
 
   // create user first without avatar
-  let user = new User({ userName, email, password });
+  let user = new User({ firstName, lastName, email, password });
 
   // make unique + friendly publicId using user._id
   const publicId = `user_${user._id}_avatar`;
@@ -51,13 +51,14 @@ const userSignup = asyncHandler(async (req, res) => {
     id: user._id,
     avatar: user.avatar,
     avatarPublicId: user.avatarPublicId,
-    userName: user.userName,
+    firstName: user.firstName,
+    lastName: user.lastName,
     email: user.email,
   };
 
   return res
     .status(201)
-    .json(new ApiResponse(201, userData, "User register successfully."));
+    .json(new ApiResponse(201, userData, "User registered successfully."));
 });
 
 const userLogin = asyncHandler(async (req, res) => {
@@ -92,7 +93,8 @@ const userLogin = asyncHandler(async (req, res) => {
   const userData = {
     id: user._id,
     avatar: user.avatar,
-    userName: user.userName,
+    firstName: user.firstName,
+    lastName: user.lastName,
     email: user.email,
   };
 
@@ -102,7 +104,7 @@ const userLogin = asyncHandler(async (req, res) => {
 });
 
 const updateUserDetails = asyncHandler(async (req, res) => {
-  const { userName, email } = req.body;
+  const { firstName, lastName, email } = req.body;
   const avatarLocalPath = req.file?.path;
   const user = req.user; // from authMiddleware
 
@@ -111,14 +113,15 @@ const updateUserDetails = asyncHandler(async (req, res) => {
   // Upload new avatar if provided
   if (avatarLocalPath) {
     const publicId = `user_${user._id}_avatar`;
-    const uploadeAvatar = await uploadOnCloudinary(avatarLocalPath, publicId);
-    if (uploadeAvatar) {
-      user.avatar = uploadeAvatar.secure_url;
-      user.avatarPublicId = uploadeAvatar.public_id;
+    const uploadedAvatar = await uploadOnCloudinary(avatarLocalPath, publicId);
+    if (uploadedAvatar) {
+      user.avatar = uploadedAvatar.secure_url;
+      user.avatarPublicId = uploadedAvatar.public_id;
     }
   }
 
-  if (userName) user.userName = userName;
+  if (firstName) user.firstName = firstName;
+  if (lastName) user.lastName = lastName;
   if (email) user.email = email;
 
   await user.save();
@@ -126,7 +129,8 @@ const updateUserDetails = asyncHandler(async (req, res) => {
   const updatedData = {
     id: user._id,
     avatar: user.avatar,
-    userName: user.userName,
+    firstName: user.firstName,
+    lastName: user.lastName,
     email: user.email,
   };
 
@@ -136,8 +140,14 @@ const updateUserDetails = asyncHandler(async (req, res) => {
 });
 
 const userLogout = asyncHandler(async (req, res) => {
-  res.clearCookie("accessToken");
-  res.clearCookie("refreshToken");
+  const option = {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "Strict",
+  };
+
+  res.clearCookie("accessToken", option);
+  res.clearCookie("refreshToken", option);
 
   return res
     .status(200)

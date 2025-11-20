@@ -4,9 +4,13 @@ import jwt from "jsonwebtoken";
 
 const userSchema = new Schema(
   {
-    userName: {
+    firstName: {
       type: String,
-      required: [true, "Please provide your own name"],
+      required: [true, "Please provide your first name"],
+    },
+    lastName: {
+      type: String,
+      required: [true, "Please provide your last name"],
     },
     avatar: { type: String, required: [true, "Please provide your own image"] },
     email: {
@@ -41,7 +45,8 @@ userSchema.methods.generateAccessToken = function () {
   return jwt.sign(
     {
       id: this._id,
-      userName: this.userName,
+      firstName: this.firstName,
+      lastName: this.lastName,
       email: this.email,
     },
     process.env.ACCESS_TOKEN_SECRET,
