@@ -53,7 +53,7 @@ function PostDetail() {
 
   return (
     <div className="bg-indigo-50 lg:pt-[90px] flex flex-col items-center justify-between">
-      <div className="w-full flex  items-cente justify-around gap-5 mb-10 lg:px-5">
+      <div className="w-full flex  items-cente justify-around gap-5 mb-10 lg:px-7">
         <div className="w-[70vw]">
           <img
             src={postDetails.image}

@@ -62,10 +62,10 @@ function Navbar() {
         <ul className="flex gap-5">
           {!user ? (
             <div className="login-register flex gap-3 md:gap-5 justify-center items-center">
-              <li className="flex items-center bg-green-700 py-1 px-2.5 lg:py-1 lg:px-4 rounded-md text-md md:font-semibold tracking-wider text-white transition duration-200 cursor-pointer">
+              <li className="flex items-center bg-green-600 hover:bg-green-700 py-1 px-2.5 lg:py-1 lg:px-4 rounded-md text-md md:font-semibold tracking-wider text-white transition duration-200 cursor-pointer">
                 <Link to={"/login"}>Login</Link>
               </li>
-              <li className="bg-red-700 py-1 px-2.5 lg:py-1 rounded-md text-md md:font-semibold tracking-wider text-white transition duration-200 cursor-pointer">
+              <li className="bg-red-600 hover:bg-red-700   py-1 px-2.5 lg:py-1 rounded-md text-md md:font-semibold tracking-wider text-white transition duration-200 cursor-pointer">
                 <Link to={"/register"}>Register</Link>
               </li>
             </div>
@@ -76,6 +76,9 @@ function Navbar() {
                   to={"/userDetials"}
                   className="flex justify-center items-center gap-2"
                 >
+                  <span className="font-semibold hidden md:block">
+                    Wellcome {user.firstName}
+                  </span>
                   {user.avatar && (
                     <img
                       src={user.avatar}
@@ -83,13 +86,10 @@ function Navbar() {
                       className="w-7 h-7 md:w-10 md:h-10 rounded-full"
                     />
                   )}
-                  <span className="font-semibold hidden md:block">
-                    {user.firstName} {user.lastName}
-                  </span>
                 </Link>
                 <button
                   onClick={handleLogout}
-                  className="border md:border-2 border-red-800 px-1.5 py-0.5 md:px-2 md:py-1 rounded-md hover:bg-red-800 hover:text-white text-[12px] md:text-[16px] md:font-semibold transition duration-200 cursor-pointer font-bold tracking-wider"
+                  className="bg-red-600 hover:bg-red-700 text-white px-1.5 py-0.5 md:px-2 md:py-1 rounded-md hover:text-white text-[12px] md:text-[16px] md:font-semibold transition duration-200 cursor-pointer font-bold tracking-wider"
                 >
                   Logout
                 </button>
