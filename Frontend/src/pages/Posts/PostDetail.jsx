@@ -2,10 +2,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Footer from "../../components/Footer";
+import { useNavigate } from "react-router-dom";
 
 function PostDetail() {
   const { postId } = useParams();
   const [postDetails, setPostDetails] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getOwnerDetails = async () => {
@@ -34,6 +36,15 @@ function PostDetail() {
     getOwnerDetails();
   }, [postId]);
 
+  const handleUserClick = (post) => {
+    const logedInUser = localStorage.getItem("user");
+    if (!logedInUser) {
+      toast.error("Please log in first!");
+      return;
+    }
+    navigate(`/profile/${post.user._id}`);
+  };
+
   if (!postDetails) {
     return (
       <div className="text-center mt-20 text-3xl">Loading post details...</div>
@@ -41,22 +52,45 @@ function PostDetail() {
   }
 
   return (
-  <div>
-     <div className="lg:mt-28 flex items-center justify-around gap-5 mb-10">
-      <div className="imageName_and_imageDescription flex flex-col items-center gap-5">
-        <h1>{postDetails.imageName}</h1>
-        <h3>{postDetails.description}</h3>
-        <p>
-          {postDetails.user.firstName} {postDetails.user.lastName}
-        </p>
-        <p>{postDetails.updatedAt}</p>
+    <div className="bg-indigo-50 lg:pt-[90px] flex flex-col items-center justify-between">
+      <div className="w-full flex flex-col items-center justify-around gap-5 mb-10 lg:px-5">
+        <div className="w-[70vw] shadow-lg/40 ">
+          <img
+            src={postDetails.image}
+            alt={postDetails.imageName}
+            className="w-full h-[70vh] rounded-md"
+          />
+        </div>
+        <div className="imageName_and_imageDescription w-full flex flex-col items-center gap-3 border-2 border-indigo-900 rounded-2xl px-3 py-1">
+          <h1 className="text-5xl font-semibold text-indigo-700">
+            {postDetails.imageName}
+          </h1>
+          <h3 className="font-medium text-base/8 text-indigo-600">
+            {postDetails.description}
+          </h3>
+          <div className="flex flex-col gap-2 items-center text-indigo-800">
+            <p className="text-[15px] font-semibold">
+              Uploaded on :-{" "}
+              {new Date(postDetails.createdAt).toLocaleDateString("en-GB", {
+                day: "2-digit",
+                month: "long",
+                year: "numeric",
+              })}
+            </p>
+            <p
+              onClick={() => handleUserClick(postDetails)}
+              className="text-[15px] font-semibold"
+            >
+              Post By :-{" "}
+              <span className="cursor-pointer hover:text-red-400 underline underline-offset-4">
+                {postDetails.user.firstName} {postDetails.user.lastName}
+              </span>
+            </p>
+          </div>
+        </div>
       </div>
-      <div className="w-[45vw]">
-        <img src={postDetails.image} alt={postDetails.imageName} className="w-full h-[80vh]" />
-      </div>
+      <Footer />
     </div>
-    <Footer/>
-  </div>
   );
 }
 

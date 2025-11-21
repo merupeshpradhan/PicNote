@@ -7,7 +7,6 @@ import Navbar from "./components/Navbar";
 import UserProfile from "./pages/UserProfile";
 import UpdatePost from "./pages/Posts/UpdatePost";
 import CreatePost from "./pages/Posts/CreatePost";
-import DeletePost from "./pages/Posts/DeletePost";
 import UserDetials from "./pages/Users/UserDetials";
 import PostDetail from "./pages/Posts/PostDetail";
 
@@ -29,7 +28,6 @@ function App() {
         <Route path="/profile/:userId" element={<UserProfile />} />
         <Route path="/postDetail/:postId" element={<PostDetail />} />
         <Route path="/update/:postId" element={<UpdatePost />} />
-        <Route path="/delete/:postId" element={<DeletePost />} />
       </Routes>
       {/* {!hideLayout && <Footer />} */}
     </div>

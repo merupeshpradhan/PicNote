@@ -47,7 +47,7 @@ function PostOwnerDetails() {
         <img
           src={ownerDetails.avatar}
           alt={ownerDetails.userName}
-          className="w-[20%] md:w-[50%] lg:w-[80%] rounded-md"
+          className="w-[20%] md:w-[50%] lg:w-[80%] lg:h-[40vh] rounded-md"
         />
         <div className="flex flex-col items-center gap-1">
           <h1 className="md:text-2xl lg:text-3xl text-yellow-800 font-bold">

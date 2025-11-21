@@ -54,7 +54,7 @@ function Navbar() {
   return (
     <nav className="fixed top-0 left-0 w-full bg-white shadow-md py-2.5 md:py-2 lg:py-7 2xl:py-3.5 px-5 md:px-10 flex justify-between items-center z-50">
       <Link to="/">
-        <h1 className="text-2xl md:text-4xl lg:text-3xl font-extrabold text-pink-600 tracking-wide">
+        <h1 className="text-2xl md:text-4xl lg:text-3xl font-extrabold text-pink-600 tracking-wide cursor-pointer">
           Pic<span className="text-gray-800">Note</span>
         </h1>
       </Link>
