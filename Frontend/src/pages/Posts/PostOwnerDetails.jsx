@@ -16,7 +16,7 @@ function PostOwnerDetails() {
           `http://localhost:4000/api/v1/posts/user/${userId}`,
           {
             headers: { Authorization: `Bearer ${token}` },
-            withCredentials: true,
+            // withCredentials: true,
           }
         );
 

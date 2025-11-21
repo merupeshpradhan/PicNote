@@ -11,7 +11,7 @@ function UserPostImages() {
     try {
       const res = await axios.get(
         `http://localhost:4000/api/v1/posts/user/${userId}`,
-        { headers: { Authorization: `Beare ${token}` }, withCredentials: true }
+        { headers: { Authorization: `Bearer ${token}` }, withCredentials: true }
       );
       setUserPosts(res.data.data);
       console.log(res.data.data);

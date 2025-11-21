@@ -53,22 +53,22 @@ function PostDetail() {
 
   return (
     <div className="bg-indigo-50 lg:pt-[90px] flex flex-col items-center justify-between">
-      <div className="w-full flex flex-col items-center justify-around gap-5 mb-10 lg:px-5">
-        <div className="w-[70vw] shadow-lg/40 ">
+      <div className="w-full flex  items-cente justify-around gap-5 mb-10 lg:px-5">
+        <div className="w-[70vw]">
           <img
             src={postDetails.image}
             alt={postDetails.imageName}
-            className="w-full h-[70vh] rounded-md"
+            className="w-full h-[85vh] rounded-2xl shadow-lg/40 "
           />
         </div>
         <div className="imageName_and_imageDescription w-full flex flex-col items-center gap-3 border-2 border-indigo-900 rounded-2xl px-3 py-1">
           <h1 className="text-5xl font-semibold text-indigo-700">
             {postDetails.imageName}
           </h1>
-          <h3 className="font-medium text-base/8 text-indigo-600">
+          <h3 className="font-medium text-base/7 text-indigo-950">
             {postDetails.description}
           </h3>
-          <div className="flex flex-col gap-2 items-center text-indigo-800">
+          <div className="flex flex-col gap-2 items-center text-indigo-900">
             <p className="text-[15px] font-semibold">
               Uploaded on :-{" "}
               {new Date(postDetails.createdAt).toLocaleDateString("en-GB", {
@@ -82,7 +82,7 @@ function PostDetail() {
               className="text-[15px] font-semibold"
             >
               Post By :-{" "}
-              <span className="cursor-pointer hover:text-red-400 underline underline-offset-4">
+              <span className="cursor-pointer hover:text-red-400 underline underline-offset-2">
                 {postDetails.user.firstName} {postDetails.user.lastName}
               </span>
             </p>

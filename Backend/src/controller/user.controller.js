@@ -81,6 +81,10 @@ const userLogin = asyncHandler(async (req, res) => {
   const accessToken = await user.generateAccessToken();
   const refreshToken = await user.generateRefreshToken();
 
+  // Save access token in DB
+  user.accessToken = accessToken;
+  await user.save({ validateBeforeSave: false });
+
   const option = {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
@@ -96,6 +100,7 @@ const userLogin = asyncHandler(async (req, res) => {
     firstName: user.firstName,
     lastName: user.lastName,
     email: user.email,
+    accessToken: user.accessToken,
   };
 
   return res
@@ -140,11 +145,18 @@ const updateUserDetails = asyncHandler(async (req, res) => {
 });
 
 const userLogout = asyncHandler(async (req, res) => {
+  const user = req.user; // must come from auth middleware
+  if (!user) throw new ApiError(401, "Unauthorized request");
+
   const option = {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "Strict",
   };
+
+  // remove token from DB
+  user.accessToken = null;
+  await user.save({ validateBeforeSave: false });
 
   res.clearCookie("accessToken", option);
   res.clearCookie("refreshToken", option);

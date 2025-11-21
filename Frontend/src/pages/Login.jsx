@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { FaEye, FaEyeSlash, FaSpinner} from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaSpinner } from "react-icons/fa";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -24,6 +24,7 @@ function Login() {
 
       const userData = res.data.data;
       localStorage.setItem("user", JSON.stringify(userData));
+      localStorage.setItem("accessToken", userData.accessToken);
       toast.success("Welcome to PicNote!");
       setEmail("");
       setPassword("");
@@ -45,7 +46,7 @@ function Login() {
       <div className="bg-white rounded-2xl shadow-2xl flex flex-col md:flex-row max-w-5xl w-full overflow-hidden justify-center items-center">
         {/* Left Section */}
         <div className="w-full md:w-1/2 bg-pink-50 flex md:flex-col items-center justify-between p-3 md:p-6">
-           {/* Project Name */}
+          {/* Project Name */}
           <div className="text-center mb-6 mt-[17px]">
             <h1 className="text-2xl md:text-4xl font-extrabold text-pink-600 tracking-wide">
               Pic<span className="text-gray-800">Note</span>
@@ -54,7 +55,7 @@ function Login() {
               Capture. Save. Remember.
             </p>
           </div>
-          
+
           {/* Illustration  */}
           <div className="relative flex items-center justify-center">
             <img
@@ -117,9 +118,9 @@ function Login() {
               }`}
             >
               {loading ? (
-                  <>
-                    <FaSpinner className="animate-spin text-xl" /> Sign In...
-                  </>
+                <>
+                  <FaSpinner className="animate-spin text-xl" /> Sign In...
+                </>
               ) : (
                 "Sign In"
               )}
