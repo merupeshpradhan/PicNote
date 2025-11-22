@@ -29,6 +29,7 @@ function App() {
         <Route path="/profile/:userId" element={<UserProfile />} />
         <Route path="/postDetail/:postId" element={<PostDetail />} />
         <Route path="/update/:postId" element={<UpdatePost />} />
+        <Route path="/search" element={<SearchPost />} />
       </Routes>
       {/* {!hideLayout && <Footer />} */}
     </div>

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import SearchPost from "../pages/Posts/SearchPost";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -58,6 +59,9 @@ function Navbar() {
           Pic<span className="text-gray-800">Note</span>
         </h1>
       </Link>
+      <div className="">
+        <SearchPost/>
+      </div>
       <div className="block">
         <ul className="flex gap-5">
           {!user ? (
@@ -65,7 +69,7 @@ function Navbar() {
               <li className="flex items-center bg-green-600 hover:bg-green-700 py-1 px-2.5 lg:py-1 lg:px-4 rounded-md text-md md:font-semibold tracking-wider text-white transition duration-200 cursor-pointer">
                 <Link to={"/login"}>Login</Link>
               </li>
-              <li className="bg-red-600 hover:bg-red-700   py-1 px-2.5 lg:py-1 rounded-md text-md md:font-semibold tracking-wider text-white transition duration-200 cursor-pointer">
+              <li className="bg-red-600 hover:bg-red-700  py-1 px-2.5 lg:py-1 rounded-md text-md md:font-semibold tracking-wider text-white transition duration-200 cursor-pointer">
                 <Link to={"/register"}>Register</Link>
               </li>
             </div>

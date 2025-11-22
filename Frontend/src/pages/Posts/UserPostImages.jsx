@@ -1,10 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 function UserPostImages() {
   const { userId } = useParams(); // get userId from URL
   const [userPosts, setUserPosts] = useState([]);
+  const navigate = useNavigate();
 
   const getUserPost = async () => {
     const token = localStorage.getItem("accessToken");
@@ -47,7 +50,7 @@ function UserPostImages() {
   let loggedInUserId = null;
 
   if (userFromStorage) {
-    try {  
+    try {
       const loggedInUser = JSON.parse(userFromStorage);
       loggedInUserId = loggedInUser?._id || loggedInUser?.id;
     } catch (error) {
@@ -60,14 +63,18 @@ function UserPostImages() {
       {userPosts.map((userPost) => (
         <div
           key={userPost._id}
-          className="lg:w-[270px] flex flex-col gap-1 items-center bg-white shadow-xl/20 rounded-2xl p-3"
+          className="lg:w-[280px] flex flex-col gap-1 items-center bg-white shadow-md rounded-2xl p-3"
         >
           <img
             src={userPost.image}
-            className="w-full h-[350px] md:h-[250px] object-cover rounded-xl"
+            onClick={() => navigate(`/postDetail/${userPost._id}`)}
+            className="w-full h-[350px] md:h-[200px] object-cover rounded-xl cursor-pointer"
           />
           <p className="text-xl font-bold">{userPost.imageName}</p>
-          <p className="w-full text-md font-medium truncate">{userPost.description}</p>
+          <p className="w-full text-sm font-medium truncate">
+            <span className="text-md">Description</span> : -{" "}
+            <span className=" text-[12px]">{userPost.description}</span>
+          </p>
           {/* Show Update/Delete only if current user is owner */}
           {userPost.user?._id === loggedInUserId && (
             <div className="flex gap-3 mt-3">
