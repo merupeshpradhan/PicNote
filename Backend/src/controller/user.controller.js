@@ -150,7 +150,7 @@ const userLogout = asyncHandler(async (req, res) => {
 
   const option = {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: false,
     sameSite: "Strict",
   };
 
