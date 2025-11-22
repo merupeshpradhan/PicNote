@@ -61,7 +61,7 @@ function Post() {
 
   return (
     <div>
-      <div className="w-full flex md:grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-5 md:gap-x-10 gap-y-5 md:gap-y-10 p-3.5 md:p-5 2xl:mt-2 2xl:mb-2">
+      <div className="w-full flex md:grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-5 md:gap-x-10 gap-y-5 md:gap-y-10 p-3.5 md:p-4 2xl:mb-2">
         {posts.map((post) => (
           <div
             key={post._id}

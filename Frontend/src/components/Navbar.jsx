@@ -52,7 +52,7 @@ function Navbar() {
     }
   };
   return (
-    <nav className="fixed top-0 left-0 w-full bg-white shadow-md py-2.5 md:py-2 lg:py-7 2xl:py-3.5 px-5 md:px-10 flex justify-between items-center z-50">
+    <nav className="fixed top-0 left-0 w-full bg-indigo-100 shadow-indigo-400 shadow-lg/65 rounded-bl-2xl rounded-br-2xl py-2.5 md:py-2 lg:py-2 px-5 flex justify-between items-center z-50">
       <Link to="/">
         <h1 className="text-2xl md:text-4xl lg:text-3xl font-extrabold text-pink-600 tracking-wide cursor-pointer">
           Pic<span className="text-gray-800">Note</span>
