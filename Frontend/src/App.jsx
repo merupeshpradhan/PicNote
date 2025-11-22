@@ -9,6 +9,7 @@ import UpdatePost from "./pages/Posts/UpdatePost";
 import CreatePost from "./pages/Posts/CreatePost";
 import UserDetials from "./pages/Users/UserDetials";
 import PostDetail from "./pages/Posts/PostDetail";
+import SearchPost from "./pages/Posts/SearchPost";
 
 function App() {
   const location = useLocation();

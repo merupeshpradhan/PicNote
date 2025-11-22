@@ -52,7 +52,7 @@ function Navbar() {
     }
   };
   return (
-    <nav className="fixed top-0 left-0 w-full bg-indigo-100 shadow-indigo-400 shadow-lg/65 rounded-bl-2xl rounded-br-2xl py-2.5 md:py-2 lg:py-2 px-5 flex justify-between items-center z-50">
+    <nav className="fixed top-0 left-0 w-full bg-indigo-100 shadow-indigo-400 shadow-lg/65 rounded-bl-md rounded-br-md py-2.5 md:py-2 lg:py-2.5 px-5 flex justify-between items-center z-50">
       <Link to="/">
         <h1 className="text-2xl md:text-4xl lg:text-3xl font-extrabold text-pink-600 tracking-wide cursor-pointer">
           Pic<span className="text-gray-800">Note</span>
@@ -76,14 +76,14 @@ function Navbar() {
                   to={"/userDetials"}
                   className="flex justify-center items-center gap-2"
                 >
-                  <span className="font-semibold hidden md:block">
-                    Wellcome {user.firstName}
+                  <span className="font-semibold hidden md:block text-green-800">
+                    Wellcome {user.firstName}😻
                   </span>
                   {user.avatar && (
                     <img
                       src={user.avatar}
                       alt={user.firstName}
-                      className="w-7 h-7 md:w-10 md:h-10 rounded-full"
+                      className="w-7 h-7 md:w-9 md:h-9 rounded-full"
                     />
                   )}
                 </Link>

@@ -61,16 +61,16 @@ function Post() {
 
   return (
     <div>
-      <div className="w-full flex md:grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-5 md:gap-x-10 gap-y-5 md:gap-y-10 p-3.5 md:p-4 2xl:mb-2">
+      <div className="w-full flex md:grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-5 md:gap-x-5 gap-y-5 md:gap-y-8 p-3.5 md:p-4 2xl:mb-2">
         {posts.map((post) => (
           <div
             key={post._id}
-            className="w-[170px] lg:w-[290px] flex flex-col gap-2 bg-white shadow-md rounded-2xl p-3"
+            className="w-[170px] lg:w-[355px] flex flex-col gap-2 bg-white shadow-md rounded-2xl p-3"
           >
             <img
               src={post.image}
               alt={post.imageName}
-              className="w-full lg:h-[208px] object-cover rounded-xl cursor-pointer"
+              className="w-full lg:h-[220px] object-cover rounded-xl cursor-pointer"
               onClick={() => navigate(`/postDetail/${post._id}`)}
             />
             <div className="text-center">
@@ -82,7 +82,7 @@ function Post() {
                 className="flex flex-col md:flex-row justify-center gap-1 mx-auto text-sm"
               >
                 Posted by :
-                <span className="text-blue-500 hover:text-blue-700 cursor-pointer font-semibold transition duration-200">
+                <span className="text-red-500 hover:text-red-600 cursor-pointer font-semibold transition duration-200">
                   {post.user.firstName} {post.user.lastName}
                 </span>
               </button>
