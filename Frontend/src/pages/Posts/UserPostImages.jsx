@@ -66,8 +66,8 @@ function UserPostImages() {
             src={userPost.image}
             className="w-full h-[350px] md:h-[250px] object-cover bject-cover rounded-xl"
           />
-          <p>{userPost.imageName}</p>
-          <p>{userPost.description}</p>
+          <p className="text-xl font-bold">{userPost.imageName}</p>
+          <p className="w-full text-md font-medium truncate">{userPost.description}</p>
           {/* Show Update/Delete only if current user is owner */}
           {userPost.user?._id === loggedInUserId && (
             <div className="flex gap-3 mt-3">

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Footer from "../../components/Footer";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function PostDetail() {
   const { postId } = useParams();
@@ -61,7 +62,12 @@ function PostDetail() {
             className="w-full h-[85vh] rounded-2xl shadow-lg/40 "
           />
         </div>
-        <div className="imageName_and_imageDescription w-full flex flex-col items-center gap-3 border-2 border-indigo-900 rounded-2xl px-3 py-1">
+        <div
+          className="imageName_and_imageDescription w-full h-[85vh] flex flex-col items-center gap-3 border-2 border-indigo-900 rounded-2xl px-3 py-1 overflow-y-auto
+            [&::-webkit-scrollbar]:w-1.5 
+            [&::-webkit-scrollbar-track]:bg-gray-200 [&::-webkit-scrollbar-track]:rounded-2xl
+            [&::-webkit-scrollbar-thumb]:bg-indigo-950 [&::-webkit-scrollbar-thumb]:rounded-md"
+        >
           <h1 className="text-5xl font-semibold text-indigo-700">
             {postDetails.imageName}
           </h1>
