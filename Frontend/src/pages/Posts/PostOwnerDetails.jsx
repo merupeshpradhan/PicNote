@@ -39,7 +39,7 @@ function PostOwnerDetails() {
   }
 
   return (
-    <div className="fixed flex flex-col justify-between bg-red-50 w-full h-[21.5vh] rounded-2xl md:rounded-none shadow-lg shadow-amber-600 z-20 md:w-[30%] lg:w-[20%] md:h-[100vh] pt-[38px] md:pt-[75px]">
+    <div className="fixed flex flex-col justify-between bg-indigo-100 w-full h-[21.5vh] rounded-2xl md:rounded-none shadow-lg shadow-indigo-600 z-20 md:w-[30%] lg:w-[20%] md:h-[100vh] pt-[38px] md:pt-[75px]">
       <div
         key={ownerDetails._id}
         className="flex md:flex-col justify-center items-center mt-[3vh] gap-10 md:gap-3"

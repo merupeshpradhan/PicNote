@@ -56,15 +56,15 @@ function UserPostImages() {
   }
 
   return (
-    <div className="w-full min-h-[100vh] bg-green-50  items-center grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 p-5 pt-[160px] lg:pt-[85px] md:pl-[32vw] lg:pl-[50vh] mt-[85px] lg:mt-0">
+    <div className="w-full min-h-[100vh] bg-indigo-50 items-center grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 p-5 pt-[160px] lg:pt-[85px] md:pl-[32vw] lg:pl-[48vh] mt-[85px] lg:mt-0">
       {userPosts.map((userPost) => (
         <div
           key={userPost._id}
-          className="lg:w-[250px] flex flex-col gap-1 items-center bg-white shadow-md rounded-2xl p-3"
+          className="lg:w-[270px] flex flex-col gap-1 items-center bg-white shadow-xl/20 rounded-2xl p-3"
         >
           <img
             src={userPost.image}
-            className="w-full h-[350px] md:h-[250px] object-cover bject-cover rounded-xl"
+            className="w-full h-[350px] md:h-[250px] object-cover rounded-xl"
           />
           <p className="text-xl font-bold">{userPost.imageName}</p>
           <p className="w-full text-md font-medium truncate">{userPost.description}</p>
