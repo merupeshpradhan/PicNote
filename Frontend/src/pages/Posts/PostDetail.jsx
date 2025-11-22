@@ -62,36 +62,36 @@ function PostDetail() {
             className="w-full h-[85vh] rounded-2xl shadow-lg/40 "
           />
         </div>
-        <div
-          className="imageName_and_imageDescription w-full h-[85vh] flex flex-col items-center gap-3 border-2 border-indigo-900 rounded-2xl px-3 py-1 overflow-y-auto
-            [&::-webkit-scrollbar]:w-1.5 
-            [&::-webkit-scrollbar-track]:bg-gray-200 [&::-webkit-scrollbar-track]:rounded-2xl
-            [&::-webkit-scrollbar-thumb]:bg-indigo-950 [&::-webkit-scrollbar-thumb]:rounded-md"
-        >
-          <h1 className="text-5xl font-semibold text-indigo-700">
+
+        <div className="w-full h-[85vh] flex flex-col gap-6 border-2 border-indigo-900 rounded-2xl pl-4 pr-1 py-1">
+          <h1 className="text-5xl font-semibold text-fuchsia-800 text-center italic tracking-wider underline underline-offset-8">
             {postDetails.imageName}
           </h1>
-          <h3 className="font-medium text-base/7 text-indigo-950">
-            {postDetails.description}
-          </h3>
-          <div className="flex flex-col gap-2 items-center text-indigo-900">
-            <p className="text-[15px] font-semibold">
-              Uploaded on :-{" "}
-              {new Date(postDetails.createdAt).toLocaleDateString("en-GB", {
-                day: "2-digit",
-                month: "long",
-                year: "numeric",
-              })}
-            </p>
-            <p
-              onClick={() => handleUserClick(postDetails)}
-              className="text-[15px] font-semibold"
-            >
-              Post By :-{" "}
-              <span className="cursor-pointer hover:text-red-400 underline underline-offset-2">
-                {postDetails.user.firstName} {postDetails.user.lastName}
-              </span>
-            </p>
+          <div
+            className="h-[73vh] flex flex-col items-center gap-3 overflow-y-auto 
+          "
+          >
+            <h3 className="font-medium text-base/7 text-indigo-700 italic tracking-wider">
+              {postDetails.description}
+            </h3>
+            <div className="flex flex-col gap-2 items-center text-indigo-900 text-lg font-semibold">
+              <p>
+                Uploaded on :-{" "}
+                {new Date(postDetails.createdAt).toLocaleDateString("en-GB", {
+                  day: "2-digit",
+                  month: "long",
+                  year: "numeric",
+                })}
+              </p>
+              <p
+                onClick={() => handleUserClick(postDetails)}
+              >
+                Post By :-{" "}
+                <span className="cursor-pointer hover:text-red-400 underline underline-offset-2">
+                  {postDetails.user.firstName} {postDetails.user.lastName}
+                </span>
+              </p>
+            </div>
           </div>
         </div>
       </div>
