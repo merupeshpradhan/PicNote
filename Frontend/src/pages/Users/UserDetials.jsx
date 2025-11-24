@@ -12,7 +12,8 @@ function UserDetials() {
 
   const [formData, setFormData] = useState({
     avatar: null,
-    userName: "",
+    firstName: "",
+    lastName: "",
     email: "",
   });
 
@@ -24,13 +25,16 @@ function UserDetials() {
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
+    console.log(storedUser);
+
     if (storedUser) {
       const user = JSON.parse(storedUser);
       setUserDetials(user);
       setFormData({
         avatar: null,
-        userName: user.userName,
-        email: user.email,
+        firstName: user.firstName || "",
+        lastName: user.lastName || "",
+        email: user.email || "",
       });
       setPreviewAvatar(user.avatar);
     }
@@ -58,14 +62,20 @@ function UserDetials() {
     try {
       const data = new FormData();
       if (formData.avatar) data.append("avatar", formData.avatar);
-      if (formData.userName) data.append("userName", formData.userName);
+      if (formData.firstName) data.append("firstName", formData.firstName);
+      if (formData.lastName) data.append("lastName", formData.lastName);
       if (formData.email) data.append("email", formData.email);
+
+      const token = localStorage.getItem("accessToken");
 
       const res = await axios.put(
         "http://localhost:4000/api/v1/users/update-profile",
         data,
         {
-          headers: { "Content-Type": "multipart/form-data" },
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
           withCredentials: true,
         }
       );
@@ -94,93 +104,106 @@ function UserDetials() {
           {editMode ? (
             <form
               onSubmit={handleSubmit}
-              className="flex flex-col items-center mt-3 space-y-3"
+              className="flex flex-row items-center mt-4 space-x-6"
             >
               <img
                 src={previewAvatar}
                 alt="user avatar"
                 className="w-[80%] md:w-[18vw] md:h-[40vh] border-2 border-amber-500 rounded-xl"
               />
-              <div className="new-avatar-input">
-                <button
-                  type="button"
-                  onClick={() => document.getElementById("newAvatar").click()}
-                  className="border-2 border-lime-500 hover:bg-lime-500 hover:text-white tracking-wider cursor-pointer md:w-[9vw] px-4 text-[14px] md:text-[16px] font-semibold py-2 rounded-md"
-                >
-                  {formData.avatar ? "Change avatar" : "Chose avatar"}
-                </button>
+              <div className="flex flex-col items-center space-y-2 w-[20vw]">
+                <div className="new-avatar-input">
+                  <button
+                    type="button"
+                    onClick={() => document.getElementById("newAvatar").click()}
+                    className="bg-lime-600 hover:bg-lime-800 text-white tracking-widest italic cursor-pointer px-1.5 py-2 text-[17px] md:text-[12px] font-semibold rounded-md transition duration-100"
+                  >
+                    {previewAvatar ? "Change Avatar" : "Choose Avatar"}
+                  </button>
+                  <input
+                    className="hidden"
+                    type="file"
+                    name="avatar"
+                    id="newAvatar"
+                    onChange={handleChange}
+                  />
+                </div>
                 <input
-                  className="hidden"
-                  type="file"
-                  name="avatar"
-                  id="newAvatar"
+                  type="text"
+                  name="firstName"
+                  value={formData.firstName}
                   onChange={handleChange}
+                  placeholder="First name"
+                  className="border-2 border-lime-500 w-[80%] md:w-full px-2 py-1 rounded-md"
                 />
-              </div>
-              <input
-                type="text"
-                name="userName"
-                value={formData.userName}
-                onChange={handleChange}
-                placeholder="Enter name"
-                className="border-2 border-lime-500 w-[80%] md:w-full px-2 py-2 rounded-md"
-              />
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="Enter email"
-                className="border-2 border-lime-500 w-[80%] md:w-full px-2 py-2 rounded-md"
-              />
-              <div className="flex gap-3 mt-2">
-                {/* Cancel Button */}
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="bg-green-500 text-white text-[15px] md:text-[16px] px-4 py-1 md:py-2 rounded-md hover:bg-green-600 transition duration-200 cursor-pointer md:font-semibold tracking-wider"
-                >
-                  {loading ? "Saving..." : "Save"}
-                </button>
+                <input
+                  type="text"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  placeholder="Last name"
+                  className="border-2 border-lime-500 w-[80%] md:w-full px-2 py-1 rounded-md"
+                />
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="Enter email"
+                  className="border-2 border-lime-500 w-[80%] md:w-full px-2 py-1 rounded-md"
+                />
+                <div className="flex gap-3 mt-2">
+                  {/* Save Button */}
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="bg-green-500 text-white text-[15px] md:text-[16px] px-3 py-1 rounded-md hover:bg-green-600 transition duration-200 cursor-pointer md:font-semibold tracking-wider"
+                  >
+                    {loading ? "Saving..." : "Save"}
+                  </button>
 
-                {/* Cancel Button */}
-                <button
-                  type="button"
-                  onClick={() => {
-                    setEditMode(false);
-                    setFormData({
-                      avatar: null,
-                      userName: userDetails.userName,
-                      email: userDetails.email,
-                    });
-                    setPreviewAvatar(userDetails.avatar);
-                  }}
-                  className="bg-gray-400 text-white px-4 py-1 md:py-2 rounded-md hover:bg-gray-500 transition duration-200 cursor-pointer md:font-semibold tracking-wider"
-                >
-                  Cancel
-                </button>
+                  {/* Cancel Button */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setEditMode(false);
+                      setFormData({
+                        avatar: null,
+                        firstName: userDetails.firstName,
+                        lastName: userDetails.lastName,
+                        email: userDetails.email,
+                      });
+                      setPreviewAvatar(userDetails.avatar);
+                    }}
+                    className="bg-gray-400 text-white px-3 py-1 rounded-md hover:bg-gray-500 transition duration-200 cursor-pointer md:font-semibold tracking-wider"
+                  >
+                    Cancel
+                  </button>
+                </div>
               </div>
             </form>
           ) : (
-            <div className="flex flex-col items-center mt-4">
+            <div className="w-full flex items-center mt-4 space-x-6">
               <img
                 src={userDetails.avatar}
                 alt="user avatar"
                 className="w-[80%] md:w-[18vw] md:h-[40vh] border-2 border-amber-500 rounded-xl"
               />
-              <h1 className="text-2xl font-bold mt-2">
-                {userDetails.userName}
-              </h1>
-              <h1 className="text-sm md:text-lg mt-1 text-gray-700">
-                {userDetails.email}
-              </h1>
-              <div className="flex gap-4 mt-4">
-                <button
-                  onClick={() => setEditMode(true)}
-                  className="bg-blue-500 text-white text-[12px] md:text-[16px] px-2 py-2 md:px-4  rounded-md cursor-pointer hover:bg-blue-600 transition duration-200"
-                >
-                  Edit Profile
-                </button>
+              <div className="flex flex-col items-center justify-center w-[20vw]">
+                <h1 className="text-2xl font-bold mt-2">
+                  {userDetails.firstName} {userDetails.lastName}
+                </h1>
+                <h1 className="text-sm md:text-lg mt-1 text-gray-700">
+                  {userDetails.email}
+                </h1>
+                <div className="flex gap-4 mt-4">
+                  <button
+                    onClick={() => setEditMode(true)}
+                    className="bg-blue-500 text-white text-[12px] md:text-[16px] px-2 py-2 md:px-4  rounded-md cursor-pointer hover:bg-blue-600 transition duration-200"
+                  >
+                    Edit Profile
+                  </button>
+                </div>
               </div>
             </div>
           )}
