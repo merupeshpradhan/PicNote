@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
@@ -9,10 +10,11 @@ import UpdatePost from "./pages/Posts/UpdatePost";
 import CreatePost from "./pages/Posts/CreatePost";
 import UserDetials from "./pages/Users/UserDetials";
 import PostDetail from "./pages/Posts/PostDetail";
-import SearchPost from "./pages/Posts/SearchPost";
+import SearchBar from "./pages/Posts/SearchBar";
 
 function App() {
   const location = useLocation();
+  const [postData, setPostData] = useState("");
 
   // Chek if current route is login or register
   const hideLayout = ["/login", "/register"].includes(location.pathname);
@@ -24,14 +26,16 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/userDetials" element={<UserDetials />} />
-        <Route path="/post" element={<Post />} />
+        <Route path="/post" element={<Post postData={postData} />} />
         <Route path="/createPost/:userId" element={<CreatePost />} />
         <Route path="/profile/:userId" element={<UserProfile />} />
         <Route path="/postDetail/:postId" element={<PostDetail />} />
         <Route path="/update/:postId" element={<UpdatePost />} />
-        <Route path="/search" element={<SearchPost />} />
+        <Route
+          path="/searchPost"
+          element={<SearchBar setPostData={setPostData} />}
+        />
       </Routes>
-      {/* {!hideLayout && <Footer />} */}
     </div>
   );
 }

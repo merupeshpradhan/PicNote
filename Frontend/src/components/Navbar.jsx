@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import SearchPost from "../pages/Posts/SearchPost";
+import SearchPost from "../pages/Posts/SearchBar";
 
 function Navbar() {
   const navigate = useNavigate();

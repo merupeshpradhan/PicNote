@@ -4,7 +4,7 @@ import { FaSpinner } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-function Post() {
+function Post({ postData }) {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -62,33 +62,35 @@ function Post() {
   return (
     <div>
       <div className="w-full flex md:grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-5 md:gap-x-5 gap-y-5 md:gap-y-8 p-3.5 md:p-4 2xl:mb-2">
-        {posts.map((post) => (
-          <div
-            key={post._id}
-            className="w-[170px] lg:w-[355px] flex flex-col gap-2 bg-white shadow-md rounded-2xl p-3"
-          >
-            <img
-              src={post.image}
-              alt={post.imageName}
-              className="w-full lg:h-[220px] object-cover rounded-xl cursor-pointer"
-              onClick={() => navigate(`/postDetail/${post._id}`)}
-            />
-            <div className="text-center">
-              <p className="text-sm md:text-lg font-bold mt-1 mb-1.5">
-                {post.imageName}
-              </p>
-              <button
-                onClick={() => handleUserClick(post)}
-                className="flex flex-col md:flex-row justify-center gap-1 mx-auto text-sm"
-              >
-                Posted by :
-                <span className="text-red-500 hover:text-red-600 cursor-pointer font-semibold transition duration-200">
-                  {post.user.firstName} {post.user.lastName}
-                </span>
-              </button>
+        {posts
+          .filter((post) => post.imageName.toLowerCase().includes(postData))
+          .map((post) => (
+            <div
+              key={post._id}
+              className="w-[170px] lg:w-[355px] flex flex-col gap-2 bg-white shadow-md rounded-2xl p-3"
+            >
+              <img
+                src={post.image}
+                alt={post.imageName}
+                className="w-full lg:h-[220px] object-cover rounded-xl cursor-pointer"
+                onClick={() => navigate(`/postDetail/${post._id}`)}
+              />
+              <div className="text-center">
+                <p className="text-sm md:text-lg font-bold mt-1 mb-1.5">
+                  {post.imageName}
+                </p>
+                <button
+                  onClick={() => handleUserClick(post)}
+                  className="flex flex-col md:flex-row justify-center gap-1 mx-auto text-sm"
+                >
+                  Posted by :
+                  <span className="text-red-500 hover:text-red-600 cursor-pointer font-semibold transition duration-200">
+                    {post.user.firstName} {post.user.lastName}
+                  </span>
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   );
