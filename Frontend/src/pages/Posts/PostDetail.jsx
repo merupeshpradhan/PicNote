@@ -4,16 +4,18 @@ import { useParams } from "react-router-dom";
 import Footer from "../../components/Footer";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { FaSpinner } from "react-icons/fa";
 
 function PostDetail() {
   const { postId } = useParams();
   const [postDetails, setPostDetails] = useState(null);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getOwnerDetails = async () => {
       const token = localStorage.getItem("accessToken");
-      console.log(token);
+      // console.log(token);
       try {
         const res = await axios.get(
           `http://localhost:4000/api/v1/posts/${postId}`,
@@ -31,6 +33,8 @@ function PostDetail() {
         }
       } catch (error) {
         console.error("Error fetching owner details:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -46,10 +50,12 @@ function PostDetail() {
     navigate(`/profile/${post.user._id}`);
   };
 
-  if (!postDetails) {
-    return (
-      <div className="text-center mt-20 text-3xl">Loading post details...</div>
-    );
+  if (loading) {
+      return (
+        <div className="flex justify-center items-center h-screen">
+          <FaSpinner className="lg:text-4xl text-red-500 animate-spin" />
+        </div>
+      );
   }
 
   return (

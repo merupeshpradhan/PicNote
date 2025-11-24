@@ -4,7 +4,7 @@ import { FaPlus } from "react-icons/fa";
 import Footer from "../components/Footer";
 import { toast } from "react-toastify";
 
-function Home() {
+function Home({postData}) {
   const navigate = useNavigate();
 
   const handleCreatePostClick = () => {
@@ -26,7 +26,7 @@ function Home() {
 
   return (
     <div className="bg-indigo-50 flex flex-col justify-between min-h-screen relative items-center pt-16 md:pt-16 lg:pt-14 2xl:pt-16">
-      <Post />
+      <Post postData={postData}/>
 
       <button
         onClick={handleCreatePostClick}

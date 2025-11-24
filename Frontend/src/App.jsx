@@ -10,7 +10,6 @@ import UpdatePost from "./pages/Posts/UpdatePost";
 import CreatePost from "./pages/Posts/CreatePost";
 import UserDetials from "./pages/Users/UserDetials";
 import PostDetail from "./pages/Posts/PostDetail";
-import SearchBar from "./pages/Posts/SearchBar";
 
 function App() {
   const location = useLocation();
@@ -20,9 +19,9 @@ function App() {
   const hideLayout = ["/login", "/register"].includes(location.pathname);
   return (
     <div className="">
-      {!hideLayout && <Navbar />}
+      {!hideLayout && <Navbar setPostData={setPostData} />}
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home postData={postData} />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/userDetials" element={<UserDetials />} />
@@ -31,10 +30,6 @@ function App() {
         <Route path="/profile/:userId" element={<UserProfile />} />
         <Route path="/postDetail/:postId" element={<PostDetail />} />
         <Route path="/update/:postId" element={<UpdatePost />} />
-        <Route
-          path="/searchPost"
-          element={<SearchBar setPostData={setPostData} />}
-        />
       </Routes>
     </div>
   );

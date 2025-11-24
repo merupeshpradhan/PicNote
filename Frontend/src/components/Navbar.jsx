@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import SearchPost from "../pages/Posts/SearchBar";
+import SearchBar from "../pages/Posts/SearchBar";
 
-function Navbar() {
+function Navbar({ setPostData }) {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
 
@@ -53,14 +53,14 @@ function Navbar() {
     }
   };
   return (
-    <nav className="fixed top-0 left-0 w-full bg-indigo-100 shadow-indigo-400 shadow-lg/65 rounded-bl-md rounded-br-md py-2.5 md:py-2 lg:py-2.5 px-5 flex justify-between items-center z-50">
+    <nav className="fixed top-0 left-0 w-full bg-indigo-100 shadow-indigo-400 shadow-lg/65 rounded-bl-lg rounded-br-lg py-2.5 md:py-2 lg:py-2.5 px-5 flex justify-between items-center z-50">
       <Link to="/">
         <h1 className="text-2xl md:text-4xl lg:text-3xl font-extrabold text-pink-600 tracking-wide cursor-pointer">
           Pic<span className="text-gray-800">Note</span>
         </h1>
       </Link>
       <div className="">
-        <SearchPost/>
+        <SearchBar setPostData={setPostData}/>
       </div>
       <div className="block">
         <ul className="flex gap-5">

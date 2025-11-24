@@ -56,15 +56,24 @@ function Post({ postData }) {
   }
 
   if (!posts.length) {
-    return <div className="text-center mt-10 text-3xl">No post available.</div>;
+    return <div className="text-center text-3xl font-semibold mt-10">No post available.</div>;
   }
 
+  const filteredPosts = posts.filter((post) =>
+    (post.imageName || "")
+      .toLowerCase()
+      .includes((postData || "").toLowerCase())
+  );
+
   return (
-    <div>
-      <div className="w-full flex md:grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-5 md:gap-x-5 gap-y-5 md:gap-y-8 p-3.5 md:p-4 2xl:mb-2">
-        {posts
-          .filter((post) => post.imageName.toLowerCase().includes(postData))
-          .map((post) => (
+    <div className="w-full">
+      {filteredPosts.length === 0 ? (
+        <h2 className="text-center text-2xl font-semibold text-red-500 w-full mt-10">
+          No image found with this name
+        </h2>
+      ) : (
+        <div className="w-full flex md:grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-5 md:gap-x-5 gap-y-5 md:gap-y-8 p-3.5 md:p-4 2xl:mb-2">
+          {filteredPosts.map((post) => (
             <div
               key={post._id}
               className="w-[170px] lg:w-[355px] flex flex-col gap-2 bg-white shadow-md rounded-2xl p-3"
@@ -91,7 +100,8 @@ function Post({ postData }) {
               </div>
             </div>
           ))}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
