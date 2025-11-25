@@ -60,7 +60,7 @@ function Navbar({ setPostData }) {
         </h1>
       </Link>
       <div className="">
-        <SearchBar setPostData={setPostData}/>
+        <SearchBar setPostData={setPostData} />
       </div>
       <div className="block">
         <ul className="flex gap-5">

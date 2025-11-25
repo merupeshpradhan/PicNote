@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Footer from "../../components/Footer";
 import { toast } from "react-toastify";
+import { NavLink } from "react-router-dom";
 
 function UserDetials() {
-  const hideLayout = ["/login", "/register"].includes(location.pathname);
   const [userDetails, setUserDetials] = useState(null);
+  const [userImages, setUserImages] = useState([]);
   const [editMode, setEditMode] = useState(false);
   const [previewAvatar, setPreviewAvatar] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -39,6 +40,29 @@ function UserDetials() {
       setPreviewAvatar(user.avatar);
     }
   }, []);
+
+  useEffect(() => {
+    if (!userDetails) return;
+
+    fetchUserImages();
+  }, [userDetails]);
+
+  const fetchUserImages = async () => {
+    const token = localStorage.getItem("accessToken");
+    const userId = userDetails.id;
+    console.log("userId :- ", userId);
+
+    try {
+      const res = await axios.get(
+        `http://localhost:4000/api/v1/posts/user/${userId}`,
+        { headers: { Authorization: `Bearer ${token}` }, withCredentials: true }
+      );
+      console.log("User Image's :- ", res.data.data);
+      setUserImages(res.data.data);
+    } catch (error) {
+      toast.error("Somthing went wrong");
+    }
+  };
 
   // Handle image or text input changes
   const handleChange = (e) => {
@@ -183,26 +207,68 @@ function UserDetials() {
               </div>
             </form>
           ) : (
-            <div className="w-full flex items-center mt-4 space-x-6">
-              <img
-                src={userDetails.avatar}
-                alt="user avatar"
-                className="w-[80%] md:w-[18vw] md:h-[40vh] border-2 border-amber-500 rounded-xl"
-              />
-              <div className="flex flex-col items-center justify-center w-[20vw]">
-                <h1 className="text-2xl font-bold mt-2">
-                  {userDetails.firstName} {userDetails.lastName}
-                </h1>
-                <h1 className="text-sm md:text-lg mt-1 text-gray-700">
-                  {userDetails.email}
-                </h1>
-                <div className="flex gap-4 mt-4">
-                  <button
-                    onClick={() => setEditMode(true)}
-                    className="bg-blue-500 text-white text-[12px] md:text-[16px] px-2 py-2 md:px-4  rounded-md cursor-pointer hover:bg-blue-600 transition duration-200"
-                  >
-                    Edit Profile
-                  </button>
+            <div className="w-full flex flex-col justify-center items-center">
+              <div className="w-full flex items-center justify-center mt-4 space-x-6">
+                <img
+                  src={userDetails.avatar}
+                  alt="user avatar"
+                  className="w-[80%] md:w-[18vw] md:h-[40vh] border-2 border-amber-500 rounded-xl"
+                />
+                <div className="flex flex-col items-center justify-center w-[20vw]">
+                  <h1 className="text-2xl font-bold mt-2">
+                    {userDetails.firstName} {userDetails.lastName}
+                  </h1>
+                  <h1 className="text-sm md:text-lg mt-1 text-gray-700">
+                    {userDetails.email}
+                  </h1>
+                  <div className="flex gap-4 mt-4">
+                    <button
+                      onClick={() => setEditMode(true)}
+                      className="bg-blue-500 text-white text-[12px] md:text-[16px] px-1 py-1 md:px-2.5  rounded-md cursor-pointer hover:bg-blue-600 transition duration-200"
+                    >
+                      Edit Profile
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div className="flex flex-col items-center justify-center mt-15">
+                <h1>All Images</h1>
+                <div className="w-full bg-indigo-50 items-center grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 p-5 pt-[160px] lg:pt-[20px]  mt-[85px] lg:mt-0">
+                  {userImages.map((userImage) => (
+                    <div
+                      key={userImage._id}
+                      className="flex flex-col gap-1 items-center bg-white shadow-md rounded-2xl p-3"
+                    >
+                      <img
+                        src={userImage.image}
+                        className="h-56 object-cover rounded-xl cursor-pointer"
+                      />
+                      <p className="text-xl font-bold">{userImage.imageName}</p>
+                      <p className="w-full text-sm font-medium truncate">
+                        <span className="text-md">Description</span> : -{" "}
+                        <span className=" text-[12px]">
+                          {userImage.description}
+                        </span>
+                      </p>
+                      {/* Show Update/Delete only if current user is owner */}
+                        <div className="flex gap-3 mt-3">
+                          <div className="flex justify-between gap-5">
+                            <NavLink
+                              to={`/update/${userImage._id}`}
+                              className="border rounded-sm px-3 py-1 text-yellow-500 hover:bg-yellow-500 hover:text-white font-bold transition duration-200"
+                            >
+                              Update post
+                            </NavLink>
+                          </div>
+                          <button
+                            onClick={() => handleDelete(userImage._id)}
+                            className="border rounded-sm px-3 py-1 text-red-500 hover:bg-red-500 hover:text-white font-bold transition duration-200 cursor-pointer"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -210,7 +276,7 @@ function UserDetials() {
         </div>
       )}
 
-      {!hideLayout && <Footer />}
+      <Footer />
     </div>
   );
 }
