@@ -76,21 +76,20 @@ function Navbar({ setPostData }) {
           ) : (
             <div className="uerImg-and-name-and-logout flex gap-5 justify-center items-center">
               <div className="flex justify-center items-center gap-3 md:gap-5">
-                <Link
-                  to={"/userDetials"}
-                  className="flex justify-center items-center gap-2"
-                >
-                  <span className="font-semibold hidden md:block text-green-800">
+                <div className="flex justify-center items-center gap-2">
+                  <span className="font-semibold hidden md:block text-green-800 cursor-context-menu">
                     Wellcome {user.firstName}😻
                   </span>
-                  {user.avatar && (
-                    <img
-                      src={user.avatar}
-                      alt={user.firstName}
-                      className="w-7 h-7 md:w-9 md:h-9 rounded-full"
-                    />
-                  )}
-                </Link>
+                  <Link to={"/userDetials"}>
+                    {user.avatar && (
+                      <img
+                        src={user.avatar}
+                        alt={user.firstName}
+                        className="w-7 h-7 md:w-9 md:h-9 rounded-full"
+                      />
+                    )}
+                  </Link>
+                </div>
                 <button
                   onClick={handleLogout}
                   className="bg-red-600 hover:bg-red-700 text-white px-1.5 py-0.5 md:px-2 md:py-1 rounded-md hover:text-white text-[12px] md:text-[16px] md:font-semibold transition duration-200 cursor-pointer font-bold tracking-wider"

@@ -76,7 +76,7 @@ function Post({ postData }) {
           {filteredPosts.map((post) => (
             <div
               key={post._id}
-              className="w-[170px] lg:w-[355px] flex flex-col gap-2 bg-white shadow-md rounded-2xl p-3"
+              className="w-[170px] lg:w-[355px] flex flex-col gap-2 bg-white shadow-md rounded-2xl p-3 hover:scale-105 ease-in-out duration-300"
             >
               <img
                 src={post.image}

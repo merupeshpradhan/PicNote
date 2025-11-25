@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Footer from "../../components/Footer";
 import { toast } from "react-toastify";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 function UserDetials() {
   const [userDetails, setUserDetials] = useState(null);
@@ -10,6 +10,7 @@ function UserDetials() {
   const [editMode, setEditMode] = useState(false);
   const [previewAvatar, setPreviewAvatar] = useState(null);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     avatar: null,
@@ -47,6 +48,7 @@ function UserDetials() {
     fetchUserImages();
   }, [userDetails]);
 
+  // Geting Usrer Post Images
   const fetchUserImages = async () => {
     const token = localStorage.getItem("accessToken");
     const userId = userDetails.id;
@@ -119,8 +121,27 @@ function UserDetials() {
     }
   };
 
+  // DELETE handler
+  const handleDelete = async (postId) => {
+    if (!window.confirm("Are you sure you want to delete this post?")) return;
+    const token = localStorage.getItem("accessToken");
+    try {
+      await axios.delete(`http://localhost:4000/api/v1/posts/${postId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+        withCredentials: true,
+      });
+      alert("Post deleted successfully!");
+
+      // remove deleted post from the state
+      setUserPosts((prev) => prev.filter((post) => post._id !== postId));
+    } catch (error) {
+      alert(error.response?.data?.message || "Error deleting post");
+      console.log(error);
+    }
+  };
+
   return (
-    <div className="min-h-[100vh] flex flex-col items-center justify-between bg-indigo-50 relative overflow-hidden">
+    <div className="min-h-[105vh] flex flex-col items-center justify-between bg-indigo-50 relative overflow-hidden">
       {!userDetails ? (
         <div>Loading...</div>
       ) : (
@@ -133,7 +154,7 @@ function UserDetials() {
               <img
                 src={previewAvatar}
                 alt="user avatar"
-                className="w-[80%] md:w-[18vw] md:h-[40vh] border-2 border-amber-500 rounded-xl"
+                className="w-[80%] md:w-[23vw] md:h-[50vh] border-4 border-lime-500 rounded-xl"
               />
               <div className="flex flex-col items-center space-y-2 w-[20vw]">
                 <div className="new-avatar-input">
@@ -152,30 +173,40 @@ function UserDetials() {
                     onChange={handleChange}
                   />
                 </div>
-                <input
-                  type="text"
-                  name="firstName"
-                  value={formData.firstName}
-                  onChange={handleChange}
-                  placeholder="First name"
-                  className="border-2 border-lime-500 w-[80%] md:w-full px-2 py-1 rounded-md"
-                />
-                <input
-                  type="text"
-                  name="lastName"
-                  value={formData.lastName}
-                  onChange={handleChange}
-                  placeholder="Last name"
-                  className="border-2 border-lime-500 w-[80%] md:w-full px-2 py-1 rounded-md"
-                />
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="Enter email"
-                  className="border-2 border-lime-500 w-[80%] md:w-full px-2 py-1 rounded-md"
-                />
+                <div className="w-full flex flex-col gap-0.5">
+                  <p>First Name</p>
+                  <input
+                    type="text"
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleChange}
+                    placeholder="First name"
+                    className="border-2 border-lime-500 w-[80%] md:w-full px-2 py-1 rounded-md"
+                  />
+                </div>
+                <div className="w-full flex flex-col gap-0.5">
+                  <p>Last Name</p>
+                  <input
+                    type="text"
+                    name="lastName"
+                    value={formData.lastName}
+                    onChange={handleChange}
+                    placeholder="Last name"
+                    className="border-2 border-lime-500 w-[80%] md:w-full px-2 py-1 rounded-md"
+                  />
+                </div>
+                <div className="w-full flex flex-col gap-0.5">
+                  <p>Email</p>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="Enter email"
+                    className="border-2 border-lime-500 w-[80%] md:w-full px-2 py-1 rounded-md"
+                  />
+                </div>
+
                 <div className="flex gap-3 mt-2">
                   {/* Save Button */}
                   <button
@@ -212,7 +243,7 @@ function UserDetials() {
                 <img
                   src={userDetails.avatar}
                   alt="user avatar"
-                  className="w-[80%] md:w-[18vw] md:h-[40vh] border-2 border-amber-500 rounded-xl"
+                  className="w-[80%] md:w-[23vw] md:h-[50vh] border-4 border-green-500 rounded-xl"
                 />
                 <div className="flex flex-col items-center justify-center w-[20vw]">
                   <h1 className="text-2xl font-bold mt-2">
@@ -231,42 +262,48 @@ function UserDetials() {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col items-center justify-center mt-15">
-                <h1>All Images</h1>
-                <div className="w-full bg-indigo-50 items-center grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 p-5 pt-[160px] lg:pt-[20px]  mt-[85px] lg:mt-0">
+              <div className="flex flex-col items-center justify-center mt-16">
+                <div className="border-b-4 border-green-300 w-[100vw] text-center shadow-green-400 shadow-2xl/50 rounded-tl-xl rounded-tr-xl">
+                  <h1 className="text-4xl mb-1.5 tracking-wider italic font-extrabold text-lime-500">All Image's</h1>
+                </div>
+                <div className="w-full items-center grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 p-5 pt-[160px] lg:pt-[30px] mt-[85px] lg:mt-0">
                   {userImages.map((userImage) => (
                     <div
                       key={userImage._id}
-                      className="flex flex-col gap-1 items-center bg-white shadow-md rounded-2xl p-3"
+                      className="flex flex-col gap-1 items-center bg-white shadow-md rounded-2xl p-3 hover:scale-105 ease-in-out duration-300"
                     >
                       <img
                         src={userImage.image}
                         className="h-56 object-cover rounded-xl cursor-pointer"
+                        onClick={() => navigate(`/postDetail/${userImage._id}`)}
                       />
-                      <p className="text-xl font-bold">{userImage.imageName}</p>
-                      <p className="w-full text-sm font-medium truncate">
-                        <span className="text-md">Description</span> : -{" "}
-                        <span className=" text-[12px]">
+                      <p className="text-xl font-bold mt-3 text-gray-800">
+                        {userImage.imageName}
+                      </p>
+                      <p className="w-full text-sm font-medium truncate px-2">
+                        <span className="text-md text-gray-700 tracking-wider">Photo Details</span>{" "}
+                        : -{" "}
+                        <span className="text-[10px] text-gray-700 tracking-wider">
                           {userImage.description}
                         </span>
                       </p>
                       {/* Show Update/Delete only if current user is owner */}
-                        <div className="flex gap-3 mt-3">
-                          <div className="flex justify-between gap-5">
-                            <NavLink
-                              to={`/update/${userImage._id}`}
-                              className="border rounded-sm px-3 py-1 text-yellow-500 hover:bg-yellow-500 hover:text-white font-bold transition duration-200"
-                            >
-                              Update post
-                            </NavLink>
-                          </div>
-                          <button
-                            onClick={() => handleDelete(userImage._id)}
-                            className="border rounded-sm px-3 py-1 text-red-500 hover:bg-red-500 hover:text-white font-bold transition duration-200 cursor-pointer"
+                      <div className="flex gap-3 mt-3">
+                        <div className="flex justify-between gap-5">
+                          <NavLink
+                            to={`/update/${userImage._id}`}
+                            className="border rounded-sm px-3 py-1 text-yellow-500 hover:bg-yellow-500 hover:text-white font-bold transition duration-200"
                           >
-                            Delete
-                          </button>
+                            Update post
+                          </NavLink>
                         </div>
+                        <button
+                          onClick={() => handleDelete(userImage._id)}
+                          className="border rounded-sm px-3 py-1 text-red-500 hover:bg-red-500 hover:text-white font-bold transition duration-200 cursor-pointer"
+                        >
+                          Delete
+                        </button>
+                      </div>
                     </div>
                   ))}
                 </div>
