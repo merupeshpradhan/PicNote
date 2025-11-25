@@ -40,6 +40,7 @@ function Navbar({ setPostData }) {
       );
 
       localStorage.removeItem("user");
+      // Here remove accessToken
 
       navigate("/");
 
