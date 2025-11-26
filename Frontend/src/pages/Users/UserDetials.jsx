@@ -130,13 +130,13 @@ function UserDetials() {
         headers: { Authorization: `Bearer ${token}` },
         withCredentials: true,
       });
-      alert("Post deleted successfully!");
+      toast.success("Post deleted successfully!");
 
       // remove deleted post from the state
-      setUserPosts((prev) => prev.filter((post) => post._id !== postId));
+      setUserImages((prev) => prev.filter((post) => post._id !== postId));
     } catch (error) {
-      alert(error.response?.data?.message || "Error deleting post");
       console.log(error);
+      toast.error(error.response?.data?.message);
     }
   };
 
@@ -264,7 +264,9 @@ function UserDetials() {
               </div>
               <div className="flex flex-col items-center justify-center mt-16 mb-2">
                 <div className="border-b-4 border-green-300 w-[100vw] text-center shadow-green-400 shadow-2xl/50 rounded-tl-xl rounded-tr-xl">
-                  <h1 className="text-4xl mb-1.5 tracking-wider italic font-extrabold text-lime-500">All Image's</h1>
+                  <h1 className="text-4xl mb-1.5 tracking-wider italic font-extrabold text-lime-500">
+                    All Image's
+                  </h1>
                 </div>
                 <div className="w-full items-center grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 p-8 pt-[160px] lg:pt-[36px] mt-[85px] lg:mt-0">
                   {userImages.map((userImage) => (
@@ -281,7 +283,9 @@ function UserDetials() {
                         {userImage.imageName}
                       </p>
                       <p className="w-full text-sm font-medium truncate px-2">
-                        <span className="text-md text-gray-700 tracking-wider">Photo Details</span>{" "}
+                        <span className="text-md text-gray-700 tracking-wider">
+                          Photo Details
+                        </span>{" "}
                         : -{" "}
                         <span className="text-[10px] text-gray-700 tracking-wider">
                           {userImage.description}
