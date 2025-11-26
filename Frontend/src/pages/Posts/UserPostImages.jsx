@@ -1,9 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-
+import { FaArrowRight } from "react-icons/fa6";
 
 function UserPostImages() {
   const { userId } = useParams(); // get userId from URL
@@ -41,7 +40,7 @@ function UserPostImages() {
   }
 
   return (
-    <div className="w-full min-h-[100vh] bg-indigo-50 items-center grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 p-5 pt-[160px] lg:pt-[85px] md:pl-[32vw] lg:pl-[48vh] mt-[85px] lg:mt-0">
+    <div className="w-full  items-center grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 p-5 pt-[160px] lg:pt-[85px] md:pl-[32vw] lg:pl-[48vh] mt-[85px] lg:mt-0">
       {userPosts.map((userPost) => (
         <div
           key={userPost._id}
@@ -50,15 +49,25 @@ function UserPostImages() {
           <img
             src={userPost.image}
             onClick={() => navigate(`/postDetail/${userPost._id}`)}
-            className="w-full h-[350px] md:h-[200px] object-cover rounded-xl cursor-pointer"
+            className="h-[350px] md:h-[200px] object-cover rounded-xl cursor-pointer"
           />
-           <p className="text-xl font-bold mt-2">{userPost.imageName}</p>
-         <div className="w-full flex flex-col gap-1.5">
-          <p className="w-full text-start text-yellow-600 underline decoration-wavy underline-offset-4 text-[14px]">Image Detials</p>
-          <p className="w-full text-sm font-medium truncate">
-            <span className="text-[12px]">{userPost.description}</span>
-          </p>
-         </div>
+          <p className="text-xl font-bold mt-2">{userPost.imageName}</p>
+          <div
+            onClick={() => navigate(`/postDetail/${userPost._id}`)}
+            className="w-full flex flex-col gap-1.5 cursor-pointer"
+          >
+            <p className="w-full text-start text-yellow-600 underline decoration-wavy underline-offset-4 text-[15px]">
+              Image Detials :-
+            </p>
+            <div className="flex items-center justify-center gap-2 mt-1">
+              <div className="text-gray-700">
+                <FaArrowRight size={15}/>
+              </div>
+              <p className="w-full text-[10px] font-medium truncate tracking-widest">
+                {userPost.description}
+              </p>
+            </div>
+          </div>
         </div>
       ))}
     </div>

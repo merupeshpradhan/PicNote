@@ -59,13 +59,13 @@ function PostDetail() {
   }
 
   return (
-    <div className="bg-indigo-50 lg:pt-[90px] flex flex-col items-center justify-between">
-      <div className="w-full flex  items-cente justify-around gap-5 mb-10 lg:px-7">
-        <div className="w-[70vw]">
+    <div className="w-full bg-indigo-50 lg:pt-[90px] flex flex-col items-center justify-between">
+      <div className="w-full flex  items-center justify-around gap-5 mb-10 lg:px-7">
+        <div className="w-full flex items-center justify-center">
           <img
             src={postDetails.image}
             alt={postDetails.imageName}
-            className="w-full h-[85vh] rounded-2xl shadow-lg/40 "
+            className="h-[85vh] rounded-2xl shadow-lg/40 "
           />
         </div>
 

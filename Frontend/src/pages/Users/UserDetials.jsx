@@ -262,11 +262,11 @@ function UserDetials() {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col items-center justify-center mt-16">
+              <div className="flex flex-col items-center justify-center mt-16 mb-2">
                 <div className="border-b-4 border-green-300 w-[100vw] text-center shadow-green-400 shadow-2xl/50 rounded-tl-xl rounded-tr-xl">
                   <h1 className="text-4xl mb-1.5 tracking-wider italic font-extrabold text-lime-500">All Image's</h1>
                 </div>
-                <div className="w-full items-center grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 p-5 pt-[160px] lg:pt-[30px] mt-[85px] lg:mt-0">
+                <div className="w-full items-center grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 p-8 pt-[160px] lg:pt-[36px] mt-[85px] lg:mt-0">
                   {userImages.map((userImage) => (
                     <div
                       key={userImage._id}

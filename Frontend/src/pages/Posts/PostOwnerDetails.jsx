@@ -49,12 +49,18 @@ function PostOwnerDetails() {
           alt={ownerDetails.userName}
           className="w-[20%] md:w-[50%] lg:w-[80%] lg:h-[40vh] rounded-md"
         />
-        <div className="flex flex-col items-center gap-1">
-          <h1 className="md:text-2xl lg:text-3xl text-yellow-800 font-bold">
-            {ownerDetails.userName}
+        <div className="flex flex-col gap-1">
+          <h1>
+            <span> Name :-</span>{" "}
+            <span className="md:text-2xl lg:text-xl text-yellow-800 font-bold tracking-wider">
+              {ownerDetails.firstName} {ownerDetails.lastName}
+            </span>
           </h1>
-          <p className="text-[12px] md:text-[15px] tracking-wider text-yellow-950 font-semibold">
-            {ownerDetails.email}
+          <p>
+            <span> Email :- </span>
+            <span className="text-[12px] text-yellow-950 md:text-[14px] tracking-wider">
+              {ownerDetails.email}
+            </span>
           </p>
           <NavLink
             to={"/"}

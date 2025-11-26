@@ -56,7 +56,11 @@ function Post({ postData }) {
   }
 
   if (!posts.length) {
-    return <div className="text-center text-3xl font-semibold mt-10">No post available.</div>;
+    return (
+      <div className="text-center text-3xl font-semibold mt-10">
+        No post available.
+      </div>
+    );
   }
 
   const filteredPosts = posts.filter((post) =>
@@ -76,12 +80,12 @@ function Post({ postData }) {
           {filteredPosts.map((post) => (
             <div
               key={post._id}
-              className="w-[170px] lg:w-[355px] flex flex-col gap-2 bg-white shadow-md rounded-2xl p-3 hover:scale-105 ease-in-out duration-300"
+              className="w-[170px] lg:w-[340px] flex items-center flex-col gap-2 bg-white shadow-md rounded-2xl p-3 hover:scale-105 ease-in-out duration-300"
             >
               <img
                 src={post.image}
                 alt={post.imageName}
-                className="w-full lg:h-[220px] object-cover rounded-xl cursor-pointer"
+                className="h-56 object-cover rounded-xl cursor-pointer"
                 onClick={() => navigate(`/postDetail/${post._id}`)}
               />
               <div className="text-center">
