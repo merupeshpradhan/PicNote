@@ -81,13 +81,15 @@ const userLogin = asyncHandler(async (req, res) => {
   const accessToken = await user.generateAccessToken();
   const refreshToken = await user.generateRefreshToken();
 
-  // Save access token in DB
+  // Save access token and refreshToken in DB
   user.accessToken = accessToken;
+  user.refreshToken = refreshToken;
   await user.save({ validateBeforeSave: false });
 
   const option = {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    // secure: process.env.NODE_ENV === "production",
+    secure: false,
     sameSite: "Strict",
   };
 
@@ -154,8 +156,11 @@ const userLogout = asyncHandler(async (req, res) => {
     sameSite: "Strict",
   };
 
-  // remove token from DB
+  // remove token and refrshToken from DB
+
   user.accessToken = null;
+  user.refreshToken = null;
+
   await user.save({ validateBeforeSave: false });
 
   res.clearCookie("accessToken", option);

@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import SearchBar from "../pages/Posts/SearchBar";
+import { toast } from "react-toastify";
 
 function Navbar({ setPostData }) {
   const navigate = useNavigate();
@@ -39,17 +40,22 @@ function Navbar({ setPostData }) {
         { withCredentials: true }
       );
 
+      // Remove stored user info and token
       localStorage.removeItem("user");
-      // Here remove accessToken
+      localStorage.removeItem("accessToken");
 
-      navigate("/");
+      toast.success("Logged out successfully");
 
+      
       // update state so Navbar re-renders
       setUser(null);
 
+      // Redirect to home page
+      navigate("/");
+
       // Do NOT navigate, user stays on current page
     } catch (error) {
-      console.error("Logout error:", error);
+      console.log("Logout error:", error);
       alert("Logout failed. Please try again.");
     }
   };
