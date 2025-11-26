@@ -51,11 +51,11 @@ function PostDetail() {
   };
 
   if (loading) {
-      return (
-        <div className="flex justify-center items-center h-screen">
-          <FaSpinner className="lg:text-4xl text-red-500 animate-spin" />
-        </div>
-      );
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <FaSpinner className="lg:text-4xl text-red-500 animate-spin" />
+      </div>
+    );
   }
 
   return (
@@ -77,10 +77,8 @@ function PostDetail() {
             className="h-[73vh] flex flex-col items-center gap-3 overflow-y-auto 
           "
           >
-            <h3 className="font-medium text-base/7 text-indigo-700 italic tracking-wider">
-              {postDetails.description}
-            </h3>
-            <div className="flex flex-col gap-2 items-center text-indigo-900 text-lg font-semibold">
+            <p className="text-base/7 tracking-wider whitespace-pre-line"> {postDetails.description}</p>
+            <div className="flex flex-col gap-1 items-center text-[15px] tracking-wider text-fuchsia-900 text-lg font-semibold">
               <p>
                 Uploaded on :-{" "}
                 {new Date(postDetails.createdAt).toLocaleDateString("en-GB", {
@@ -89,9 +87,7 @@ function PostDetail() {
                   year: "numeric",
                 })}
               </p>
-              <p
-                onClick={() => handleUserClick(postDetails)}
-              >
+              <p onClick={() => handleUserClick(postDetails)} className="">
                 Post By :-{" "}
                 <span className="cursor-pointer hover:text-red-400 underline underline-offset-2">
                   {postDetails.user.firstName} {postDetails.user.lastName}

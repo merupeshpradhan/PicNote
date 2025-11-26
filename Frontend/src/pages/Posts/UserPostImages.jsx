@@ -28,25 +28,6 @@ function UserPostImages() {
     getUserPost();
   }, [userId]);
 
-  // DELETE handler
-  const handleDelete = async (postId) => {
-    if (!window.confirm("Are you sure you want to delete this post?")) return;
-    const token = localStorage.getItem("accessToken");
-    try {
-      await axios.delete(`http://localhost:4000/api/v1/posts/${postId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-        withCredentials: true,
-      });
-      alert("Post deleted successfully!");
-
-      // remove deleted post from the state
-      setUserPosts((prev) => prev.filter((post) => post._id !== postId));
-    } catch (error) {
-      alert(error.response?.data?.message || "Error deleting post");
-      console.log(error);
-    }
-  };
-
   const userFromStorage = localStorage.getItem("user");
   let loggedInUserId = null;
 
@@ -64,37 +45,20 @@ function UserPostImages() {
       {userPosts.map((userPost) => (
         <div
           key={userPost._id}
-          className="lg:w-[280px] flex flex-col gap-1 items-center bg-white shadow-md rounded-2xl p-3"
+          className="lg:w-[280px] flex flex-col items-center bg-white shadow-md rounded-2xl p-3"
         >
           <img
             src={userPost.image}
             onClick={() => navigate(`/postDetail/${userPost._id}`)}
             className="w-full h-[350px] md:h-[200px] object-cover rounded-xl cursor-pointer"
           />
-          <p className="text-xl font-bold">{userPost.imageName}</p>
+           <p className="text-xl font-bold mt-2">{userPost.imageName}</p>
+         <div className="w-full flex flex-col gap-1.5">
+          <p className="w-full text-start text-yellow-600 underline decoration-wavy underline-offset-4 text-[14px]">Image Detials</p>
           <p className="w-full text-sm font-medium truncate">
-            <span className="text-md">Description</span> : -{" "}
-            <span className=" text-[12px]">{userPost.description}</span>
+            <span className="text-[12px]">{userPost.description}</span>
           </p>
-          {/* Show Update/Delete only if current user is owner */}
-          {userPost.user?._id === loggedInUserId && (
-            <div className="flex gap-3 mt-3">
-              <div className="flex justify-between gap-5">
-                <NavLink
-                  to={`/update/${userPost._id}`}
-                  className="border rounded-sm px-3 py-1 text-yellow-500 hover:bg-yellow-500 hover:text-white font-bold transition duration-200"
-                >
-                  Update post
-                </NavLink>
-              </div>
-              <button
-                onClick={() => handleDelete(userPost._id)}
-                className="border rounded-sm px-3 py-1 text-red-500 hover:bg-red-500 hover:text-white font-bold transition duration-200 cursor-pointer"
-              >
-                Delete
-              </button>
-            </div>
-          )}
+         </div>
         </div>
       ))}
     </div>
