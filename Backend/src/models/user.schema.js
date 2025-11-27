@@ -13,13 +13,14 @@ const userSchema = new Schema(
       required: [true, "Please provide your last name"],
     },
     avatar: { type: String, required: [true, "Please provide your own image"] },
+    avatarPublicId: { type: String, required: false },
     email: {
       type: String,
       required: [true, "Please provide correct and own email"],
       unique: true,
     },
     password: { type: String, required: [true, "Password is required"] },
-    accessToken: { type: String },
+    refreshToken: { type: String },
   },
   { timestamps: true }
 );

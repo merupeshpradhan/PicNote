@@ -78,19 +78,17 @@ const userLogin = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Incorrect password.");
   }
 
-  const accessToken = await user.generateAccessToken();
+  const accessToken = user.generateAccessToken();
   const refreshToken = await user.generateRefreshToken();
 
-  // Save access token and refreshToken in DB
-  user.accessToken = accessToken;
+  // Save refreshToken in DB
   user.refreshToken = refreshToken;
   await user.save({ validateBeforeSave: false });
 
   const option = {
     httpOnly: true,
-    // secure: process.env.NODE_ENV === "production",
-    secure: false,
-    sameSite: "Strict",
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
   };
 
   res.cookie("accessToken", accessToken, option);
@@ -102,7 +100,6 @@ const userLogin = asyncHandler(async (req, res) => {
     firstName: user.firstName,
     lastName: user.lastName,
     email: user.email,
-    accessToken: user.accessToken,
   };
 
   return res
@@ -152,13 +149,11 @@ const userLogout = asyncHandler(async (req, res) => {
 
   const option = {
     httpOnly: true,
-    secure: false,
-    sameSite: "Strict",
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
   };
 
   // remove token and refrshToken from DB
-
-  user.accessToken = null;
   user.refreshToken = null;
 
   await user.save({ validateBeforeSave: false });
