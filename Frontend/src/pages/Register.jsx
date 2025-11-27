@@ -37,6 +37,7 @@ function Register() {
         "http://localhost:4000/api/v1/users/signup",
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
+        // { withCredentials: true }
       );
 
       console.log("You register successfully!", res);

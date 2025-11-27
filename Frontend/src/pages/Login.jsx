@@ -21,6 +21,7 @@ function Login() {
         { email, password },
         { withCredentials: true }
       );
+      console.log(res.data);
 
       const userData = res.data.data;
       const loginData = localStorage.setItem("user", JSON.stringify(userData));

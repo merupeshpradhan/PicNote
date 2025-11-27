@@ -5,10 +5,6 @@ import { ApiError } from "../utils/ApiError.js";
 export const authMiddleware = async (req, res, next) => {
   try {
 
-     // DEBUG: Check what is coming from frontend
-    console.log("Cookies received:", req.cookies);
-    console.log("Authorization header:", req.header("Authorization"));
-
     // Get token from cookies or Authorization header
     const token =
       req.cookies.accessToken ||

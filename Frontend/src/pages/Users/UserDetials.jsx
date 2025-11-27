@@ -50,20 +50,23 @@ function UserDetials() {
 
   // Geting Usrer Post Images
   const fetchUserImages = async () => {
-    const token = localStorage.getItem("accessToken");
+    // const token = localStorage.getItem("accessToken");
     const userId = userDetails.id;
     console.log("userId :- ", userId);
 
     try {
       const res = await axios.get(
         `http://localhost:4000/api/v1/posts/user/${userId}`,
-        { headers: { Authorization: `Bearer ${token}` }, withCredentials: true }
+        {
+          // headers: { Authorization: `Bearer ${token}` },
+          withCredentials: true,
+        }
       );
       console.log("User Image's :- ", res.data.data);
       setUserImages(res.data.data);
     } catch (error) {
       console.log(error);
-      
+
       toast.error("Somthing went wrong");
     }
   };
