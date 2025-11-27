@@ -42,7 +42,7 @@ function Navbar({ setPostData }) {
 
       // Remove stored user info and token
       localStorage.removeItem("user");
-      localStorage.removeItem("accessToken");
+      // localStorage.removeItem("accessToken");
 
       toast.success("Logged out successfully");
 

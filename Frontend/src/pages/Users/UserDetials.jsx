@@ -62,6 +62,8 @@ function UserDetials() {
       console.log("User Image's :- ", res.data.data);
       setUserImages(res.data.data);
     } catch (error) {
+      console.log(error);
+      
       toast.error("Somthing went wrong");
     }
   };
@@ -245,7 +247,7 @@ function UserDetials() {
                   alt="user avatar"
                   className="w-[80%] md:w-[23vw] md:h-[50vh] border-4 border-green-500 rounded-xl"
                 />
-                <div className="flex flex-col items-center justify-center w-[20vw]">
+                <div className="flex flex-col items-center justify-center w-[20vw] cursor-default">
                   <h1 className="text-2xl font-bold mt-2">
                     {userDetails.firstName} {userDetails.lastName}
                   </h1>
@@ -264,52 +266,62 @@ function UserDetials() {
               </div>
               <div className="flex flex-col items-center justify-center mt-16 mb-2">
                 <div className="border-b-4 border-green-300 w-[100vw] text-center shadow-green-400 shadow-2xl/50 rounded-tl-xl rounded-tr-xl">
-                  <h1 className="text-4xl mb-1.5 tracking-wider italic font-extrabold text-lime-500">
+                  <h1 className="text-4xl mb-1.5 tracking-wider italic font-extrabold text-lime-500 cursor-default">
                     All Image's
                   </h1>
                 </div>
-                <div className="w-full items-center grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 p-8 pt-[160px] lg:pt-[36px] mt-[85px] lg:mt-0">
-                  {userImages.map((userImage) => (
-                    <div
-                      key={userImage._id}
-                      className="flex flex-col gap-1 items-center bg-white shadow-md rounded-2xl p-3 hover:scale-105 ease-in-out duration-300"
-                    >
-                      <img
-                        src={userImage.image}
-                        className="h-56 object-cover rounded-xl cursor-pointer"
-                        onClick={() => navigate(`/postDetail/${userImage._id}`)}
-                      />
-                      <p className="text-xl font-bold mt-3 text-gray-800">
-                        {userImage.imageName}
-                      </p>
-                      <p className="w-full text-sm font-medium truncate px-2">
-                        <span className="text-md text-gray-700 tracking-wider">
-                          Photo Details
-                        </span>{" "}
-                        : -{" "}
-                        <span className="text-[10px] text-gray-700 tracking-wider">
-                          {userImage.description}
-                        </span>
-                      </p>
-                      {/* Show Update/Delete only if current user is owner */}
-                      <div className="flex gap-3 mt-3">
-                        <div className="flex justify-between gap-5">
-                          <NavLink
-                            to={`/update/${userImage._id}`}
-                            className="border rounded-sm px-3 py-1 text-yellow-500 hover:bg-yellow-500 hover:text-white font-bold transition duration-200"
-                          >
-                            Update post
-                          </NavLink>
-                        </div>
-                        <button
-                          onClick={() => handleDelete(userImage._id)}
-                          className="border rounded-sm px-3 py-1 text-red-500 hover:bg-red-500 hover:text-white font-bold transition duration-200 cursor-pointer"
+                <div className="w-full">
+                  {userImages.length === 0 ? (
+                    <h2 className="text-center text-2xl font-semibold text-red-400 w-full mt-10 mb-20 cursor-default">
+                      Oops! You don’t have any images yet 😃
+                    </h2>
+                  ) : (
+                    <div className="w-full items-center grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 p-8 pt-[160px] lg:pt-[36px] mt-[85px] lg:mt-0">
+                      {userImages.map((userImage) => (
+                        <div
+                          key={userImage._id}
+                          className="flex flex-col gap-1 items-center bg-white shadow-md rounded-2xl p-3 hover:scale-105 ease-in-out duration-300"
                         >
-                          Delete
-                        </button>
-                      </div>
+                          <img
+                            src={userImage.image}
+                            className="h-56 object-cover rounded-xl cursor-pointer"
+                            onClick={() =>
+                              navigate(`/postDetail/${userImage._id}`)
+                            }
+                          />
+                          <p className="text-xl font-bold mt-3 text-gray-800">
+                            {userImage.imageName}
+                          </p>
+                          <p className="w-full text-sm font-medium truncate px-2">
+                            <span className="text-md text-gray-700 tracking-wider">
+                              Photo Details
+                            </span>{" "}
+                            : -{" "}
+                            <span className="text-[10px] text-gray-700 tracking-wider">
+                              {userImage.description}
+                            </span>
+                          </p>
+                          {/* Show Update/Delete only if current user is owner */}
+                          <div className="flex gap-3 mt-3">
+                            <div className="flex justify-between gap-5">
+                              <NavLink
+                                to={`/update/${userImage._id}`}
+                                className="border rounded-sm px-3 py-1 text-yellow-500 hover:bg-yellow-500 hover:text-white font-bold transition duration-200"
+                              >
+                                Update post
+                              </NavLink>
+                            </div>
+                            <button
+                              onClick={() => handleDelete(userImage._id)}
+                              className="border rounded-sm px-3 py-1 text-red-500 hover:bg-red-500 hover:text-white font-bold transition duration-200 cursor-pointer"
+                            >
+                              Delete
+                            </button>
+                          </div>
+                        </div>
+                      ))}
                     </div>
-                  ))}
+                  )}
                 </div>
               </div>
             </div>

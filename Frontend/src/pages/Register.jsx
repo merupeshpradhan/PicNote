@@ -44,6 +44,7 @@ function Register() {
       navigate("/login");
 
       setAvatar("");
+      setAvatarPreview("");
       setFirstName("");
       setLastName("");
       setEmail("");

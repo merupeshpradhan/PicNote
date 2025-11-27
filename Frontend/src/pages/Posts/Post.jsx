@@ -57,7 +57,7 @@ function Post({ postData }) {
 
   if (!posts.length) {
     return (
-      <div className="text-center text-3xl font-semibold mt-10">
+      <div className="text-center text-3xl font-semibold mt-10 cursor-default">
         No post available.
       </div>
     );

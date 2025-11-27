@@ -23,14 +23,14 @@ function Login() {
       );
 
       const userData = res.data.data;
-      localStorage.setItem("user", JSON.stringify(userData));
-      localStorage.setItem("accessToken", userData.accessToken);
+      const loginData = localStorage.setItem("user", JSON.stringify(userData));
+
+      // localStorage.setItem("accessToken", userData.accessToken);
       toast.success("Welcome to PicNote!");
       setEmail("");
       setPassword("");
       navigate("/"); // redirect to home or dashboard
     } catch (err) {
-      setPassword("");
       if (err.response) {
         toast.error(err.response.data.message);
       } else {
