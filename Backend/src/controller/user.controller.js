@@ -1,8 +1,51 @@
+import jwt from "jsonwebtoken";
 import { User } from "../models/user.schema.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
+
+export const refreshAccessToken = async (req, res) => {
+  try {
+    const incomingRefreshToken = req.cookies.refreshToken;
+
+    if (!incomingRefreshToken) throw new ApiError(401, "Refresh token missing");
+
+    // verify refresh token
+    const decoded = jwt.verify(
+      incomingRefreshToken,
+      process.env.REFRESH_TOKEN_SECRET
+    );
+
+    const user = await User.findById(decoded.id);
+
+    if (!user) throw new ApiError(401, "User not found");
+
+    if (user.refreshToken !== incomingRefreshToken)
+      throw new ApiError(401, "Invalid refresh token");
+
+    // generate new access token
+    const newAccessToken = user.generateAccessToken();
+
+    res.cookie("accessToken", newAccessToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+    });
+
+    return res
+      .status(200)
+      .json(
+        new ApiResponse(
+          200,
+          { accessToken: newAccessToken },
+          "New access token issued"
+        )
+      );
+  } catch (error) {
+    return res.status(401).json(new ApiError(401, "Invalid refresh token"));
+  }
+};
 
 const userSignup = asyncHandler(async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
@@ -149,7 +192,7 @@ const userLogout = asyncHandler(async (req, res) => {
     user.refreshToken = null;
     await user.save({ validateBeforeSave: false });
   }
-  
+
   const option = {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
@@ -164,4 +207,10 @@ const userLogout = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, {}, "User logout successfully."));
 });
 
-export { userSignup, userLogin, updateUserDetails, userLogout };
+export {
+  refreshAccessToken,
+  userSignup,
+  userLogin,
+  updateUserDetails,
+  userLogout,
+};

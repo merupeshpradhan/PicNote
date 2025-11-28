@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+  refreshAccessToken,
   updateUserDetails,
   userLogin,
   userLogout,
@@ -12,7 +13,8 @@ const router = Router();
 
 router.route("/signup").post(upload.single("avatar"), userSignup);
 router.route("/login").post(userLogin);
-router.route("/logout").post(userLogout);
+router.route("/logout").post(authMiddleware, userLogout);
+router.route("/refresh-token").post(refreshAccessToken);
 
 // Portected routes
 router
