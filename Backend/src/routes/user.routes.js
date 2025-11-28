@@ -12,7 +12,7 @@ const router = Router();
 
 router.route("/signup").post(upload.single("avatar"), userSignup);
 router.route("/login").post(userLogin);
-router.route("/logout").post(authMiddleware,userLogout);
+router.route("/logout").post(userLogout);
 
 // Portected routes
 router

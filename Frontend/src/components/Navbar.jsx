@@ -57,7 +57,7 @@ function Navbar({ setPostData }) {
         navigate("/");
       })
       .catch((err) => {
-        console.log("Logout error:", error);
+        console.log("Logout error:", err);
         alert("Logout failed. Please try again.");
       });
   };
