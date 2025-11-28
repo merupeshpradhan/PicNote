@@ -5,7 +5,7 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 
-export const refreshAccessToken = async (req, res) => {
+const refreshAccessToken = async (req, res) => {
   try {
     const incomingRefreshToken = req.cookies.refreshToken;
 

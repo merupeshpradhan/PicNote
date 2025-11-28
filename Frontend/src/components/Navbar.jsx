@@ -1,4 +1,5 @@
-import axios from "axios";
+// import { useState, useEffect } from 'react';
+import api from "../utils/axiosInstance";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import SearchBar from "../pages/Posts/SearchBar";
@@ -32,35 +33,47 @@ function Navbar({ setPostData }) {
     };
   }, []);
 
-  const handleLogout = (e) => {
-    e.preventDefault();
+  // const handleLogout = (e) => {
+  //   e.preventDefault();
 
-    axios
-      .post(
-        `http://localhost:4000/api/v1/users/logout`,
-        {},
-        {
-          withCredentials: true,
-        }
-      )
-      .then((res) => {
-        // Remove stored user info and token
-        localStorage.removeItem("user");
-        // localStorage.removeItem("accessToken");
+  //   axios
+  //     .post(
+  //       `http://localhost:4000/api/v1/users/logout`,
+  //       {},
+  //       {
+  //         withCredentials: true,
+  //       }
+  //     )
+  //     .then((res) => {
+  //       // Remove stored user info and token
+  //       localStorage.removeItem("user");
+  //       // localStorage.removeItem("accessToken");
 
-        toast.success("Logged out successfully");
+  //       toast.success("Logged out successfully");
 
-        // update state so Navbar re-renders
-        setUser(null);
+  //       // update state so Navbar re-renders
+  //       setUser(null);
 
-        // Redirect to home page
-        navigate("/");
-      })
-      .catch((err) => {
-        console.log("Logout error:", err);
-        alert("Logout failed. Please try again.");
-      });
+  //       // Redirect to home page
+  //       navigate("/");
+  //     })
+  //     .catch((err) => {
+  //       console.log("Logout error:", err);
+  //       alert("Logout failed. Please try again.");
+  //     });
+  // };
+
+  const handleLogout = async () => {
+    try {
+      await api.post("/users/logout");
+      console.log("Logged out");
+      localStorage.removeItem("user");
+      navigate("/login");
+    } catch (err) {
+      console.log("Logout error:", err);
+    }
   };
+
   return (
     <nav className="fixed top-0 left-0 w-full bg-indigo-100 shadow-indigo-400 shadow-lg/65 rounded-bl-lg rounded-br-lg py-2.5 md:py-2 lg:py-2.5 px-5 flex justify-between items-center z-50">
       <Link to="/">

@@ -14,7 +14,7 @@ function Post({ postData }) {
     const fetchPost = async () => {
       try {
         const res = await axios.get("http://localhost:4000/api/v1/posts");
-        console.log("Posts response", res);
+        // console.log("Posts response", res);
 
         if (res.data.data) {
           setPosts(res.data.data);
