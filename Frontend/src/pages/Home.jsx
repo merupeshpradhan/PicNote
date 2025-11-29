@@ -34,6 +34,7 @@ function Home({postData}) {
       >
         <FaPlus size={20} />
       </button>
+
       <Footer />
     </div>
   );

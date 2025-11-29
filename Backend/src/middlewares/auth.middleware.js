@@ -7,7 +7,7 @@ export const authMiddleware = async (req, res, next) => {
 
     // Get token from cookies or Authorization header
     const token =
-      req.cookies?.accessToken ||
+      req.cookies.accessToken ||
       req.header("Authorization")?.replace("Bearer ", "").trim();
     if (!token) {
       throw new ApiError(401, "Please log in first to access this feature");

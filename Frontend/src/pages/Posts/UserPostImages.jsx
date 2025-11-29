@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa6";
+import api from "../../utils/axiosInstance";
 
 function UserPostImages() {
   const { userId } = useParams(); // get userId from URL
@@ -12,10 +13,8 @@ function UserPostImages() {
   const getUserPost = async () => {
     const token = localStorage.getItem("accessToken");
     try {
-      const res = await axios.get(
-        `http://localhost:4000/api/v1/posts/user/${userId}`,
-        { headers: { Authorization: `Bearer ${token}` }, withCredentials: true }
-      );
+      const res = await api.get(`/posts/user/${userId}`);
+      
       setUserPosts(res.data.data);
       console.log(res.data.data);
     } catch (error) {
@@ -61,7 +60,7 @@ function UserPostImages() {
             </p>
             <div className="flex items-center justify-center gap-2 mt-1">
               <div className="text-gray-700">
-                <FaArrowRight size={15}/>
+                <FaArrowRight size={15} />
               </div>
               <p className="w-full text-[10px] font-medium truncate tracking-widest">
                 {userPost.description}

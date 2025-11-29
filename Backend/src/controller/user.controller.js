@@ -5,7 +5,7 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 
-const refreshAccessToken = async (req, res) => {
+export const refreshAccessToken = async (req, res) => {
   try {
     const incomingRefreshToken = req.cookies.refreshToken;
 
@@ -21,7 +21,8 @@ const refreshAccessToken = async (req, res) => {
 
     if (!user) throw new ApiError(401, "User not found");
 
-    if (user.refreshToken !== incomingRefreshToken)
+    // better check (handles null or mismatch)
+    if (!user.refreshToken || user.refreshToken !== incomingRefreshToken)
       throw new ApiError(401, "Invalid refresh token");
 
     // generate new access token
@@ -30,7 +31,9 @@ const refreshAccessToken = async (req, res) => {
     res.cookie("accessToken", newAccessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      // secure: true,
+      // sameSite: "none",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     });
 
     return res
@@ -131,7 +134,10 @@ const userLogin = asyncHandler(async (req, res) => {
   const option = {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
+    // secure: true,
+    // sameSite: "strict",
+    // sameSite: "none",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
   };
 
   res.cookie("accessToken", accessToken, option);
@@ -186,17 +192,43 @@ const updateUserDetails = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, updatedData, "Profile updated successfully."));
 });
 
+// const userLogout = asyncHandler(async (req, res) => {
+//   const user = req.user;
+//   if (user) {
+//     user.refreshToken = null;
+//     await user.save({ validateBeforeSave: false });
+//   }
+
+//   const option = {
+//     httpOnly: true,
+//     secure: process.env.NODE_ENV === "production",
+//     sameSite: "strict",
+//   };
+
+//   res.clearCookie("accessToken", option);
+//   res.clearCookie("refreshToken", option);
+
+//   return res
+//     .status(200)
+//     .json(new ApiResponse(200, {}, "User logout successfully."));
+// });
+
 const userLogout = asyncHandler(async (req, res) => {
-  const user = req.user;
-  if (user) {
-    user.refreshToken = null;
-    await user.save({ validateBeforeSave: false });
+  if (req.user?._id) {
+    // remove refresh token from DB
+    await User.findByIdAndUpdate(
+      req.user._id,
+      { $unset: { refreshToken: 1 } },
+      { new: true }
+    );
   }
 
   const option = {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
+    // secure: true,
+    // sameSite: "none",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
   };
 
   res.clearCookie("accessToken", option);
@@ -207,10 +239,4 @@ const userLogout = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, {}, "User logout successfully."));
 });
 
-export {
-  refreshAccessToken,
-  userSignup,
-  userLogin,
-  updateUserDetails,
-  userLogout,
-};
+export { userSignup, userLogin, updateUserDetails, userLogout };

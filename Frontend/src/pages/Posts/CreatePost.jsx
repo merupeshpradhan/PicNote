@@ -45,7 +45,11 @@ function CreatePost() {
     } catch (error) {
       // toast.error("Please log in first to create a post.");
       toast.error(error.response?.data?.message || "Error creatingpost.");
-      console.error(
+      // console.error(
+      //   error.response?.data?.message || "Error creation post",
+      //   error
+      // );
+      console.log(
         error.response?.data?.message || "Error creation post",
         error
       );
@@ -136,7 +140,7 @@ function CreatePost() {
           </button>
         </div>
       </form>{" "}
-      <Footer />
+      <Footer /> 
     </div>
   );
 }

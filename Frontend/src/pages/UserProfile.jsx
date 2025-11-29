@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Footer from "../components/Footer";
+// import Footer from "../components/Footer";
 import PostOwnerDetails from "./Posts/PostOwnerDetails";
 import UserPostImages from "./Posts/UserPostImages";
 import { FaSpinner } from "react-icons/fa";
@@ -32,7 +32,7 @@ function UserProfile() {
       </div>
 
       <div className="z-50">
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </div>
   );

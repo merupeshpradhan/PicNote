@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Footer from "../../components/Footer";
+// import Footer from "../../components/Footer";
 import { toast } from "react-toastify";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
+import api from "../../utils/axiosInstance";
 
 function UserDetials() {
+  const { userId } = useParams(); // get userId from URL
   const [userDetails, setUserDetials] = useState(null);
   const [userImages, setUserImages] = useState([]);
   const [editMode, setEditMode] = useState(false);
   const [previewAvatar, setPreviewAvatar] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  // console.log(userId);
 
   const [formData, setFormData] = useState({
     avatar: null,
@@ -43,31 +47,26 @@ function UserDetials() {
   }, []);
 
   useEffect(() => {
-    if (!userDetails) return;
+    if (!userId) return;
 
     fetchUserImages();
-  }, [userDetails]);
+  }, [userId]);
 
   // Geting Usrer Post Images
   const fetchUserImages = async () => {
-    const token = localStorage.getItem("accessToken");
-    const userId = userDetails.id;
+    // const userId = userDetails.id;
     console.log("userId :- ", userId);
 
     try {
-      const res = await axios.get(
-        `http://localhost:4000/api/v1/posts/user/${userId}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-          withCredentials: true,
-        }
-      );
-      console.log("User Image's :- ", res.data.data);
+      const res = await api.get(`/posts/user/${userId}`);
+      console.log("User Image's :- ", res);
       setUserImages(res.data.data);
     } catch (error) {
       console.log(error);
 
-      toast.error("Somthing went wrong");
+      if (error.response?.status !== 401) {
+        toast.error("Something went wrong");
+      }
     }
   };
 
@@ -97,19 +96,9 @@ function UserDetials() {
       if (formData.lastName) data.append("lastName", formData.lastName);
       if (formData.email) data.append("email", formData.email);
 
-      const token = localStorage.getItem("accessToken");
+      // const token = localStorage.getItem("accessToken");
 
-      const res = await axios.put(
-        "http://localhost:4000/api/v1/users/update-profile",
-        data,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
-          },
-          withCredentials: true,
-        }
-      );
+      const res = await api.put(`/users/update-profile`, data);
 
       const updateUser = res.data.data;
       localStorage.setItem("user", JSON.stringify(updateUser));
@@ -129,12 +118,10 @@ function UserDetials() {
   // DELETE handler
   const handleDelete = async (postId) => {
     if (!window.confirm("Are you sure you want to delete this post?")) return;
-    const token = localStorage.getItem("accessToken");
+    // const token = localStorage.getItem("accessToken");
     try {
-      await axios.delete(`http://localhost:4000/api/v1/posts/${postId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-        withCredentials: true,
-      });
+      await api.delete(`/posts/${postId}`);
+
       toast.success("Post deleted successfully!");
 
       // remove deleted post from the state
@@ -332,7 +319,7 @@ function UserDetials() {
         </div>
       )}
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

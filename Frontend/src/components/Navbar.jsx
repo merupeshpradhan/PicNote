@@ -1,4 +1,4 @@
-// import { useState, useEffect } from 'react';
+// import axios from "axios";
 import api from "../utils/axiosInstance";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -33,6 +33,23 @@ function Navbar({ setPostData }) {
     };
   }, []);
 
+  const handleGotoUserProfile = () => {
+    const user = localStorage.getItem("user");
+    if (user) {
+      const parsedUser = JSON.parse(user);
+      navigate(`/userDetials/${parsedUser.id}`);
+    } else {
+      toast.error("Please Login first", {
+        style: {
+          width: window.innerWidth < 600 ? "250px" : "320px",
+          marginTop: window.innerWidth < 600 ? "10px" : "0px",
+          fontSize: window.innerWidth < 600 ? "18px" : "16px",
+        },
+      });
+      navigate("/login");
+    }
+  };
+
   // const handleLogout = (e) => {
   //   e.preventDefault();
 
@@ -66,9 +83,11 @@ function Navbar({ setPostData }) {
   const handleLogout = async () => {
     try {
       await api.post("/users/logout");
-      console.log("Logged out");
       localStorage.removeItem("user");
-      navigate("/login");
+      localStorage.removeItem("accessToken");
+      setUser(null);
+      navigate("/");
+      console.log("Logged out");
     } catch (err) {
       console.log("Logout error:", err);
     }
@@ -102,15 +121,17 @@ function Navbar({ setPostData }) {
                   <span className="font-semibold hidden md:block text-green-800 cursor-context-menu">
                     Wellcome {user.firstName}😻
                   </span>
-                  <Link to={"/userDetials"}>
+                  {/* <Link to={`/userDetials/${userId}`}> */}
+                  <div onClick={handleGotoUserProfile}>
                     {user.avatar && (
                       <img
                         src={user.avatar}
                         alt={user.firstName}
-                        className="w-7 h-7 md:w-9 md:h-9 rounded-full"
+                        className="w-7 h-7 md:w-9 md:h-9 rounded-full cursor-pointer"
                       />
                     )}
-                  </Link>
+                  </div>
+                  {/* </Link> */}
                 </div>
                 <button
                   onClick={handleLogout}
