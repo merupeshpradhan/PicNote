@@ -83,7 +83,7 @@ function CreatePost() {
             )}
           </div>
         </div>
-        <div className="Image-name-with-description">
+        <div className="Image-input-name-and-description">
           <div className="w-full flex flex-col gap-3 items-center">
             <div className="image-input">
               <button

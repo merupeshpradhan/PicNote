@@ -76,7 +76,6 @@ function UpdatePost() {
       // );
       const res = await api.put(`/posts/${postId}`, data);
 
-
       const post = res.data.data;
       if (post?.user?._id) {
         navigate(`/userDetials/${post.user._id}`);
@@ -92,56 +91,59 @@ function UpdatePost() {
   return (
     <div className="h-[100vh] bg-blue-50 flex flex-col justify-between items-center gap-12 pt-25">
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-        <div className="Image-input-and-view flex gap-5 items-center ">
-          <div className="image-view xl:h-[35vh] xl:w-[15vw] rounded-md border flex justify-center items-center overflow-hidden">
-            {preview && (
-              <img
-                src={preview}
-                alt="Image preview"
-                className="w-full h-[350px] object-cover"
+        <div className="w-full flex justify-center items-center gap-5">
+          <div className="Image-input-and-view flex gap-5 items-center ">
+            <div className="image-view  w-[40vw] h-[23vh] md:h-[70vh] rounded-md border flex justify-center items-center overflow-hidden">
+              {preview && (
+                <img
+                  src={preview}
+                  alt="Image preview"
+                  className="w-full h-[350px] object-cover"
+                />
+              )}
+            </div>
+          </div>
+          <div className="Image-name-with-description">
+            <div className="flex items-center justify-center flex-col gap-3">
+              {/* Image input */}
+              <div className="image-input">
+                <button
+                  type="button"
+                  onClick={() => document.getElementById("fileInput").click()}
+                  className="bg-yellow-700 rounded-full py-2  transition duration-200 w-[7.5vw] text-[12px] font-semibold tracking-widest text-white hover:bg-yellow-900 cursor-pointer"
+                >
+                  Change image
+                </button>
+                <input
+                  id="fileInput"
+                  className="hidden"
+                  type="file"
+                  name="image"
+                  onChange={handleChange}
+                />
+              </div>
+              {/* Image Name */}
+              <input
+                type="text"
+                name="imageName"
+                placeholder="Image name"
+                value={formData.imageName}
+                onChange={handleChange}
+                className="border w-[24vw] xl:py-2 px-3 font-semibold rounded-md outline-0"
               />
-            )}
-          </div>
-          <div className="image-input">
-            <button
-              type="button"
-              onClick={() => document.getElementById("fileInput").click()}
-              className="bg-yellow-500 rounded-full p-2.5 transition duration-200 w-[8vw] font-semibold text-white hover:bg-yellow-900 cursor-pointer"
-            >
-              Change image
-            </button>
-            <input
-              id="fileInput"
-              className="hidden"
-              type="file"
-              name="image"
-              onChange={handleChange}
-            />
-          </div>
-        </div>
-        <div className="Image-name-with-description">
-          <div className="flex flex-col gap-3">
-            {/* Image Name */}
-            <input
-              type="text"
-              name="imageName"
-              placeholder="Image name"
-              value={formData.imageName}
-              onChange={handleChange}
-              className="border w-[24vw] xl:py-2 px-3 font-semibold rounded-md outline-0"
-            />
-            {/* Description */}
-            <textarea
-              name="description"
-              placeholder="Write description..."
-              value={formData.description}
-              onChange={handleChange}
-              className="border px-3 p-2 rounded-md outline-none h-24 resize-none"
-            ></textarea>
+              {/* Description */}
+              <textarea
+                name="description"
+                placeholder="Write description..."
+                value={formData.description}
+                onChange={handleChange}
+                className="w-[50vw] h-[50vh] border px-3 p-2 rounded-md outline-none resize-none"
+              ></textarea>
+            </div>
           </div>
         </div>
         <div className="flex justify-center">
-          <button className="bg-green-400 xl:px-6 xl:py-1.5 hover:bg-green-800 rounded transition duration-200 font-semibold tracking-wider text-lg text-white cursor-pointer">
+          <button className="w-[13vw] bg-green-700 xl:px-6 xl:py-1 hover:bg-green-800 rounded transition duration-200 font-semibold tracking-widest text-lg text-white cursor-pointer">
             {loading ? "Processing" : "Update"}
           </button>
         </div>

@@ -74,7 +74,7 @@ function PostDetail() {
           <img
             src={postDetails.image}
             alt={postDetails.imageName}
-            className="h-[85vh] rounded-2xl shadow-lg/40 "
+            className="h-[70vh] rounded-2xl shadow-lg/40 "
           />
         </div>
         <div className="w-full h-[85vh] flex flex-col gap-6 border-2 border-indigo-900 rounded-2xl pl-4 pr-1 py-1">

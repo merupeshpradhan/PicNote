@@ -49,7 +49,7 @@ function UserPostImages() {
       {userPosts.map((userPost) => (
         <div
           key={userPost._id}
-          className="lg:w-[280px] flex flex-col items-center bg-white shadow-md rounded-2xl p-3"
+          className="lg:w-[280px] flex flex-col items-center bg-indigo-100/90 shadow-md rounded-2xl p-3"
         >
           <img
             src={userPost.image}
@@ -61,7 +61,7 @@ function UserPostImages() {
             onClick={() => navigate(`/postDetail/${userPost._id}`)}
             className="w-full flex flex-col gap-1.5 cursor-pointer"
           >
-            <p className="w-full text-start text-yellow-600 underline decoration-wavy underline-offset-4 text-[15px]">
+            <p className="w-full text-start text-green-600 m-2 underline decoration-wavy underline-offset-4 text-[15px]">
               Image Detials :-
             </p>
             <div className="flex items-center justify-center gap-2 mt-1">

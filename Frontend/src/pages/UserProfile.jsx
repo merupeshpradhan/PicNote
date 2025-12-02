@@ -26,7 +26,7 @@ function UserProfile() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Main content */}
-      <div className="flex flex-col flex-grow min-h-[100vh] bg-indigo-50">
+      <div className="flex flex-col flex-grow min-h-[100vh] bg-indigo-50/40">
         <PostOwnerDetails />
         <UserPostImages />
       </div>
