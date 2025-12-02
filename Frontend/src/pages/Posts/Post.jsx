@@ -72,34 +72,34 @@ function Post({ postData }) {
   );
 
   return (
-    <div className="w-full">
+    <div className="w-full flex justify-center items-center">
       {filteredPosts.length === 0 ? (
         <h2 className="text-center text-2xl font-semibold text-red-500 w-full mt-10">
           No image found with this name
         </h2>
       ) : (
-        <div className="w-full flex md:grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-5 md:gap-x-5 gap-y-5 md:gap-y-8 p-3.5 md:p-4 2xl:mb-2">
+        <div className="w-full flex md:grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-x-5 md:gap-x-5 gap-y-5 md:gap-y-8 p-3.5 md:p-4 2xl:mb-2">
           {filteredPosts.map((post) => (
             <div
               key={post._id}
-              className="w-[170px] lg:w-[340px] flex items-center flex-col gap-2 bg-white shadow-md rounded-2xl p-3 hover:scale-105 ease-in-out duration-300"
+              className="w-[170px] lg:w-[220px] flex items-center flex-col gap-2 bg-white shadow-md/30 rounded-2xl p-3 hover:scale-105 ease-in-out duration-300"
             >
               <img
                 src={post.image}
                 alt={post.imageName}
-                className="h-56 object-cover rounded-xl cursor-pointer"
+                className="h-32  object-cover rounded-xl cursor-pointer"
                 onClick={() => navigate(`/postDetail/${post._id}`)}
               />
-              <div className="text-center">
-                <p className="text-sm md:text-lg font-bold mt-1 mb-1.5">
+              <div className="text-center w-full">
+                <p className="text-sm md:text-md font-bold mt-1 mb-1.5 text-indigo-900 tracking-wider">
                   {post.imageName}
                 </p>
                 <button
                   onClick={() => handleUserClick(post)}
-                  className="flex flex-col md:flex-row justify-center gap-1 mx-auto text-sm"
+                  className="flex flex-col md:flex-row items-center-center justify-between gap-1 mx-auto text-[10px] tracking-wider text-fuchsia-900 font-semibold"
                 >
                   Posted by :
-                  <span className="text-red-500 hover:text-red-600 cursor-pointer font-semibold transition duration-200">
+                  <span className="text-red-5 hover:text-red-600 cursor-pointer font-semibold transition duration-200 underline underline-offset-2">
                     {post.user.firstName} {post.user.lastName}
                   </span>
                 </button>

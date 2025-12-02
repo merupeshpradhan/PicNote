@@ -61,12 +61,13 @@ function CreatePost() {
     }
     // alert("Please provide all thing to create post");
   };
-  
+
   return (
     <div className="bg-indigo-50 h-[100vh] flex flex-col justify-between items-center gap-12 pt-25">
       <form onSubmit={handlePostCreation} className="flex flex-col gap-5">
-        <div className="Image-input-and-view flex gap-5 items-center ">
-          <div className="image-view w-[40vw] h-[23vh] md:w-[15vw] md:h-[35vh] rounded-md border flex justify-center items-center overflow-hidden">
+       <div className="flex justify-center items-center gap-5">
+         <div className="Image-input-and-view flex gap-5 items-center ">
+          <div className="image-view w-[40vw] h-[23vh] md:h-[70vh] rounded-md border flex justify-center items-center overflow-hidden">
             {ImagePreview ? (
               <div className="post-image-preview">
                 <img
@@ -81,61 +82,62 @@ function CreatePost() {
               </div>
             )}
           </div>
-          <div className="image-input">
-            <button
-              type="button"
-              onClick={() => document.getElementById("fileInput").click()}
-              className="bg-yellow-500 rounded-full py-2 md:p-2 transition duration-200 text-[15px] w-[28vw] md:w-[9vw] font-medium md:font-semibold text-white hover:bg-yellow-600 cursor-pointer"
-            >
-              {image ? "Change image" : "Chose image"}
-            </button>
-            <input
-              className="hidden"
-              id="fileInput"
-              type="file"
-              accept="image/*"
-              onChange={(e) => {
-                const file = e.target.files[0];
-                setImage(file);
-                if (file) {
-                  setImagePreview(URL.createObjectURL(file));
-                } else {
-                  setImagePreview(null);
-                }
-              }}
-            />
-          </div>
         </div>
         <div className="Image-name-with-description">
-          <div className="flex flex-col gap-3">
+          <div className="w-full flex flex-col gap-3 items-center">
+            <div className="image-input">
+              <button
+                type="button"
+                onClick={() => document.getElementById("fileInput").click()}
+                className="bg-blue-500 hover:bg-blue-600 rounded-full py-2 md:p-2 transition duration-200 text-[15px] w-[28vw] md:w-[9vw] font-medium md:font-semibold text-white cursor-pointer"
+              >
+                {image ? "Change image" : "Chose image"}
+              </button>
+              <input
+                className="hidden"
+                id="fileInput"
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  const file = e.target.files[0];
+                  setImage(file);
+                  if (file) {
+                    setImagePreview(URL.createObjectURL(file));
+                  } else {
+                    setImagePreview(null);
+                  }
+                }}
+              />
+            </div>
             {/* Image Name */}
             <input
               type="text"
               placeholder="Image name"
               value={imageName}
               onChange={(e) => setImageName(e.target.value)}
-              className="border md:w-[24vw] py-2 px-2 md:px-5 font-semibold rounded-md outline-0"
+              className="border w-full md:w-[24vw] py-2 px-2 md:px-5 font-semibold rounded-md outline-0"
             />
             {/* Description */}
             <textarea
               placeholder="Write description..."
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="border py-2 px-2 md:p-2 rounded-md outline-none h-24 resize-none"
+              className="w-[50vw] h-[50vh] border py-2 px-2 md:p-2 rounded-md outline-none resize-none"
             ></textarea>
           </div>
         </div>
+       </div>
         <div className="flex justify-center">
           <button
             type="submit"
             disabled={loading}
-            className={`bg-green-500 py-2 xl:px-6 xl:py-1.5 hover:bg-green-600 w-[50%] rounded transition duration-200 font-semibold tracking-widest text-xl md:text-lg text-white cursor-pointer flex justify-center items-center gap-2 ${
+            className={`bg-green-500 py-2 xl:px-6 xl:py-1.5 hover:bg-green-600 w-[20%] rounded transition duration-200 font-semibold tracking-widest text-xl md:text-lg text-white cursor-pointer flex justify-center items-center gap-2 ${
               loading && "opacity-70 cursor-not-allowed"
             } `}
           >
             {loading ? (
               <>
-                <FaSpinner className="animate-spin text-xl"/> Uploading...
+                <FaSpinner className="animate-spin text-xl" /> Uploading...
               </>
             ) : (
               "Upload"
@@ -143,7 +145,7 @@ function CreatePost() {
           </button>
         </div>
       </form>{" "}
-      <Footer /> 
+      <Footer />
     </div>
   );
 }
