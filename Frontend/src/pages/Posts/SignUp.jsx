@@ -9,9 +9,9 @@ import {
   FaUser,
 } from "react-icons/fa";
 import { toast } from "react-toastify";
-import api from "../../Api/api";
+import api from "../Api/api";
 
-function Signup() {
+function SignUp() {
   const [previewAvatar, setAvatarPreview] = useState("");
   const [avatar, setAvatar] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -27,7 +27,7 @@ function Signup() {
     setLoading(true);
 
     // Loading toast
-    const toastId = toast.loading("SignUp for PicNote...");
+    const toastId = toast.loading("Signup for PicNote...");
 
     try {
       const formData = new FormData();
@@ -63,7 +63,7 @@ function Signup() {
         style: { fontSize: "14px" },
       });
 
-      navigate("/signin");
+      navigate("/signIn");
 
       setAvatar("");
       setAvatarPreview("");
@@ -73,17 +73,7 @@ function Signup() {
       setPassword("");
     } catch (error) {
       if (error.response) {
-        // toast.error(error.response.data.message);
-        const errorMsg =
-          error.response?.data?.message || "SignUp failed. Something went wrong.";
-
-        toast.update(toastId, {
-          render: errorMsg,
-          type: "error",
-          isLoading: false,
-          autoClose: 2000,
-          style: { fontSize: "13px" },
-        });
+        toast.error(error.response.data.message);
       } else {
         toast.error("Oops! Something went wrong. Please try again.");
       }
@@ -260,7 +250,7 @@ function Signup() {
           <p className="text-center text-gray-600 mt-3 md:mt-6 text-[14px] tracking-wide">
             Already have an account?
             <Link
-              to="/signin"
+              to="/SignIn"
               className="text-pink-500 md:font-semibold hover:underline"
             >
               Sign In
@@ -272,4 +262,4 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default SignUp;

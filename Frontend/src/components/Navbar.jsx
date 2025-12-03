@@ -50,7 +50,7 @@ function Navbar({ setPostData }) {
           fontSize: window.innerWidth < 600 ? "18px" : "16px",
         },
       });
-      navigate("/login");
+      navigate("/signin");
     }
   };
 
@@ -86,10 +86,10 @@ function Navbar({ setPostData }) {
           {!user ? (
             <div className="login-register flex gap-3 md:gap-5 justify-center items-center">
               <li className="flex items-center bg-green-600 hover:bg-green-700 py-1 px-2.5 lg:py-1 lg:px-4 rounded-md text-md md:font-semibold tracking-wider text-white transition duration-200 cursor-pointer">
-                <Link to={"/login"}>Login</Link>
+                <Link to={"/signin"}>SignIn</Link>
               </li>
               <li className="bg-red-600 hover:bg-red-700  py-1 px-2.5 lg:py-1 rounded-md text-md md:font-semibold tracking-wider text-white transition duration-200 cursor-pointer">
-                <Link to={"/register"}>Register</Link>
+                <Link to={"/signup"}>SignUp</Link>
               </li>
             </div>
           ) : (

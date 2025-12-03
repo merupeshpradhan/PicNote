@@ -15,6 +15,10 @@ function SignIn() {
   const userSignUp = async (e) => {
     e.preventDefault();
     setLoading(true);
+
+    // Loading toast
+    const toastId = toast.loading("SignIN for PicNote...");
+
     try {
       // const res = await axios.post(
       //   "http://localhost:4000/api/v1/users/login",
@@ -28,13 +32,37 @@ function SignIn() {
       localStorage.setItem("user", JSON.stringify(userData));
 
       localStorage.setItem("accessToken", userData.accessToken);
+
       toast.success("Welcome to PicNote!");
+
+      const successsMsg = res.data?.message || "SignIn success";
+
+      toast.update(toastId, {
+        render: successsMsg,
+        type: "success",
+        isLoading: false,
+        autoClose: "3000",
+        style: { fontSize: "14px" },
+      });
+
+      navigate("/"); // redirect to home or dashboard
+
       setEmail("");
       setPassword("");
-      navigate("/"); // redirect to home or dashboard
     } catch (err) {
       if (err.response) {
-        toast.error(err.response.data.message);
+        // toast.error(err.response.data.message);
+        const errorMsg =
+          err.response?.data?.message ||
+          "SignIn failed. Something went wrong.";
+
+        toast.update(toastId, {
+          render: errorMsg,
+          type: "error",
+          isLoading: false,
+          autoClose: 2000,
+          style: { fontSize: "13px" },
+        });
       } else {
         toast.error("Something went wrong. Please try again.");
       }
@@ -132,7 +160,7 @@ function SignIn() {
           <p className="text-center text-gray-600 mt-3 md:mt-6 text-[14px] tracking-wide">
             Don't have an account?
             <Link
-              to="/Signup"
+              to="/signup"
               className="text-pink-500 md:font-semibold hover:underline"
             >
               Sign Up
