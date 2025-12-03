@@ -56,18 +56,52 @@ function Navbar({ setPostData }) {
 
   const handleLogout = (e) => {
     e.preventDefault();
+    const toastId = toast.loading("Logout for PicNote...");
 
     api
       .post("/users/logout")
       .then((res) => {
         localStorage.removeItem("user");
-        toast.success("Logged out successfully");
+        // toast.success("Logged out successfully");
+        const successsMsg = res.data?.message || "SignIn success";
+
+        toast.update(toastId, {
+          render: successsMsg,
+          type: "success",
+          isLoading: false,
+          autoClose: "3000",
+          style: {
+            fontSize: "14px",
+            marginTop: "40px",
+            padding: "2px 8px",
+            lineHeight: "42px",
+            minHeight: "20px", // ⬅ override default height
+            height: "auto",
+          },
+        });
+
         setUser(null);
         navigate("/");
       })
       .catch((err) => {
         console.log("Logout error:", err);
         alert("Logout failed. Please try again.");
+        const errorMsg = res.data?.message || "SignIn success";
+
+        toast.update(toastId, {
+          render: errorMsg,
+          type: "warning",
+          isLoading: false,
+          autoClose: "3000",
+          style: {
+            fontSize: "14px",
+            marginTop: "40px",
+            padding: "2px 8px",
+            lineHeight: "42px",
+            minHeight: "20px", // ⬅ override default height
+            height: "auto",
+          },
+        });
       });
   };
 

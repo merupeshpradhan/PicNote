@@ -33,7 +33,7 @@ function SignIn() {
 
       localStorage.setItem("accessToken", userData.accessToken);
 
-      toast.success("Welcome to PicNote!");
+      // toast.success("Welcome to PicNote!");
 
       const successsMsg = res.data?.message || "SignIn success";
 
@@ -42,26 +42,38 @@ function SignIn() {
         type: "success",
         isLoading: false,
         autoClose: "3000",
-        style: { fontSize: "14px" },
+        style: {
+          fontSize: "14px",
+          marginTop: "40px",
+          padding: "2px 8px",
+          lineHeight: "42px",
+          minHeight: "20px", // ⬅ override default height
+          height: "auto",
+        },
       });
 
       navigate("/"); // redirect to home or dashboard
 
       setEmail("");
       setPassword("");
-    } catch (err) {
-      if (err.response) {
+    } catch (error) {
+      if (error.response) {
         // toast.error(err.response.data.message);
         const errorMsg =
-          err.response?.data?.message ||
-          "SignIn failed. Something went wrong.";
+          error.response?.data?.message || "SignIn failed. Something went wrong.";
 
         toast.update(toastId, {
           render: errorMsg,
           type: "error",
           isLoading: false,
-          autoClose: 2000,
-          style: { fontSize: "13px" },
+          autoClose: "2000",
+          style: {
+            fontSize: "14px",
+            padding: "2px 8px",
+            lineHeight: "42px",
+            minHeight: "20px", // ⬅ override default height
+            height: "auto",
+          },
         });
       } else {
         toast.error("Something went wrong. Please try again.");

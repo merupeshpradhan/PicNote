@@ -4,7 +4,7 @@ import { FaPlus } from "react-icons/fa";
 import Footer from "../components/Footer";
 import { toast } from "react-toastify";
 
-function Home({postData}) {
+function Home({ postData }) {
   const navigate = useNavigate();
 
   const handleCreatePostClick = () => {
@@ -13,20 +13,31 @@ function Home({postData}) {
       const parsedUser = JSON.parse(user);
       navigate(`/createPost/${parsedUser._id || parsedUser.id}`);
     } else {
-      toast.error("Please Login first", {
+      const toastId = toast.loading("Please Login first");
+      const errorMsg = "Please Login first";
+      
+      toast.update(toastId, {
+        render: errorMsg,
+        type: "warning",
+        isLoading: false,
+        autoClose: "3000",
         style: {
-          width: window.innerWidth < 600 ? "250px" : "320px",
-          marginTop: window.innerWidth < 600 ? "10px" : "0px",
-          fontSize: window.innerWidth < 600 ? "18px" : "16px",
+          fontSize: "14px",
+          marginRight: "600px",
+          marginTop: "-10px",
+          padding: "2px 8px",
+          lineHeight: "42px",
+          minHeight: "20px", // ⬅ override default height
+          height: "auto",
         },
       });
-      navigate("/login");
+      navigate("/signin");
     }
   };
 
   return (
     <div className="h-[111vh] bg-[#f5edf3] flex flex-col justify-between min-h-screen relative items-center pt-16 md:pt-16 lg:pt-14 2xl:pt-16">
-      <Post postData={postData}/>
+      <Post postData={postData} />
 
       <button
         onClick={handleCreatePostClick}

@@ -112,7 +112,7 @@ const userLogin = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .json(new ApiResponse(200, userData, "User login successfully."));
+    .json(new ApiResponse(200, userData, `Welcome to PicNote, ${userData.firstName}!`));
 });
 
 // =========================
