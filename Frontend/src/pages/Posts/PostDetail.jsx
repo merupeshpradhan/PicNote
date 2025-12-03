@@ -68,7 +68,7 @@ function PostDetail() {
   }
 
   return (
-    <div className="w-full bg-indigo-50 lg:pt-[90px] flex flex-col items-center justify-between">
+    <div className="w-full bg-[#eff7ed] lg:pt-[90px] flex flex-col items-center justify-between">
       <div className="w-full flex  items-center justify-around gap-5 mb-10 lg:px-7">
         <div className="w-full flex items-center justify-center">
           <img

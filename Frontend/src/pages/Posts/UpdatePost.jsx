@@ -22,11 +22,11 @@ function UpdatePost() {
   useEffect(() => {
     const fetchPost = async () => {
       try {
+        window.scrollTo(0, 0);
         // const res = await axios.get(
         //   `http://localhost:4000/api/v1/posts/${postId}`
         // );
         const res = await api.get(`/posts/${postId}`);
-
         const post = res.data.data;
         // console.log(post);
 
@@ -89,7 +89,7 @@ function UpdatePost() {
   };
 
   return (
-    <div className="h-[100vh] bg-blue-50 flex flex-col justify-between items-center gap-12 pt-25">
+    <div className="min-h-screen bg-blue-50 flex flex-col justify-between items-center gap-12 pt-25">
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
         <div className="w-full flex justify-center items-center gap-5">
           <div className="Image-input-and-view flex gap-5 items-center ">
@@ -98,7 +98,7 @@ function UpdatePost() {
                 <img
                   src={preview}
                   alt="Image preview"
-                  className="w-full h-[350px] object-cover"
+                  className="w-full max-h-[350px] object-cover"
                 />
               )}
             </div>

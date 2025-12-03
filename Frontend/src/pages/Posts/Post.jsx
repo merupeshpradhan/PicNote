@@ -19,7 +19,11 @@ function Post({ postData }) {
         console.log("Posts response", res);
 
         if (res.data.data) {
-          setPosts(res.data.data);
+          // Sort latest post first
+          const sorted = res.data.data.sort(
+            (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+          );
+          setPosts(sorted);
         } else {
           setPosts([]);
         }
@@ -31,7 +35,14 @@ function Post({ postData }) {
       }
     };
 
+    // FIRST FETCH
     fetchPost();
+
+    // AUTO REFRESH every 15 minutes (900000ms)
+    const interval = setInterval(fetchPost, 900000);
+
+    // clean interval on unmount
+    return () => clearInterval(interval);
   }, []);
 
   const handleUserClick = (post) => {
@@ -82,7 +93,7 @@ function Post({ postData }) {
           {filteredPosts.map((post) => (
             <div
               key={post._id}
-              className="w-[170px] lg:w-[220px] flex items-center flex-col gap-2 bg-indigo-100/40 shadow-md/30 shadow-indigo-700/90 rounded-2xl p-3 hover:scale-105 ease-in-out duration-300"
+              className="w-[170px] lg:w-[220px] flex items-center flex-col gap-2 bg-[#daebd5] shadow-md/30 shadow-indigo-700/90 rounded-xl p-3 hover:scale-105 ease-in-out duration-300"
             >
               <img
                 src={post.image}
@@ -91,12 +102,12 @@ function Post({ postData }) {
                 onClick={() => navigate(`/postDetail/${post._id}`)}
               />
               <div className="text-center w-full">
-                <p className="text-sm md:text-md font-bold mt-1 mb-1.5 text-indigo-900 tracking-wider">
+                <p className="text-sm md:text-md font-bold mt-1 mb-1.5 text-[#6f53d3] tracking-wider">
                   {post.imageName}
                 </p>
                 <button
                   onClick={() => handleUserClick(post)}
-                  className="flex flex-col md:flex-row items-center-center justify-between gap-1 mx-auto text-[10px] tracking-wider text-fuchsia-900 font-semibold"
+                  className="flex flex-col md:flex-row items-center-center justify-between gap-1 mx-auto text-[10px] tracking-wider text-[#8315a5] font-semibold"
                 >
                   Posted by :
                   <span className="text-red-5 hover:text-red-600 cursor-pointer font-semibold transition duration-200 underline underline-offset-2">

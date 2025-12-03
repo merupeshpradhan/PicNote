@@ -265,9 +265,9 @@ function UserDetials() {
                 </div>
               </div>
               <div className="flex flex-col items-center justify-center mt-20 mb-2">
-                <div className="border-b-4 z-40 border-green-300 w-[100vw] text-center shadow-green-400 shadow-2xl/50 rounded-tl-xl rounded-tr-xl">
-                  <h1 className="text-4xl mb-2.5 tracking-wider italic font-extrabold text-lime-500 cursor-default">
-                    All Image's
+                <div className="border-b-4 border-t-4 z-40 border-[#658C58] w-[100vw] text-center shadow-[#8ed38b] shadow-2xl/50 rounded-l-2xl rounded-r-2xl">
+                  <h1 className="text-4xl mb-2.5 tracking-wider italic font-extrabold text-[#31694E] cursor-default">
+                    Your Image's
                   </h1>
                 </div>
                 <div className="w-full">
@@ -276,11 +276,11 @@ function UserDetials() {
                       Oops! You don’t have any images yet 😃
                     </h2>
                   ) : (
-                    <div className="w-full items-center bg-green-50/90 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 p-8 pt-[160px] lg:pt-[36px] mt-[85px] lg:mt-0">
+                    <div className="w-full items-center grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 p-8 pt-[160px] lg:pt-[36px] mt-[85px] lg:mt-0">
                       {userImages.map((userImage) => (
                         <div
                           key={userImage._id}
-                          className="flex flex-col gap-0.5 items-center bg-white shadow-lg/20  rounded-2xl p-3 hover:scale-105 ease-in-out duration-300"
+                          className="flex flex-col gap-0.5 items-center bg-[#d3ebcc] shadow-lg/70 shadow-[#b7c74e] rounded-2xl p-3 hover:scale-105 ease-in-out duration-300"
                         >
                           <img
                             src={userImage.image}
@@ -289,15 +289,15 @@ function UserDetials() {
                               navigate(`/postDetail/${userImage._id}`)
                             }
                           />
-                          <p className="text-lg font-bold mt-3 text-indigo-900 tracking-wider">
+                          <p className="text-lg font-bold mt-3 text-indigo-700 tracking-wider">
                             {userImage.imageName}
                           </p>
-                          <p className="w-full text-[13px] font-medium truncate px-2">
-                            <span className="text-md text-gray-700 tracking-wider">
+                          <p className="w-full text-[13px] text-indigo-900 font-medium truncate px-2">
+                            <span className="text-md  tracking-wider">
                               Photo Details
                             </span>{" "}
                             : -{" "}
-                            <span className="text-[11px] text-gray-700 tracking-wider">
+                            <span className="text-[11px]  tracking-wider">
                               {userImage.description}
                             </span>
                           </p>
@@ -306,7 +306,7 @@ function UserDetials() {
                             <div className="flex justify-between gap-5">
                               <NavLink
                                 to={`/update/${userImage._id}`}
-                                className="border rounded-sm px-3 py-1 text-yellow-500 hover:bg-yellow-500 hover:text-white font-bold transition duration-200"
+                                className="rounded-sm px-3 py-1 bg-yellow-500 hover:bg-yellow-600 text-white font-bold transition duration-200"
                               >
                                 Update post
                               </NavLink>

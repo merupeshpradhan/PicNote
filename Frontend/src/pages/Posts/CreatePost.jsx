@@ -63,11 +63,11 @@ function CreatePost() {
   };
 
   return (
-    <div className="bg-indigo-50 h-[100vh] flex flex-col justify-between items-center gap-12 pt-25">
+    <div className="bg-[#eff7ed] h-[100vh] flex flex-col justify-between items-center gap-12 pt-25">
       <form onSubmit={handlePostCreation} className="flex flex-col gap-5">
        <div className="flex justify-center items-center gap-5">
          <div className="Image-input-and-view flex gap-5 items-center ">
-          <div className="image-view w-[40vw] h-[23vh] md:h-[70vh] rounded-md border flex justify-center items-center overflow-hidden">
+          <div className="image-view w-[40vw] h-[23vh] md:h-[70vh] rounded-md border border-[#58530b] flex justify-center items-center overflow-hidden">
             {ImagePreview ? (
               <div className="post-image-preview">
                 <img
@@ -115,7 +115,7 @@ function CreatePost() {
               placeholder="Image name"
               value={imageName}
               onChange={(e) => setImageName(e.target.value)}
-              className="border w-full md:w-[24vw] py-2 px-2 md:px-5 font-semibold rounded-md outline-0"
+              className="border w-full md:w-[24vw] py-2 px-2 font-semibold rounded-md outline-0"
             />
             {/* Description */}
             <textarea

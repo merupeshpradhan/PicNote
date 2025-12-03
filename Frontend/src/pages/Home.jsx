@@ -25,7 +25,7 @@ function Home({postData}) {
   };
 
   return (
-    <div className="bg-indigo-50 flex flex-col justify-between min-h-screen relative items-center pt-16 md:pt-16 lg:pt-14 2xl:pt-16">
+    <div className="bg-[#eff7ed] flex flex-col justify-between min-h-screen relative items-center pt-16 md:pt-16 lg:pt-14 2xl:pt-16">
       <Post postData={postData}/>
 
       <button
