@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
-import Register from "./pages/Register";
-import Login from "./pages/Login";
+import SignIn from "./pages/Auth/SignIn/SignIn";
+import Signup from "./pages/Auth/Signup/SignUp";
 import Navbar from "./components/Navbar";
 import UserProfile from "./pages/UserProfile";
 import UserDetials from "./pages/Users/UserDetials";
@@ -17,14 +17,14 @@ function App() {
   // const [postData, setPostData] = useState([]);
 
   // Chek if current route is login or register
-  const hideLayout = ["/login", "/register"].includes(location.pathname);
+  const hideLayout = ["/SignIn", "/Signup"].includes(location.pathname);
   return (
     <div className="">
       {!hideLayout && <Navbar setPostData={setPostData} />}
       <Routes>
         <Route path="/" element={<Home postData={postData} />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/SignUp" element={<Signup />} />
+        <Route path="/SignIn" element={<SignIn />} />
         <Route path="/post" element={<Post postData={postData} />} />
         <Route
           path="/userDetials/:userId"

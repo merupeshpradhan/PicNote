@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { FaEye, FaEyeSlash, FaSpinner } from "react-icons/fa";
-import api from "./Api/api";
+// import api from "../Api/api";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -135,7 +135,7 @@ function Login() {
           <p className="text-center text-gray-600 mt-3 md:mt-6 text-[14px] tracking-wide">
             Don't have an account?
             <Link
-              to="/register"
+              to="/Signup"
               className="text-pink-500 md:font-semibold hover:underline"
             >
               Sign Up

@@ -72,7 +72,7 @@ function Navbar({ setPostData }) {
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-[#a2fa9d] shadow-[#5eeb8d] shadow-lg/90 rounded-bl-lg rounded-br-lg py-2.5 md:py-2 lg:py-2.5 px-5 flex justify-between items-center z-50">
+    <nav className="fixed top-0 left-0 w-full bg-[#f5b9e6] shadow-[#fd52d2] shadow-lg/90 rounded-bl-lg rounded-br-lg py-2.5 md:py-2 lg:py-2.5 px-5 flex justify-between items-center z-50">
       <Link to="/">
         <h1 className="text-2xl md:text-4xl lg:text-3xl font-extrabold text-pink-600 tracking-wide cursor-pointer">
           Pic<span className="text-gray-800">Note</span>

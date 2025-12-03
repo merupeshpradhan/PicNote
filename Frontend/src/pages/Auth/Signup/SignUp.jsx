@@ -9,9 +9,9 @@ import {
   FaUser,
 } from "react-icons/fa";
 import { toast } from "react-toastify";
-import api from "./Api/api";
+import api from "../../Api/api";
 
-function Register() {
+function SignUp() {
   const [previewAvatar, setAvatarPreview] = useState("");
   const [avatar, setAvatar] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -22,7 +22,7 @@ function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const userRegister = async (e) => {
+  const userSignUp = async (e) => {
     e.preventDefault();
     setLoading(true);
 
@@ -66,7 +66,6 @@ function Register() {
       setLoading(false);
     }
   };
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-pink-100 py-4 px-4">
       <div className="bg-white rounded-2xl shadow-2xl md:rounded-2xl md:shadow-2xl flex flex-col md:flex-row max-w-5xl w-full overflow-hidden">
@@ -103,7 +102,7 @@ function Register() {
             securely.
           </p>
 
-          <form onSubmit={userRegister} className="space-y-1 md:space-y-5">
+          <form onSubmit={userSignUp} className="space-y-1 md:space-y-5">
             {/* Avatar Upload */}
             <div className="flex justify-between md:justify-start md:gap-7 mb-3">
               <div className="avatar-preview-container border-2 border-pink-500 w-[50%] h-[20vh] xl:h-[26vh] xl:w-[42%] rounded-md flex justify-center items-center overflow-hidden">
@@ -236,7 +235,7 @@ function Register() {
           <p className="text-center text-gray-600 mt-3 md:mt-6 text-[14px] tracking-wide">
             Already have an account?
             <Link
-              to="/login"
+              to="/SignIn"
               className="text-pink-500 md:font-semibold hover:underline"
             >
               Sign In
@@ -248,4 +247,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default SignUp;
