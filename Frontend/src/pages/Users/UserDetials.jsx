@@ -122,8 +122,20 @@ function UserDetials() {
 
   // DELETE handler
   const handleDelete = async (postId) => {
-    if (!window.confirm("Are you sure you want to delete this post?")) return;
+    // if (!window.confirm("Are you sure you want to delete this post?")) return;
     // const token = localStorage.getItem("accessToken");
+
+    // Loading toast
+    const toastId = toast.loading("Deleting image...", {
+      style: {
+        fontSize: "14px",
+        marginTop: "40px",
+        padding: "2px 8px",
+        lineHeight: "42px",
+        minHeight: "20px", // ⬅ override default height
+        height: "auto",
+      },
+    });
     try {
       // await axios.delete(`http://localhost:4000/api/v1/posts/${postId}`, {
       //   headers: {
@@ -131,19 +143,46 @@ function UserDetials() {
       //   },
       //   withCredentials: true,
       // });
-      await api.delete(`/posts/${postId}`);
-      toast.success("Post deleted successfully!");
+      const res = await api.delete(`/posts/${postId}`);
+
+      // toast.success("Post deleted successfully!");
+      const successsMsg = res.data?.message || "SignIn success";
+
+      toast.update(toastId, {
+        render: successsMsg,
+        type: "success",
+        isLoading: false,
+        autoClose: "3000",
+        style: {
+          fontSize: "14px",
+          marginTop: "40px",
+          padding: "2px 8px",
+          lineHeight: "42px",
+          minHeight: "20px", // ⬅ override default height
+          height: "auto",
+        },
+      });
 
       // remove deleted post from the state
       setUserImages((prev) => prev.filter((post) => post._id !== postId));
     } catch (error) {
       console.log(error);
-      toast.error(error.response?.data?.message);
+      // toast.error(error.response?.data?.message);
+
+      const errorMsg =
+        error?.response?.data?.message || "Failed to delete post";
+
+      toast.update(toastId, {
+        render: errorMsg,
+        type: "error",
+        isLoading: false,
+        autoClose: 3000,
+      });
     }
   };
 
   return (
-    <div className="min-h-[105vh] flex flex-col items-center justify-between bg-indigo-50 relative overflow-hidden">
+    <div className="min-h-[105vh] flex flex-col items-center justify-between bg-[#eff5ed] relative overflow-hidden">
       {!userDetails ? (
         <div>Loading...</div>
       ) : (

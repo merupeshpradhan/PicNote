@@ -17,7 +17,16 @@ function SignIn() {
     setLoading(true);
 
     // Loading toast
-    const toastId = toast.loading("SignIN for PicNote...");
+    const toastId = toast.loading("SignIN for PicNote...", {
+      style: {
+        fontSize: "14px",
+        marginTop: "40px",
+        padding: "2px 8px",
+        lineHeight: "42px",
+        minHeight: "20px", // ⬅ override default height
+        height: "auto",
+      },
+    });
 
     try {
       // const res = await axios.post(
@@ -60,7 +69,8 @@ function SignIn() {
       if (error.response) {
         // toast.error(err.response.data.message);
         const errorMsg =
-          error.response?.data?.message || "SignIn failed. Something went wrong.";
+          error.response?.data?.message ||
+          "SignIn failed. Something went wrong.";
 
         toast.update(toastId, {
           render: errorMsg,
@@ -76,7 +86,22 @@ function SignIn() {
           },
         });
       } else {
-        toast.error("Something went wrong. Please try again.");
+        const errorMsg = "Something went wrong. Please try again.";
+
+        toast.update(toastId, {
+          render: errorMsg,
+          type: "error",
+          isLoading: false,
+          autoClose: "2000",
+          style: {
+            fontSize: "14px",
+            padding: "2px 8px",
+            lineHeight: "42px",
+            minHeight: "20px", // ⬅ override default height
+            height: "auto",
+          },
+        });
+        // toast.error("Something went wrong. Please try again.");
       }
     } finally {
       setLoading(false);

@@ -3,7 +3,7 @@ import { FaSearch } from "react-icons/fa";
 function SearchBar({ setPostData }) {
   return (
     <div>
-      <div className="border-2 border-[#628f07] flex items-center rounded">
+      <div className="border-2 border-[#85ac85] flex items-center rounded">
         <input
           onChange={(e) => setPostData(e.target.value.toLowerCase())}
           type="text"

@@ -49,23 +49,23 @@ function UserPostImages() {
       {userPosts.map((userPost) => (
         <div
           key={userPost._id}
-          className="lg:w-[280px] flex flex-col items-center bg-indigo-100/90 shadow-md rounded-2xl p-3"
+          className="lg:w-[280px] flex flex-col items-center bg-[#cee7b9] shadow-md rounded-2xl p-3"
         >
           <img
             src={userPost.image}
             onClick={() => navigate(`/postDetail/${userPost._id}`)}
             className="h-[350px] md:h-[200px] object-cover rounded-xl cursor-pointer"
           />
-          <p className="text-xl font-bold mt-2">{userPost.imageName}</p>
+          <p className="text-xl font-bold mt-2 text-[#6f53d3]">{userPost.imageName}</p>
           <div
             onClick={() => navigate(`/postDetail/${userPost._id}`)}
             className="w-full flex flex-col gap-1.5 cursor-pointer"
           >
-            <p className="w-full text-start text-green-600 m-2 underline decoration-wavy underline-offset-4 text-[15px]">
+            <p className="w-full text-start text-[#c5550b] m-2 underline decoration-wavy underline-offset-4 text-[15px]">
               Image Detials :-
             </p>
-            <div className="flex items-center justify-center gap-2 mt-1">
-              <div className="text-gray-700">
+            <div className="flex items-center justify-center gap-2 mt-1 ml-2">
+              <div className="text-[#c5550b]">
                 <FaArrowRight size={15} />
               </div>
               <p className="w-full text-[10px] font-medium truncate tracking-widest">

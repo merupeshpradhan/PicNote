@@ -89,7 +89,7 @@ function Post({ postData }) {
           No image found with this name
         </h2>
       ) : (
-        <div className="w-full flex md:grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-x-5 md:gap-x-5 gap-y-5 md:gap-y-8 p-3.5 md:p-4 2xl:mb-2">
+        <div className="w-full flex md:grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-x-5 md:gap-x-7 gap-y-5 md:gap-y-8 p-3.5 md:p-4 2xl:mb-2">
           {filteredPosts.map((post) => (
             <div
               key={post._id}
@@ -110,7 +110,7 @@ function Post({ postData }) {
                   className="flex flex-col md:flex-row items-center-center justify-between gap-1 mx-auto text-[10px] tracking-wider text-[#8315a5] font-semibold"
                 >
                   Posted by :
-                  <span className="text-red-5 hover:text-red-600 cursor-pointer font-semibold transition duration-200 underline underline-offset-2">
+                  <span className="text-red-5 hover:text-red-600 cursor-pointer font-normal transition duration-200 underline underline-offset-2">
                     {post.user.firstName} {post.user.lastName}
                   </span>
                 </button>

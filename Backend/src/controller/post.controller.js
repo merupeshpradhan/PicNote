@@ -75,7 +75,7 @@ const createPost = asyncHandler(async (req, res) => {
 
   return res
     .status(201)
-    .json(new ApiResponse(201, post, "Post created successfully."));
+    .json(new ApiResponse(201, post, "Post uploaded successfully!"));
 });
 
 // ==================================

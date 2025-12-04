@@ -56,7 +56,16 @@ function Navbar({ setPostData }) {
 
   const handleLogout = (e) => {
     e.preventDefault();
-    const toastId = toast.loading("Logout for PicNote...");
+    const toastId = toast.loading("Logout for PicNote...", {
+      style: {
+        fontSize: "14px",
+        marginTop: "40px",
+        padding: "2px 8px",
+        lineHeight: "42px",
+        minHeight: "20px", // ⬅ override default height
+        height: "auto",
+      },
+    });
 
     api
       .post("/users/logout")
@@ -85,8 +94,9 @@ function Navbar({ setPostData }) {
       })
       .catch((err) => {
         console.log("Logout error:", err);
-        alert("Logout failed. Please try again.");
-        const errorMsg = res.data?.message || "SignIn success";
+        // alert("Logout failed. Please try again.");
+        const errorMsg =
+          err?.response?.data?.message || "Logout failed. Please try again.";
 
         toast.update(toastId, {
           render: errorMsg,
@@ -106,7 +116,7 @@ function Navbar({ setPostData }) {
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-[#f5b9e6] shadow-[#fd52d2] shadow-lg/90 rounded-bl-lg rounded-br-lg py-2.5 md:py-2 lg:py-2.5 px-5 flex justify-between items-center z-50">
+    <nav className="fixed top-0 left-0 w-full bg-[#c4e7b9] shadow-[#899292] shadow-lg/60 rounded-bl-lg rounded-br-lg py-2.5 md:py-2 lg:py-2.5 px-5 flex justify-between items-center z-50">
       <Link to="/">
         <h1 className="text-2xl md:text-4xl lg:text-3xl font-extrabold text-pink-600 tracking-wide cursor-pointer">
           Pic<span className="text-gray-800">Note</span>
