@@ -32,7 +32,16 @@ function PostDetail() {
 
         const post = res.data.data;
         if (!post) {
-          toast.error("Show imge not available");
+          toast.error("Show imge not available", {
+            style: {
+              fontSize: "14px",
+              marginTop: "40px",
+              padding: "2px 8px",
+              lineHeight: "42px",
+              minHeight: "20px",
+              height: "auto",
+            },
+          });
           navigate("/");
           return;
         }
@@ -40,7 +49,16 @@ function PostDetail() {
         setPostDetails(post);
       } catch (error) {
         console.error("Error fetching owner details:", error);
-        toast.error(error.response?.data?.message || "Failed to fetch post");
+        toast.error(error.response?.data?.message || "Failed to fetch post", {
+          style: {
+            fontSize: "14px",
+            marginTop: "40px",
+            padding: "2px 8px",
+            lineHeight: "42px",
+            minHeight: "20px",
+            height: "auto",
+          },
+        });
         navigate("/");
       } finally {
         setLoading(false);
@@ -53,7 +71,16 @@ function PostDetail() {
   const handleUserClick = (post) => {
     const logedInUser = localStorage.getItem("user");
     if (!logedInUser) {
-      toast.error("Please log in first!");
+      toast.error("Please log in first!", {
+        style: {
+          fontSize: "14px",
+          marginTop: "40px",
+          padding: "2px 8px",
+          lineHeight: "42px",
+          minHeight: "20px",
+          height: "auto",
+        },
+      });
       return;
     }
     navigate(`/profile/${post.user._id}`);

@@ -76,6 +76,7 @@ function Navbar({ setPostData }) {
 
         toast.update(toastId, {
           render: successsMsg,
+          closeButton: true,
           type: "success",
           isLoading: false,
           autoClose: "3000",
@@ -100,6 +101,7 @@ function Navbar({ setPostData }) {
 
         toast.update(toastId, {
           render: errorMsg,
+          closeButton: true,
           type: "warning",
           isLoading: false,
           autoClose: "3000",
@@ -118,8 +120,11 @@ function Navbar({ setPostData }) {
   return (
     <nav className="fixed top-0 left-0 w-full bg-[#c4e7b9] shadow-[#899292] shadow-lg/60 rounded-bl-lg rounded-br-lg py-2.5 md:py-2 lg:py-2.5 px-5 flex justify-between items-center z-50">
       <Link to="/">
-        <h1 className="text-2xl md:text-4xl lg:text-3xl font-extrabold text-pink-600 tracking-wide cursor-pointer">
+        {/* <h1 className="text-2xl md:text-4xl lg:text-3xl font-extrabold text-pink-600 tracking-wide cursor-pointer">
           Pic<span className="text-gray-800">Note</span>
+        </h1> */}
+        <h1 className="text-2xl md:text-4xl lg:text-3xl font-extrabold tracking-wide cursor-pointer bg-gradient-to-r from-pink-500 via-purple-500 to-green-700 text-transparent bg-clip-text drop-shadow-md transition-transform duration-300 hover:scale-105">
+          PicNote
         </h1>
       </Link>
       <div className="">

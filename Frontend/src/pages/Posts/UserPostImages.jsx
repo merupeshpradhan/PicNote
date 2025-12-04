@@ -56,17 +56,23 @@ function UserPostImages() {
             onClick={() => navigate(`/postDetail/${userPost._id}`)}
             className="h-[350px] md:h-[200px] object-cover rounded-xl cursor-pointer"
           />
-          <p className="text-xl font-bold mt-2 text-[#6f53d3]">{userPost.imageName}</p>
+          <p className="text-xl font-bold mt-2 text-[#6f53d3]">
+            {userPost.imageName}
+          </p>
           <div
             onClick={() => navigate(`/postDetail/${userPost._id}`)}
             className="w-full flex flex-col gap-1.5 cursor-pointer"
           >
-            <p className="w-full text-start text-[#c5550b] m-2 underline decoration-wavy underline-offset-4 text-[15px]">
-              Image Detials :-
+            <p className="text-[#c5550b] ml-2">
+              <span className="w-full text-start text-[#035310] mr-1 underline decoration-dotted underline-offset-4 text-[15px]">
+                {" "}
+                Image Detials
+              </span>
+              :-
             </p>
-            <div className="flex items-center justify-center gap-2 mt-1 ml-2">
-              <div className="text-[#c5550b]">
-                <FaArrowRight size={15} />
+            <div className="flex items-center justify-center gap-2 mt- ml-2">
+              <div className="text-[#035310]">
+                <FaArrowRight size={13} />
               </div>
               <p className="w-full text-[10px] font-medium truncate tracking-widest">
                 {userPost.description}

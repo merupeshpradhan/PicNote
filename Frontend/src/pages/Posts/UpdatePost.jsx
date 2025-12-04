@@ -4,6 +4,7 @@ import { useLocation, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer";
 import api from "../Api/api";
+import { toast } from "react-toastify";
 
 function UpdatePost() {
   const { postId } = useParams();
@@ -38,7 +39,19 @@ function UpdatePost() {
 
         setPreview(post.image);
       } catch (error) {
-        alert(error.response?.data?.message || "Error fetching post");
+        // alert(error.response?.data?.message || "Error fetching post");
+
+        toast.error(error.response?.data?.message || "Error fetching post", {
+          style: {
+            fontSize: "14px",
+            marginTop: "40px",
+            padding: "2px 8px",
+            lineHeight: "42px",
+            minHeight: "20px",
+            height: "auto",
+          },
+        });
+
         console.error("Error fething post:", error);
       }
     };
@@ -65,6 +78,17 @@ function UpdatePost() {
     data.append("imageName", formData.imageName);
     data.append("description", formData.description);
 
+     const toastId = toast.loading("Update post...", {
+      style: {
+        fontSize: "14px",
+        marginTop: "40px",
+        padding: "2px 8px",
+        lineHeight: "42px",
+        minHeight: "20px", // ⬅ override default height
+        height: "auto",
+      },
+    });
+
     try {
       // const res = await axios.put(
       //   `http://localhost:4000/api/v1/posts/${postId}`,
@@ -76,12 +100,41 @@ function UpdatePost() {
       // );
       const res = await api.put(`/posts/${postId}`, data);
 
+       const successsMsg = res.data?.message || "Post Update success";
+
+      toast.update(toastId, {
+        render: successsMsg,
+        type: "success",
+        isLoading: false,
+        autoClose: 3000,
+        style: {
+          fontSize: "14px",
+          marginTop: "40px",
+          padding: "2px 8px",
+          lineHeight: "42px",
+          minHeight: "20px",
+          height: "auto",
+        },
+      });
+
       const post = res.data.data;
       if (post?.user?._id) {
         navigate(`/userDetials/${post.user._id}`);
       }
     } catch (error) {
-      alert(error.response?.data?.message || "Error updating post");
+      // alert(error.response?.data?.message || "Error updating post");
+
+      toast.error(error.response?.data?.message || "Error updating post", {
+        style: {
+          fontSize: "14px",
+          marginTop: "40px",
+          padding: "2px 8px",
+          lineHeight: "42px",
+          minHeight: "20px",
+          height: "auto",
+        },
+      });
+
       console.error("Error updating post:", error);
     } finally {
       setLoading(false);
@@ -89,7 +142,7 @@ function UpdatePost() {
   };
 
   return (
-    <div className="min-h-screen bg-blue-50 flex flex-col justify-between items-center gap-12 pt-25">
+    <div className="min-h-screen bg-[#edf5f0] flex flex-col justify-between items-center gap-12 pt-25">
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
         <div className="w-full flex justify-center items-center gap-5">
           <div className="Image-input-and-view flex gap-5 items-center ">

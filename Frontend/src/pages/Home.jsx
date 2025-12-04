@@ -36,7 +36,7 @@ function Home({ postData }) {
   };
 
   return (
-    <div className="h-[111vh] bg-[#f5edf3] flex flex-col justify-between min-h-screen relative items-center pt-16 md:pt-16 lg:pt-14 2xl:pt-16">
+    <div className="h-[111vh] bg-[#edf5f0] flex flex-col justify-between min-h-screen relative items-center pt-16 md:pt-16 lg:pt-14 2xl:pt-16">
       <Post postData={postData} />
 
       <button

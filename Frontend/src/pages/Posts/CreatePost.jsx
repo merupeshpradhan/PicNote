@@ -56,7 +56,7 @@ function CreatePost() {
         render: successsMsg,
         type: "success",
         isLoading: false,
-        autoClose: "3000",
+        autoClose: 3000,
         style: {
           fontSize: "14px",
           marginTop: "40px",

@@ -69,7 +69,16 @@ function UserDetials() {
       console.log(error);
 
       if (error.response?.status !== 401) {
-        toast.error("Something went wrong");
+        toast.error("Something went wrong", {
+          style: {
+            fontSize: "14px",
+            marginTop: "40px",
+            padding: "2px 8px",
+            lineHeight: "42px",
+            minHeight: "20px",
+            height: "auto",
+          },
+        });
       }
     }
   };
@@ -93,6 +102,18 @@ function UserDetials() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+
+    const toastId = toast.loading("Saving your profile changes...", {
+      style: {
+        fontSize: "14px",
+        marginTop: "40px",
+        padding: "2px 8px",
+        lineHeight: "42px",
+        minHeight: "20px", // ⬅ override default height
+        height: "auto",
+      },
+    });
+
     try {
       const data = new FormData();
       if (formData.avatar) data.append("avatar", formData.avatar);
@@ -111,10 +132,40 @@ function UserDetials() {
       window.dispatchEvent(new Event("userUpdated"));
 
       setUserDetials(updateUser);
-      toast.success("Profile updated successfully!");
+
+      // toast.success("Profile updated successfully!");
+      const successsMsg = res.data?.message || "Profile updated successfully.";
+
+      toast.update(toastId, {
+        render: successsMsg,
+        type: "success",
+        isLoading: false,
+        autoClose: 2000,
+        style: {
+          fontSize: "14px",
+          marginTop: "40px",
+          padding: "2px 8px",
+          lineHeight: "42px",
+          minHeight: "20px", // ⬅ override default height
+          height: "auto",
+        },
+      });
+
       setEditMode(false);
     } catch (error) {
-      toast.error(error.response?.data?.message || "Update failed");
+      // toast.error(error.response?.data?.message || "Update failed");
+
+      console.log(
+        error.response?.data?.message || "Error creation post",
+        error
+      );
+
+      toast.update(toastId, {
+        render: error.response?.data?.message || "Error updating profile.",
+        type: "error",
+        isLoading: false,
+        autoClose: 3000,
+      });
     } finally {
       setLoading(false);
     }

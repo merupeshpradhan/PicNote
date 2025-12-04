@@ -50,7 +50,7 @@ function SignIn() {
         render: successsMsg,
         type: "success",
         isLoading: false,
-        autoClose: "3000",
+        autoClose: 3000,
         style: {
           fontSize: "14px",
           marginTop: "40px",
@@ -114,8 +114,8 @@ function SignIn() {
         <div className="w-full md:w-1/2 bg-pink-50 flex md:flex-col items-center justify-between p-3 md:p-6">
           {/* Project Name */}
           <div className="text-center mb-6 mt-[17px]">
-            <h1 className="text-2xl md:text-4xl font-extrabold text-pink-600 tracking-wide">
-              Pic<span className="text-gray-800">Note</span>
+            <h1 className="text-2xl lg:text-4xl font-extrabold tracking-wide cursor-pointer bg-gradient-to-r from-pink-500 via-purple-500 to-green-700 text-transparent bg-clip-text drop-shadow-md transition-transform duration-300 hover:scale-105">
+              PicNote
             </h1>
             <p className="text-gray-500 text-sm md:mt-1">
               Capture. Save. Remember.
