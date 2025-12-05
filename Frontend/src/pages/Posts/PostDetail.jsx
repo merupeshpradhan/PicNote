@@ -33,6 +33,7 @@ function PostDetail() {
         const post = res.data.data;
         if (!post) {
           toast.error("Show imge not available", {
+            closeButton: true,
             style: {
               fontSize: "14px",
               marginTop: "40px",
@@ -50,6 +51,7 @@ function PostDetail() {
       } catch (error) {
         console.error("Error fetching owner details:", error);
         toast.error(error.response?.data?.message || "Failed to fetch post", {
+          closeButton: true,
           style: {
             fontSize: "14px",
             marginTop: "40px",

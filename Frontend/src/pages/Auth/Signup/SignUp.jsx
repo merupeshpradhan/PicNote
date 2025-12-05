@@ -27,7 +27,16 @@ function Signup() {
     setLoading(true);
 
     // Loading toast
-    const toastId = toast.loading("SignUp for PicNote...");
+    const toastId = toast.loading("SignUp for PicNote...", {
+      style: {
+        fontSize: "14px",
+        marginTop: "30px",
+        padding: "2px 8px",
+        lineHeight: "42px",
+        minHeight: "20px", // ⬅ override default height
+        height: "auto",
+      },
+    });
 
     try {
       const formData = new FormData();
@@ -57,12 +66,19 @@ function Signup() {
 
       toast.update(toastId, {
         render: successsMsg,
+        closeButton: true,
         type: "success",
         isLoading: false,
-        autoClose: "3000",
-        style: { fontSize: "14px" },
+        autoClose: 3000,
+        style: {
+          fontSize: "14px",
+          marginTop: "40px",
+          padding: "2px 8px",
+          lineHeight: "42px",
+          minHeight: "20px", // ⬅ override default height
+          height: "auto",
+        },
       });
-
       navigate("/signin");
 
       setAvatar("");
@@ -75,14 +91,22 @@ function Signup() {
       if (error.response) {
         // toast.error(error.response.data.message);
         const errorMsg =
-          error.response?.data?.message || "SignUp failed. Something went wrong.";
+          error.response?.data?.message ||
+          "SignUp failed. Something went wrong.";
 
         toast.update(toastId, {
           render: errorMsg,
+          closeButton: true,
           type: "error",
           isLoading: false,
-          autoClose: 2000,
-          style: { fontSize: "13px" },
+          autoClose: "2000",
+          style: {
+            fontSize: "14px",
+            padding: "2px 8px",
+            lineHeight: "42px",
+            minHeight: "20px", // ⬅ override default height
+            height: "auto",
+          },
         });
       } else {
         toast.error("Oops! Something went wrong. Please try again.");

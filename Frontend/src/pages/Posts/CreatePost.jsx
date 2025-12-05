@@ -54,6 +54,7 @@ function CreatePost() {
 
       toast.update(toastId, {
         render: successsMsg,
+        closeButton: true,
         type: "success",
         isLoading: false,
         autoClose: 3000,
@@ -86,6 +87,7 @@ function CreatePost() {
 
       toast.update(toastId, {
         render: error.response?.data?.message || "Error creating post.",
+        closeButton: true,
         type: "error",
         isLoading: false,
         autoClose: 3000,

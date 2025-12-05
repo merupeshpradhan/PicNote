@@ -74,6 +74,7 @@ function SignIn() {
 
         toast.update(toastId, {
           render: errorMsg,
+          closeButton: true,
           type: "error",
           isLoading: false,
           autoClose: "2000",
@@ -90,6 +91,7 @@ function SignIn() {
 
         toast.update(toastId, {
           render: errorMsg,
+          closeButton: true,
           type: "error",
           isLoading: false,
           autoClose: "2000",

@@ -49,6 +49,7 @@ function Post({ postData }) {
     const logedInUser = localStorage.getItem("user");
     if (!logedInUser) {
       toast.error("Please log in first!", {
+        closeButton: true,
         style: {
           fontSize: "14px",
           marginTop: "40px",
@@ -120,7 +121,7 @@ function Post({ postData }) {
                 >
                   Posted by :
                   <span className="text-red-5 hover:text-red-600 cursor-pointer font-normal transition duration-200 underline underline-offset-2">
-                    {post.user.firstName} {post.user.lastName}
+                    {post.user?.firstName || "Unknown User"}
                   </span>
                 </button>
               </div>

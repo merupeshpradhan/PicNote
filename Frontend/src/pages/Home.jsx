@@ -15,9 +15,10 @@ function Home({ postData }) {
     } else {
       const toastId = toast.loading("Please Login first");
       const errorMsg = "Please Login first";
-      
+
       toast.update(toastId, {
         render: errorMsg,
+        closeButton: true,
         type: "warning",
         isLoading: false,
         autoClose: "3000",

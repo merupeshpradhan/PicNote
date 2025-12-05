@@ -178,6 +178,7 @@ function UserDetials() {
 
     // Loading toast
     const toastId = toast.loading("Deleting image...", {
+      closeButton: true,
       style: {
         fontSize: "14px",
         marginTop: "40px",
@@ -201,6 +202,7 @@ function UserDetials() {
 
       toast.update(toastId, {
         render: successsMsg,
+        closeButton: true,
         type: "success",
         isLoading: false,
         autoClose: "3000",
@@ -225,6 +227,7 @@ function UserDetials() {
 
       toast.update(toastId, {
         render: errorMsg,
+        closeButton: true,
         type: "error",
         isLoading: false,
         autoClose: 3000,
@@ -335,8 +338,9 @@ function UserDetials() {
                 <img
                   src={userDetails.avatar}
                   alt="user avatar"
-                  className="w-[80%] md:w-[23vw] md:h-[50vh] border-4 border-green-500 rounded-xl"
+                  className="w-[80%] md:w-[20vw] md:h-[50vh] border-4 border-green-500 rounded-xl"
                 />
+
                 <div className="flex flex-col items-center justify-center w-[20vw] cursor-default">
                   <h1 className="text-2xl font-bold mt-2">
                     {userDetails.firstName} {userDetails.lastName}

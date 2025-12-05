@@ -42,6 +42,7 @@ function UpdatePost() {
         // alert(error.response?.data?.message || "Error fetching post");
 
         toast.error(error.response?.data?.message || "Error fetching post", {
+          closeButton: true,
           style: {
             fontSize: "14px",
             marginTop: "40px",
@@ -78,7 +79,8 @@ function UpdatePost() {
     data.append("imageName", formData.imageName);
     data.append("description", formData.description);
 
-     const toastId = toast.loading("Update post...", {
+    const toastId = toast.loading("Update post...", {
+      closeButton: true,
       style: {
         fontSize: "14px",
         marginTop: "40px",
@@ -100,10 +102,11 @@ function UpdatePost() {
       // );
       const res = await api.put(`/posts/${postId}`, data);
 
-       const successsMsg = res.data?.message || "Post Update success";
+      const successsMsg = res.data?.message || "Post Update success";
 
       toast.update(toastId, {
         render: successsMsg,
+        closeButton: true,
         type: "success",
         isLoading: false,
         autoClose: 3000,
@@ -125,6 +128,7 @@ function UpdatePost() {
       // alert(error.response?.data?.message || "Error updating post");
 
       toast.error(error.response?.data?.message || "Error updating post", {
+        closeButton: true,
         style: {
           fontSize: "14px",
           marginTop: "40px",
