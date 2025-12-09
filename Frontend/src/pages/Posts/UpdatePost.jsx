@@ -155,7 +155,7 @@ function UpdatePost() {
                 <img
                   src={preview}
                   alt="Image preview"
-                  className="w-full max-h-[350px] object-cover"
+                  className="w-full object-cover"
                 />
               )}
             </div>

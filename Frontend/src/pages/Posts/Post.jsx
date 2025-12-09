@@ -37,12 +37,6 @@ function Post({ postData }) {
 
     // FIRST FETCH
     fetchPost();
-
-    // AUTO REFRESH every 15 minutes (900000ms)
-    const interval = setInterval(fetchPost, 900000);
-
-    // clean interval on unmount
-    return () => clearInterval(interval);
   }, []);
 
   const handleUserClick = (post) => {
@@ -103,7 +97,7 @@ function Post({ postData }) {
           {filteredPosts.map((post) => (
             <div
               key={post._id}
-              className="w-[170px] lg:w-[220px] flex items-center flex-col gap-2 bg-[#daebd5] shadow-md/30 shadow-indigo-700/90 rounded-xl p-3 hover:scale-105 ease-in-out duration-300"
+              className="w-[170px] lg:w-[220px] flex items-center flex-col gap-2 bg-[#daebd5] shadow-lg/60 shadow-[#b7c74e] rounded-xl p-3 hover:scale-105 ease-in-out duration-300"
             >
               <img
                 src={post.image}

@@ -49,7 +49,7 @@ function UserPostImages() {
       {userPosts.map((userPost) => (
         <div
           key={userPost._id}
-          className="lg:w-[280px] flex flex-col items-center bg-[#cee7b9] shadow-md rounded-2xl p-3"
+          className="lg:w-[280px] flex flex-col items-center bg-[#cee7b9] shadow-lg/60 shadow-[#7ac095] rounded-2xl p-3"
         >
           <img
             src={userPost.image}

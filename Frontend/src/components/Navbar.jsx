@@ -123,7 +123,7 @@ function Navbar({ setPostData }) {
         {/* <h1 className="text-2xl md:text-4xl lg:text-3xl font-extrabold text-pink-600 tracking-wide cursor-pointer">
           Pic<span className="text-gray-800">Note</span>
         </h1> */}
-        <h1 className="text-2xl md:text-4xl lg:text-3xl font-extrabold tracking-wide cursor-pointer bg-gradient-to-r from-pink-500 via-purple-500 to-green-700 text-transparent bg-clip-text drop-shadow-md transition-transform duration-300 hover:scale-105">
+        <h1 className="text-2xl md:text-4xl lg:text-3xl font-extrabold tracking-wide cursor-pointer bg-gradient-to-r from-pink-500 via-purple-500 to-green-700 text-transparent bg-clip-text drop-shadow-md transition-transform duration-300 scale-105">
           PicNote
         </h1>
       </Link>

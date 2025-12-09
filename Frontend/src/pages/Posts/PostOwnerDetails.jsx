@@ -51,7 +51,7 @@ function PostOwnerDetails() {
         <div className="flex flex-col gap-1">
           <h1>
             <span className="text-[#035310]"> Name :-</span>{" "}
-            <span className="md:text-2xl lg:text-xl text-[#0fac29] font-bold tracking-wider">
+            <span className="text-[#0fac29] font-bold tracking-wider">
               {ownerDetails.firstName} {ownerDetails.lastName}
             </span>
           </h1>
