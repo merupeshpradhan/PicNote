@@ -34,14 +34,6 @@ function PostDetail() {
         if (!post) {
           toast.error("Show imge not available", {
             closeButton: true,
-            style: {
-              fontSize: "14px",
-              marginTop: "40px",
-              padding: "2px 8px",
-              lineHeight: "42px",
-              minHeight: "20px",
-              height: "auto",
-            },
           });
           navigate("/");
           return;
@@ -52,14 +44,6 @@ function PostDetail() {
         console.error("Error fetching owner details:", error);
         toast.error(error.response?.data?.message || "Failed to fetch post", {
           closeButton: true,
-          style: {
-            fontSize: "14px",
-            marginTop: "40px",
-            padding: "2px 8px",
-            lineHeight: "42px",
-            minHeight: "20px",
-            height: "auto",
-          },
         });
         navigate("/");
       } finally {

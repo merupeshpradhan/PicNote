@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 // import axios from "axios";
-// import Footer from "../../components/Footer";
+import Footer from "../../components/Footer";
 import { toast } from "react-toastify";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import api from "../Api/api";
@@ -69,16 +69,7 @@ function UserDetials() {
       console.log(error);
 
       if (error.response?.status !== 401) {
-        toast.error("Something went wrong", {
-          style: {
-            fontSize: "14px",
-            marginTop: "40px",
-            padding: "2px 8px",
-            lineHeight: "42px",
-            minHeight: "20px",
-            height: "auto",
-          },
-        });
+        toast.error("Something went wrong", {});
       }
     }
   };
@@ -103,16 +94,7 @@ function UserDetials() {
     e.preventDefault();
     setLoading(true);
 
-    const toastId = toast.loading("Saving your profile changes...", {
-      style: {
-        fontSize: "14px",
-        marginTop: "40px",
-        padding: "2px 8px",
-        lineHeight: "42px",
-        minHeight: "20px", // ⬅ override default height
-        height: "auto",
-      },
-    });
+    const toastId = toast.loading("Saving your profile changes...");
 
     try {
       const data = new FormData();
@@ -141,14 +123,6 @@ function UserDetials() {
         type: "success",
         isLoading: false,
         autoClose: 2000,
-        style: {
-          fontSize: "14px",
-          marginTop: "40px",
-          padding: "2px 8px",
-          lineHeight: "42px",
-          minHeight: "20px", // ⬅ override default height
-          height: "auto",
-        },
       });
 
       setEditMode(false);
@@ -179,14 +153,6 @@ function UserDetials() {
     // Loading toast
     const toastId = toast.loading("Deleting image...", {
       closeButton: true,
-      style: {
-        fontSize: "14px",
-        marginTop: "40px",
-        padding: "2px 8px",
-        lineHeight: "42px",
-        minHeight: "20px", // ⬅ override default height
-        height: "auto",
-      },
     });
     try {
       // await axios.delete(`http://localhost:4000/api/v1/posts/${postId}`, {
@@ -206,14 +172,6 @@ function UserDetials() {
         type: "success",
         isLoading: false,
         autoClose: "3000",
-        style: {
-          fontSize: "14px",
-          marginTop: "40px",
-          padding: "2px 8px",
-          lineHeight: "42px",
-          minHeight: "20px", // ⬅ override default height
-          height: "auto",
-        },
       });
 
       // remove deleted post from the state
@@ -236,7 +194,7 @@ function UserDetials() {
   };
 
   return (
-    <div className="min-h-[105vh] flex flex-col items-center justify-between bg-[#eff5ed] relative overflow-hidden">
+    <div className="min-h-[110vh] flex flex-col items-center justify-between bg-[#eff5ed] relative overflow-hidden">
       {!userDetails ? (
         <div>Loading...</div>
       ) : (
@@ -423,7 +381,7 @@ function UserDetials() {
         </div>
       )}
 
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }

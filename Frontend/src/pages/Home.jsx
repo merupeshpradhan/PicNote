@@ -22,15 +22,6 @@ function Home({ postData }) {
         type: "warning",
         isLoading: false,
         autoClose: "3000",
-        style: {
-          fontSize: "14px",
-          marginRight: "600px",
-          marginTop: "-10px",
-          padding: "2px 8px",
-          lineHeight: "42px",
-          minHeight: "20px", // ⬅ override default height
-          height: "auto",
-        },
       });
       navigate("/signin");
     }

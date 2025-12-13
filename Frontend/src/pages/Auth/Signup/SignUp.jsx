@@ -27,16 +27,7 @@ function Signup() {
     setLoading(true);
 
     // Loading toast
-    const toastId = toast.loading("SignUp for PicNote...", {
-      style: {
-        fontSize: "14px",
-        marginTop: "30px",
-        padding: "2px 8px",
-        lineHeight: "42px",
-        minHeight: "20px", // ⬅ override default height
-        height: "auto",
-      },
-    });
+    const toastId = toast.loading("SignUp for PicNote...");
 
     try {
       const formData = new FormData();
@@ -70,14 +61,6 @@ function Signup() {
         type: "success",
         isLoading: false,
         autoClose: 3000,
-        style: {
-          fontSize: "14px",
-          marginTop: "40px",
-          padding: "2px 8px",
-          lineHeight: "42px",
-          minHeight: "20px", // ⬅ override default height
-          height: "auto",
-        },
       });
       navigate("/signin");
 
@@ -100,13 +83,6 @@ function Signup() {
           type: "error",
           isLoading: false,
           autoClose: "2000",
-          style: {
-            fontSize: "14px",
-            padding: "2px 8px",
-            lineHeight: "42px",
-            minHeight: "20px", // ⬅ override default height
-            height: "auto",
-          },
         });
       } else {
         toast.error("Oops! Something went wrong. Please try again.");

@@ -43,14 +43,6 @@ function UpdatePost() {
 
         toast.error(error.response?.data?.message || "Error fetching post", {
           closeButton: true,
-          style: {
-            fontSize: "14px",
-            marginTop: "40px",
-            padding: "2px 8px",
-            lineHeight: "42px",
-            minHeight: "20px",
-            height: "auto",
-          },
         });
 
         console.error("Error fething post:", error);
@@ -81,14 +73,6 @@ function UpdatePost() {
 
     const toastId = toast.loading("Update post...", {
       closeButton: true,
-      style: {
-        fontSize: "14px",
-        marginTop: "40px",
-        padding: "2px 8px",
-        lineHeight: "42px",
-        minHeight: "20px", // ⬅ override default height
-        height: "auto",
-      },
     });
 
     try {
@@ -110,14 +94,6 @@ function UpdatePost() {
         type: "success",
         isLoading: false,
         autoClose: 3000,
-        style: {
-          fontSize: "14px",
-          marginTop: "40px",
-          padding: "2px 8px",
-          lineHeight: "42px",
-          minHeight: "20px",
-          height: "auto",
-        },
       });
 
       const post = res.data.data;
@@ -129,14 +105,6 @@ function UpdatePost() {
 
       toast.error(error.response?.data?.message || "Error updating post", {
         closeButton: true,
-        style: {
-          fontSize: "14px",
-          marginTop: "40px",
-          padding: "2px 8px",
-          lineHeight: "42px",
-          minHeight: "20px",
-          height: "auto",
-        },
       });
 
       console.error("Error updating post:", error);

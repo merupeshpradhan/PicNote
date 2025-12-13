@@ -25,11 +25,8 @@ function App() {
         <Route path="/" element={<Home postData={postData} />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<SignIn />} />
-        <Route path="/post" element={<Post postData={postData} />} />
-        <Route
-          path="/userDetials/:userId"
-          element={<UserDetials postData={postData} />}
-        />
+        <Route path="/post" element={<Post />} />
+        <Route path="/userDetials/:userId" element={<UserDetials />} />
         <Route path="/createPost/:userId" element={<CreatePost />} />
         <Route path="/profile/:userId" element={<UserProfile />} />
         <Route path="/postDetail/:postId" element={<PostDetail />} />

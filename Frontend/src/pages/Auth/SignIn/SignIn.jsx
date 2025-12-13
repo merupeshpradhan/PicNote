@@ -17,16 +17,7 @@ function SignIn() {
     setLoading(true);
 
     // Loading toast
-    const toastId = toast.loading("SignIN for PicNote...", {
-      style: {
-        fontSize: "14px",
-        marginTop: "40px",
-        padding: "2px 8px",
-        lineHeight: "42px",
-        minHeight: "20px", // ⬅ override default height
-        height: "auto",
-      },
-    });
+    const toastId = toast.loading("SignIN for PicNote...");
 
     try {
       // const res = await axios.post(
@@ -51,14 +42,6 @@ function SignIn() {
         type: "success",
         isLoading: false,
         autoClose: 3000,
-        style: {
-          fontSize: "14px",
-          marginTop: "40px",
-          padding: "2px 8px",
-          lineHeight: "42px",
-          minHeight: "20px", // ⬅ override default height
-          height: "auto",
-        },
       });
 
       navigate("/"); // redirect to home or dashboard
@@ -78,13 +61,6 @@ function SignIn() {
           type: "error",
           isLoading: false,
           autoClose: "2000",
-          style: {
-            fontSize: "14px",
-            padding: "2px 8px",
-            lineHeight: "42px",
-            minHeight: "20px", // ⬅ override default height
-            height: "auto",
-          },
         });
       } else {
         const errorMsg = "Something went wrong. Please try again.";
@@ -95,13 +71,6 @@ function SignIn() {
           type: "error",
           isLoading: false,
           autoClose: "2000",
-          style: {
-            fontSize: "14px",
-            padding: "2px 8px",
-            lineHeight: "42px",
-            minHeight: "20px", // ⬅ override default height
-            height: "auto",
-          },
         });
         // toast.error("Something went wrong. Please try again.");
       }

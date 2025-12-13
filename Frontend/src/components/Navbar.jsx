@@ -56,16 +56,7 @@ function Navbar({ setPostData }) {
 
   const handleLogout = (e) => {
     e.preventDefault();
-    const toastId = toast.loading("Logout for PicNote...", {
-      style: {
-        fontSize: "14px",
-        marginTop: "40px",
-        padding: "2px 8px",
-        lineHeight: "42px",
-        minHeight: "20px", // ⬅ override default height
-        height: "auto",
-      },
-    });
+    const toastId = toast.loading("Logout for PicNote...");
 
     api
       .post("/users/logout")
@@ -80,14 +71,6 @@ function Navbar({ setPostData }) {
           type: "success",
           isLoading: false,
           autoClose: "3000",
-          style: {
-            fontSize: "14px",
-            marginTop: "40px",
-            padding: "2px 8px",
-            lineHeight: "42px",
-            minHeight: "20px", // ⬅ override default height
-            height: "auto",
-          },
         });
 
         setUser(null);
@@ -105,14 +88,6 @@ function Navbar({ setPostData }) {
           type: "warning",
           isLoading: false,
           autoClose: "3000",
-          style: {
-            fontSize: "14px",
-            marginTop: "40px",
-            padding: "2px 8px",
-            lineHeight: "42px",
-            minHeight: "20px", // ⬅ override default height
-            height: "auto",
-          },
         });
       });
   };

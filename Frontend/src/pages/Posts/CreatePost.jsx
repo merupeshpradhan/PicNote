@@ -18,16 +18,7 @@ function CreatePost() {
     e.preventDefault();
     setLoading(true);
 
-    const toastId = toast.loading("Publishing your post.........", {
-      style: {
-        fontSize: "14px",
-        marginTop: "40px",
-        padding: "2px 8px",
-        lineHeight: "42px",
-        minHeight: "20px", // ⬅ override default height
-        height: "auto",
-      },
-    });
+    const toastId = toast.loading("Publishing your post.........");
     try {
       const formData = new FormData();
       formData.append("image", image);
@@ -58,14 +49,6 @@ function CreatePost() {
         type: "success",
         isLoading: false,
         autoClose: 3000,
-        style: {
-          fontSize: "14px",
-          marginTop: "40px",
-          padding: "2px 8px",
-          lineHeight: "42px",
-          minHeight: "20px", // ⬅ override default height
-          height: "auto",
-        },
       });
 
       navigate("/");

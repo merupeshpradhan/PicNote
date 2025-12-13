@@ -44,14 +44,6 @@ function Post({ postData }) {
     if (!logedInUser) {
       toast.error("Please log in first!", {
         closeButton: true,
-        style: {
-          fontSize: "14px",
-          marginTop: "40px",
-          padding: "2px 8px",
-          lineHeight: "42px",
-          minHeight: "20px",
-          height: "auto",
-        },
       });
       return;
     }
