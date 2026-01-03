@@ -10,6 +10,7 @@ import Post from "./pages/Posts/Post";
 import CreatePost from "./pages/Posts/CreatePost";
 import UpdatePost from "./pages/Posts/UpdatePost";
 import PostDetail from "./pages/Posts/PostDetail";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   const location = useLocation();
@@ -20,7 +21,10 @@ function App() {
   const hideLayout = ["/signin", "/signup"].includes(location.pathname);
   return (
     <div className="">
+      <ScrollToTop />
+
       {!hideLayout && <Navbar setPostData={setPostData} />}
+
       <Routes>
         <Route path="/" element={<Home postData={postData} />} />
         <Route path="/signup" element={<Signup />} />
