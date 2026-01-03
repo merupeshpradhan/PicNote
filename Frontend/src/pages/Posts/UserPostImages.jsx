@@ -1,8 +1,7 @@
 // import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { data, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { FaArrowRight } from "react-icons/fa6";
 import api from "../Api/api";
 // import api from "../../utils/axiosInstance";
 
@@ -20,6 +19,16 @@ function UserPostImages() {
       //   { withCredentials: true }
       // );
       const res = await api.get(`/posts/user/${userId}`);
+
+      if (res.data.data) {
+        // Sort latest post first
+        const sorted = res.data.data.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        );
+        setUserPosts(sorted);
+      } else {
+        setUserPosts([]);
+      }
 
       setUserPosts(res.data.data);
       console.log(res.data.data);
@@ -70,10 +79,7 @@ function UserPostImages() {
               </span>
               :-
             </p>
-            <div className="flex items-center justify-center gap-2 mt- ml-2">
-              <div className="text-[#035310]">
-                <FaArrowRight size={13} />
-              </div>
+            <div className="flex items-center justify-center gap-2">
               <p className="w-full text-[10px] font-medium truncate tracking-widest">
                 {userPost.description}
               </p>

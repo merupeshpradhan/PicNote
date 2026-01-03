@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import SignIn from "./pages/Auth/SignIn/SignIn";
 import Signup from "./pages/Auth/Signup/Signup";
 import Navbar from "./components/Navbar";
-import UserProfile from "./pages/UserProfile";
+import OwnerProfile from "./pages/OwnerProfile";
 import UserDetials from "./pages/Users/UserDetials";
 import Post from "./pages/Posts/Post";
 import CreatePost from "./pages/Posts/CreatePost";
@@ -32,7 +32,7 @@ function App() {
         <Route path="/post" element={<Post />} />
         <Route path="/userDetials/:userId" element={<UserDetials />} />
         <Route path="/createPost/:userId" element={<CreatePost />} />
-        <Route path="/profile/:userId" element={<UserProfile />} />
+        <Route path="/profile/:userId" element={<OwnerProfile />} />
         <Route path="/postDetail/:postId" element={<PostDetail />} />
         <Route path="/update/:postId" element={<UpdatePost />} />
       </Routes>

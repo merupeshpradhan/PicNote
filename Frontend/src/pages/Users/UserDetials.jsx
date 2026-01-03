@@ -4,6 +4,7 @@ import Footer from "../../components/Footer";
 import { toast } from "react-toastify";
 import { data, NavLink, useNavigate, useParams } from "react-router-dom";
 import api from "../Api/api";
+import { FaSpinner } from "react-icons/fa";
 
 function UserDetials() {
   const { userId } = useParams(); // get userId from URL
@@ -11,7 +12,7 @@ function UserDetials() {
   const [userImages, setUserImages] = useState([]);
   const [editMode, setEditMode] = useState(false);
   const [previewAvatar, setPreviewAvatar] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   // console.log(userId);
@@ -81,6 +82,8 @@ function UserDetials() {
       if (error.response?.status !== 401) {
         toast.error("Something went wrong", {});
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -202,6 +205,15 @@ function UserDetials() {
       });
     }
   };
+
+  // Loading
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <FaSpinner className="lg:text-4xl text-red-500 animate-spin" />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-[110vh] flex flex-col items-center justify-between bg-[#eff5ed] relative overflow-hidden">
