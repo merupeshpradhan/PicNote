@@ -40,9 +40,9 @@ function Post({ postData }) {
   }, []);
 
   const handleUserClick = (post) => {
-    const logedInUser = localStorage.getItem("user");
-    if (!logedInUser) {
-      toast.error("Please log in first!", {
+    const signInInUser = localStorage.getItem("user");
+    if (!signInInUser) {
+      toast.error("Please signIn first!", {
         closeButton: true,
       });
       return;

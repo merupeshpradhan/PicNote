@@ -57,16 +57,7 @@ function PostDetail() {
   const handleUserClick = (post) => {
     const logedInUser = localStorage.getItem("user");
     if (!logedInUser) {
-      toast.error("Please log in first!", {
-        style: {
-          fontSize: "14px",
-          marginTop: "40px",
-          padding: "2px 8px",
-          lineHeight: "42px",
-          minHeight: "20px",
-          height: "auto",
-        },
-      });
+      toast.error("Please signIn first!");
       return;
     }
     navigate(`/profile/${post.user._id}`);

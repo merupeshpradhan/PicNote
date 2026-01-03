@@ -13,8 +13,8 @@ function Home({ postData }) {
       const parsedUser = JSON.parse(user);
       navigate(`/createPost/${parsedUser._id || parsedUser.id}`);
     } else {
-      const toastId = toast.loading("Please Login first");
-      const errorMsg = "Please Login first";
+      const toastId = toast.loading("Please SignIn first");
+      const errorMsg = "Please SignIn first";
 
       toast.update(toastId, {
         render: errorMsg,
