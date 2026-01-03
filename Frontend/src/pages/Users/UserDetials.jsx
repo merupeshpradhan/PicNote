@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 // import axios from "axios";
 import Footer from "../../components/Footer";
 import { toast } from "react-toastify";
-import { NavLink, useNavigate, useParams } from "react-router-dom";
+import { data, NavLink, useNavigate, useParams } from "react-router-dom";
 import api from "../Api/api";
 
 function UserDetials() {
@@ -62,9 +62,19 @@ function UserDetials() {
       //   `http://localhost:4000/api/v1/posts/user/${userId}`,
       //   { withCredentials: true }
       // );
+
       const res = await api.get(`/posts/user/${userId}`);
       console.log("User Image's :- ", res);
-      setUserImages(res.data.data);
+
+      if (res.data.data) {
+        // Sort latest post first
+        const sorted = res.data.data.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        );
+        setUserImages(sorted);
+      } else {
+        setUserImages([]);
+      }
     } catch (error) {
       console.log(error);
 
