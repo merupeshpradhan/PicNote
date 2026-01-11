@@ -93,12 +93,12 @@ function Navbar({ setPostData }) {
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-[#c4e7b9] shadow-[#899292] shadow-lg/60 rounded-bl-lg rounded-br-lg py-2.5 md:py-2 lg:py-2.5 px-5 flex justify-between items-center z-50">
+    <nav className="fixed top-0 left-0 w-full bg-[#c4e7b9] shadow-[#899292] shadow-lg/60 rounded-bl-lg rounded-br-lg py-2.5 md:py-2 lg:py-2.5 px-2 md:px-4 lg:px-5 flex justify-between items-center z-50">
       <Link to="/">
         {/* <h1 className="text-2xl md:text-4xl lg:text-3xl font-extrabold text-pink-600 tracking-wide cursor-pointer">
           Pic<span className="text-gray-800">Note</span>
         </h1> */}
-        <h1 className="text-2xl md:text-4xl lg:text-3xl font-extrabold tracking-wide cursor-pointer bg-gradient-to-r from-pink-500 via-purple-500 to-green-700 text-transparent bg-clip-text drop-shadow-md transition-transform duration-300 scale-105">
+        <h1 className="text-lg md:text-2xl lg:text-3xl font-extrabold tracking-wide cursor-pointer bg-gradient-to-r from-pink-500 via-purple-500 to-green-700 text-transparent bg-clip-text drop-shadow-md transition-transform duration-300 scale-105">
           PicNote
         </h1>
       </Link>
@@ -109,10 +109,10 @@ function Navbar({ setPostData }) {
         <ul className="flex gap-5">
           {!user ? (
             <div className="login-register flex gap-3 md:gap-5 justify-center items-center">
-              <li className="flex items-center bg-green-600 hover:bg-green-700 py-1 px-2.5 lg:py-1 lg:px-4 rounded-md text-md md:font-semibold tracking-wider text-white transition duration-200 cursor-pointer">
+              <li className="flex items-center bg-green-600 hover:bg-green-700 px-1.5 lg:px-4 py-0.5 md:py-1 lg:py-1 rounded-md md:text-base lg:text-md md:font-semibold tracking-wider text-white transition duration-200 cursor-pointer">
                 <Link to={"/signin"}>SignIn</Link>
               </li>
-              <li className="bg-red-600 hover:bg-red-700  py-1 px-2.5 lg:py-1 rounded-md text-md md:font-semibold tracking-wider text-white transition duration-200 cursor-pointer">
+              <li className="bg-red-600 hover:bg-red-700 hidden md:block  py-1 px-2.5 lg:py-1 rounded-md  md:text-base lg:text-md text-md md:font-semibold tracking-wider text-white transition duration-200 cursor-pointer">
                 <Link to={"/signup"}>SignUp</Link>
               </li>
             </div>
