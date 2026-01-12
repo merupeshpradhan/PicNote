@@ -118,7 +118,7 @@ function Navbar({ setPostData }) {
             </div>
           ) : (
             <div className="uerImg-and-name-and-logout flex gap-5 justify-center items-center">
-              <div className="flex justify-center items-center gap-3 md:gap-5">
+              <div className="flex justify-center items-center gap-3 md:gap-4">
                 <div className="flex justify-center items-center gap-2">
                   <span className="font-semibold hidden md:block text-green-800 cursor-context-menu">
                     Wellcome {user.firstName}😻

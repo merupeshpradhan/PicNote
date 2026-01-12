@@ -72,28 +72,27 @@ function PostDetail() {
   }
 
   return (
-    <div className="w-full bg-[#eff7ed] lg:pt-[90px] flex flex-col items-center justify-between">
-      <div className="w-full flex  items-center justify-around gap-5 mb-10 lg:px-7">
-        <div className="w-full flex items-center justify-center">
+    <div className="w-full bg-[#eff7ed] pt-[90px] flex flex-col items-center justify-between">
+      <div className="w-full flex flex-col lg:flex-row  items-center justify-around gap-5 mb-10 lg:px-7">
+        <div className="w-full flex items-center justify-center px-5">
           <img
             src={postDetails.image}
             alt={postDetails.imageName}
-            className="h-[70vh] rounded-2xl shadow-lg/40 "
+            className="lg:h-[70vh] rounded-2xl shadow-lg/40"
           />
         </div>
-        <div className="w-full h-[85vh] flex flex-col gap-6 border-2 border-[#55ff6c] rounded-2xl pl-4 pr-1 py-1">
-          <h1 className="text-5xl font-semibold text-[#33bd45] text-center italic tracking-wider underline underline-offset-8">
+        <div className="w-[370px] md:w-[95%] lg:w-full md:h-[63.5vh] lg:h-[85vh] flex flex-col gap-6 border-2 border-[#55ff6c] rounded-2xl px-2 lg:pl-4 lg:pr-1 lg:py-1 mt-4 lg:mt-7">
+          <h1 className="lg:text-5xl font-semibold text-[#33bd45] text-center italic tracking-wider underline underline-offset-8 mt-2">
             {postDetails.imageName}
           </h1>
           <div
-            className="h-[73vh] flex flex-col items-center gap-3 overflow-y-auto 
-          "
+            className="h-[73vh] flex flex-col items-center gap-3 overflow-y-auto"
           >
-            <p className="text-base leading-7 tracking-wider whitespace-pre-line">
+            <p className="text-[12px] md:text-base lg:leading-7 tracking-wider whitespace-pre-line">
               {" "}
               {postDetails.description}
             </p>
-            <div className="flex flex-col gap-1 items-center text-[15px] tracking-wider text-fuchsia-900 text-lg font-semibold">
+            <div className="flex flex-col gap-1 items-center text-[12px] md:text-[14px] lg:text-[15px] tracking-wider text-fuchsia-900 text-lg font-semibold">
               <p>
                 Uploaded on :-{" "}
                 {new Date(postDetails.createdAt).toLocaleDateString("en-GB", {

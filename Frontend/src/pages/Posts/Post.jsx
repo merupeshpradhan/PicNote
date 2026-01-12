@@ -85,28 +85,28 @@ function Post({ postData }) {
           No image found with this name
         </h2>
       ) : (
-        <div className="w-full flex md:grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-x-5 md:gap-x-7 gap-y-5 md:gap-y-8 p-3.5 md:p-4 2xl:mb-2">
+        <div className="w-full grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 2xl:grid-cols-6 gap-x-5 md:gap-x-6 gap-y-5 md:gap-y-8 p-3.5 md:p-4 2xl:mb-2">
           {filteredPosts.map((post) => (
             <div
               key={post._id}
-              className="w-[170px] lg:w-[220px] flex items-center flex-col gap-2 bg-[#daebd5] shadow-lg/60 shadow-[#b7c74e] rounded-xl p-3 hover:scale-105 ease-in-out duration-300"
+              className="w-[100px] md:w-[178px] lg:w-[220px] flex items-center flex-col gap-1 md:gap-2 bg-[#daebd5] shadow-lg/60 shadow-[#b7c74e] rounded-xl p-1.5 md:p-3 hover:scale-105 ease-in-out duration-300"
             >
               <img
                 src={post.image}
                 alt={post.imageName}
-                className="h-32  object-cover rounded-xl cursor-pointer"
+                className="h-16 md:h-24 lg:h-32 object-cover rounded-xl cursor-pointer"
                 onClick={() => navigate(`/postDetail/${post._id}`)}
               />
               <div className="text-center w-full">
-                <p className="text-sm md:text-md font-bold mt-1 mb-1.5 text-[#6f53d3] tracking-wider">
+                <p className="text-[10px] md:text-[16px] font-normal md:font-bold mt-0 md:mt-0.5 lg:mt-1 mb-1 text-[#6f53d3] tracking-wider">
                   {post.imageName}
                 </p>
                 <button
                   onClick={() => handleUserClick(post)}
-                  className="flex flex-col md:flex-row items-center-center justify-between gap-1 mx-auto text-[10px] tracking-wider text-[#8315a5] font-semibold"
+                  className="flex flex-row md:flex-row items-center-center justify-between gap-1 mx-auto text-[8px] md:text-[11px] lg:text-[11px] tracking-wider text-[#8315a5] sm:font-normal md:font-medium"
                 >
                   Posted by :
-                  <span className="text-red-5 hover:text-red-600 cursor-pointer font-normal transition duration-200 underline underline-offset-2">
+                  <span className="text-red-5 hover:text-red-600 cursor-pointer sm:font-normal md:font-semibold transition duration-200 underline underline-offset-2">
                     {post.user?.firstName || "Unknown User"}
                   </span>
                 </button>
