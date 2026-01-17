@@ -82,11 +82,11 @@ function CreatePost() {
   };
 
   return (
-    <div className="bg-[#eff7ed] h-[100vh] flex flex-col justify-between items-center gap-12 pt-25">
+    <div className="min-h-[111vh] bg-[#eff7ed] flex flex-col justify-between items-center gap-12 pt-20 md:pt-32">
       <form onSubmit={handlePostCreation} className="flex flex-col gap-5">
-        <div className="flex justify-center items-center gap-5">
-          <div className="Image-input-and-view flex gap-5 items-center ">
-            <div className="image-view w-[40vw] h-[23vh] md:h-[70vh] rounded-md border border-[#58530b] flex justify-center items-center overflow-hidden">
+        <div className="flex flex-col lg:flex-row justify-center items-center gap-5">
+          <div className="Image-input-and-view flex gap-5 justify-center items-center ">
+            <div className="image-view w-[90vw] h-[40vh] md:w-[90vw] md:h-[50vh] lg:w-[40vw] lg:h-[67vh] rounded-md border border-[#58530b] flex justify-center items-center overflow-hidden">
               {ImagePreview ? (
                 <div className="post-image-preview">
                   <img
@@ -108,7 +108,7 @@ function CreatePost() {
                 <button
                   type="button"
                   onClick={() => document.getElementById("fileInput").click()}
-                  className="bg-blue-500 hover:bg-blue-600 rounded-full py-2 md:p-2 transition duration-200 text-[15px] w-[28vw] md:w-[9vw] font-medium md:font-semibold text-white cursor-pointer"
+                  className="bg-blue-500 hover:bg-blue-600 rounded-full py-1.5 md:p-2 transition duration-200 text-[15px] mt-3 mb-3 md:mt-0 w-[35vw] md:w-[20vw] font-medium md:font-semibold text-white cursor-pointer"
                 >
                   {image ? "Change image" : "Chose image"}
                 </button>
@@ -134,14 +134,14 @@ function CreatePost() {
                 placeholder="Image name"
                 value={imageName}
                 onChange={(e) => setImageName(e.target.value)}
-                className="border w-full md:w-[24vw] py-2 px-2 font-semibold rounded-md outline-0"
+                className="border w-[90vw] md:w-[60vw] lg:w-[24vw] py-2 px-2 font-semibold rounded-md outline-0"
               />
               {/* Description */}
               <textarea
                 placeholder="Write description..."
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="w-[50vw] h-[50vh] border py-2 px-2 md:p-2 rounded-md outline-none resize-none"
+                className="w-[90vw] md:w-[90vw] lg:w-[50vw] h-[50vh] border py-2 px-2 md:p-2 rounded-md outline-none resize-none"
               ></textarea>
             </div>
           </div>
@@ -150,7 +150,7 @@ function CreatePost() {
           <button
             type="submit"
             disabled={loading}
-            className={`bg-green-500 py-2 xl:px-6 xl:py-1.5 hover:bg-green-600 w-[20%] rounded transition duration-200 font-semibold tracking-widest text-xl md:text-lg text-white cursor-pointer flex justify-center items-center gap-2 ${
+            className={`bg-green-500 py-1 md:py-2 xl:px-6 xl:py-1.5 hover:bg-green-600 w-[35%] md:w-[20%] rounded transition duration-200 font-semibold tracking-widest text md:text-xl lg:text-lg text-white cursor-pointer flex justify-center items-center gap-2 ${
               loading && "opacity-70 cursor-not-allowed"
             } `}
           >

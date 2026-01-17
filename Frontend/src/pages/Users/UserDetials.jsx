@@ -224,14 +224,14 @@ function UserDetials() {
           {editMode ? (
             <form
               onSubmit={handleSubmit}
-              className="flex flex-col md:flex-row items-center justify-center mt-4 md:space-x-6"
+              className="flex flex-col md:flex-row items-center justify-center mt-4 md:space-x-16 lg:space-x-6"
             >
               <img
                 src={previewAvatar}
                 alt="user avatar"
-                className="w-[90%] md:w-[60%] md:h-[50vh] border-4 border-lime-500 rounded-xl"
+                className="w-[90%] md:w-[55%] lg:w-[60%] lg:h-[50vh] border-4 border-lime-500 rounded-xl"
               />
-              <div className="flex flex-col items-center space-y-2 mt-3 lg:mt-0 lg:w-[20vw]">
+              <div className="flex flex-col items-center space-y-2 mt-3 md:mt-0 lg:w-[20vw]">
                 <div className="new-avatar-input">
                   <button
                     type="button"
@@ -248,7 +248,7 @@ function UserDetials() {
                     onChange={handleChange}
                   />
                 </div>
-                <div className="w-full flex flex-col gap-0.5">
+                <div className="w-[320px] md:w-[250px] lg:w-full flex flex-col gap-0.5">
                   <p>First Name</p>
                   <input
                     type="text"
@@ -256,7 +256,7 @@ function UserDetials() {
                     value={formData.firstName}
                     onChange={handleChange}
                     placeholder="First name"
-                    className="border-2 border-lime-500 lg:w-[80%] md:w-full px-2 py-1 rounded-md"
+                    className="border-2 border-lime-500 px-2 py-2 rounded-md"
                   />
                 </div>
                 <div className="w-full flex flex-col gap-0.5">
@@ -267,7 +267,7 @@ function UserDetials() {
                     value={formData.lastName}
                     onChange={handleChange}
                     placeholder="Last name"
-                    className="border-2 border-lime-500 lg:w-[80%] md:w-full px-2 py-1 rounded-md"
+                    className="border-2 border-lime-500 px-2 py-2 rounded-md"
                   />
                 </div>
                 <div className="w-full flex flex-col gap-0.5">
@@ -278,7 +278,7 @@ function UserDetials() {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="Enter email"
-                    className="border-2 border-lime-500 lg:w-[80%] md:w-full px-2 py-1 rounded-md"
+                    className="border-2 border-lime-500 px-2 py-2 rounded-md"
                   />
                 </div>
 
@@ -314,18 +314,18 @@ function UserDetials() {
             </form>
           ) : (
             <div className="w-full flex flex-col justify-center items-center">
-              <div className="w-full flex items-center justify-center mt-4 space-x-14 lg:space-x-6">
+              <div className="w-full flex items-center justify-center mt-4 space-x-1.5 md:space-x-10 lg:space-x-6">
                 <img
                   src={userDetails.avatar}
                   alt="user avatar"
-                  className="w-[50%] md:w-[20vw] md:h-[50vh] border-4 border-green-500 rounded-xl"
+                  className="w-[50%] md:w-[60%] lg:w-[30vw] lg:h-[50vh] border-4 border-green-500 rounded-xl"
                 />
 
                 <div className="flex flex-col items-center justify-center lg:w-[20vw] cursor-default">
-                  <h1 className="lg:text-2xl font-bold mt-2">
+                  <h1 className="md:text-xl lg:text-2xl font-bold mt-2">
                     {userDetails.firstName} {userDetails.lastName}
                   </h1>
-                  <h1 className="text-sm md:text-lg mt-1 text-gray-700">
+                  <h1 className="text-sm md:text-xl mt-1 text-gray-700 truncate">
                     {userDetails.email}
                   </h1>
                   <div className="flex gap-4 mt-4">
@@ -338,15 +338,15 @@ function UserDetials() {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col items-center justify-center mt-20 mb-2">
-                <div className="border-b-4 border-t-4 z-40 border-[#658C58] w-[100vw] text-center shadow-[#8ed38b] shadow-2xl/50 rounded-l-2xl rounded-r-2xl">
-                  <h1 className="text-4xl mb-2.5 tracking-wider italic font-extrabold text-[#31694E] cursor-default">
+              <div className="flex flex-col items-center justify-center mt-10 md:mt-20 mb-2">
+                <div className="border-b-2 border-t-2 lg:border-b-4 lg:border-t-4 z-40 border-[#658C58] w-[100vw] text-center shadow-[#8ed38b] shadow-2xl/50 rounded-l-xl rounded-r-xl lg:rounded-l-2xl lg:rounded-r-2xl">
+                  <h1 className=" text-lg lg:text-4xl my-0.5 lg:mb-2.5 tracking-wider italic font-bold md:font-extrabold text-[#31694E] cursor-default">
                     Your Image's
                   </h1>
                 </div>
                 <div className="w-full">
                   {userImages.length === 0 ? (
-                    <h2 className="text-center text-2xl font-semibold text-red-400 w-full mt-10 mb-20 cursor-default">
+                    <h2 className="text-center md:text-2xl font-semibold text-red-400 w-full mt-5 lg:mt-10 mb-20 cursor-default">
                       Oops! You don’t have any images yet 😃
                     </h2>
                   ) : (
