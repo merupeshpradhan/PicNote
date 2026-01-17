@@ -92,7 +92,7 @@ function PostDetail() {
               {" "}
               {postDetails.description}
             </p>
-            <div className="flex flex-col gap-1 items-center text-[12px] md:text-[14px] lg:text-[15px] tracking-wider text-fuchsia-900 text-lg font-semibold">
+            <div className="flex flex-col gap-1 items-center text-[12px] md:text-[15px] mt-0.5 mb-2 tracking-wider text-fuchsia-900 text-lg font-semibold">
               <p>
                 Uploaded on :-{" "}
                 {new Date(postDetails.createdAt).toLocaleDateString("en-GB", {
