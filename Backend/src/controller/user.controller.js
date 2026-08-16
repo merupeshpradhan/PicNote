@@ -49,20 +49,26 @@ const userSignup = asyncHandler(async (req, res) => {
   // });
 
   // save the user to DB
-  await user.save();
+  try {
+    console.log("Before save");
 
-  const userData = {
-    id: user._id,
-    avatar: user.avatar,
-    avatarPublicId: user.avatarPublicId,
-    firstName: user.firstName,
-    lastName: user.lastName,
-    email: user.email,
-  };
+    await user.save();
 
-  return res
-    .status(201)
-    .json(new ApiResponse(201, userData, "User registered successfully."));
+    const userData = {
+      id: user._id,
+      avatar: user.avatar,
+      avatarPublicId: user.avatarPublicId,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+    };
+    return res
+      .status(201)
+      .json(new ApiResponse(201, userData, "User registered successfully."));
+  } catch (error) {
+    console.log("After save");
+    console.log(error);
+  }
 });
 
 // =========================
@@ -94,13 +100,13 @@ const userLogin = asyncHandler(async (req, res) => {
 
   // now add
   const cookieOptions = {
-  httpOnly: true,
-  secure: process.env.NODE_ENV === "production",
-  sameSite: "strict",
-};
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+  };
 
-  res.cookie("accessToken", accessToken,cookieOptions); //here hide option i want now
-  res.cookie("refreshToken", refreshToken,cookieOptions);
+  res.cookie("accessToken", accessToken, cookieOptions); //here hide option i want now
+  res.cookie("refreshToken", refreshToken, cookieOptions);
 
   const userData = {
     id: user._id,
@@ -112,7 +118,13 @@ const userLogin = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .json(new ApiResponse(200, userData, `Welcome to PicNote, ${userData.firstName}!`));
+    .json(
+      new ApiResponse(
+        200,
+        userData,
+        `Welcome to PicNote, ${userData.firstName}!`,
+      ),
+    );
 });
 
 // =========================
@@ -151,7 +163,13 @@ const updateUserDetails = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .json(new ApiResponse(200, updatedData, "Your profile has been updated successfully."));
+    .json(
+      new ApiResponse(
+        200,
+        updatedData,
+        "Your profile has been updated successfully.",
+      ),
+    );
 });
 // =========================
 //          LOGOUT
