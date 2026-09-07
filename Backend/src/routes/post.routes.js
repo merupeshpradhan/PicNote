@@ -12,18 +12,6 @@ import { authMiddleware } from "../middlewares/auth.middleware.js";
 
 const router = Router();
 
-// Create post (Without login)
-// router.route("/").post(upload.single("image"), createPost);
-
-// Get user posts (Without logged in user can access)
-// router.route("/user/:userId").get(getuserPosts);
-
-// Update post (login not required)
-// router.route("/:postId").put(upload.single("image"), updatePost);
-
-// Delete post (login not required required)
-// router.route("/:postId").delete(deletePost);
-
 // Create post (With login)
 router.route("/").post(authMiddleware, upload.single("image"), createPost);
 

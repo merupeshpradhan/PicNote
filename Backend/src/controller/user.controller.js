@@ -41,13 +41,6 @@ const userSignup = asyncHandler(async (req, res) => {
   user.avatar = avatarUpload.secure_url;
   user.avatarPublicId = avatarUpload.public_id;
 
-  // const user = await User.create({
-  //   avatar: avatar.secure_url,
-  //   userName,
-  //   email,
-  //   password,
-  // });
-
   // save the user to DB
   try {
     console.log("Before save");

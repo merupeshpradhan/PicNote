@@ -14,7 +14,6 @@ const router = Router();
 router.route("/signup").post(upload.single("avatar"), userSignup);
 router.route("/login").post(userLogin);
 router.route("/logout").post(authMiddleware, userLogout);
-// router.post("/refresh-token", refreshAccessToken);
 router.route("/refresh-token").post(refreshAccessToken);
 
 // Portected routes

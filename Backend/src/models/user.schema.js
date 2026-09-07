@@ -12,7 +12,10 @@ const userSchema = new Schema(
       type: String,
       required: [true, "Please provide your last name"],
     },
-    avatar: { type: String, required: [false, "Please provide your own image"] },
+    avatar: {
+      type: String,
+      required: [false, "Please provide your own image"],
+    },
     avatarPublicId: { type: String, required: false },
     email: {
       type: String,
@@ -22,18 +25,8 @@ const userSchema = new Schema(
     password: { type: String, required: [true, "Password is required"] },
     refreshToken: { type: String },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
-
-// Hashing password before saving
-// userSchema.pre("save", async function (next) {
-//   if (!this.isModified("password")) {
-//     return next();
-//   }
-
-//   this.password = await bcrypt.hash(this.password, 10);
-//   next();
-// });
 
 userSchema.pre("save", async function () {
   if (!this.isModified("password")) return;
@@ -59,7 +52,7 @@ userSchema.methods.generateAccessToken = function () {
     process.env.ACCESS_TOKEN_SECRET,
     {
       expiresIn: process.env.ACCESS_TOKEN_EXPIRY,
-    }
+    },
   );
 };
 
@@ -71,7 +64,7 @@ userSchema.methods.generateRefreshToken = function () {
     process.env.REFRESH_TOKEN_SECRET,
     {
       expiresIn: process.env.REFRESH_TOKEN_EXPIRY,
-    }
+    },
   );
 };
 

@@ -29,31 +29,13 @@ const createPost = asyncHandler(async (req, res) => {
   if (!description) {
     throw new ApiError(400, "Please provide description.");
   }
-
-  // unique + friendly publicId: userId + post image name
-  // const cleanName = (imageName || post.imageName).replace(/[^a-zA-Z0-9_-]/g, "_");
-  // const publicId = `user_${req.user._id}_post_${cleanName}`;
-
   // With Login image name ->
   const publicId = `user_${req.user._id}_post_${imageName.replace(
     /\s+/g,
-    "_"
+    "_",
   )}`;
 
-  // With out Login image name ->
-  // const userId = req.user?._id || null;
-  // const publicId = userId
-  //   ? `user_${userId}_post_${imageName.replace(/\s+/g, "_")}`
-  //   : `_post_${imageName.replace(/\s+/g, "_")}`;
-
-  // Upload to Cloudinary 1st way
-  // const image = await uploadOnCloudinary(imageLocalPath);
-  // if (!image) {
-  //   throw new ApiError(400, "Image upload failed, please try again.");
-  // }
-  // const imagUrl = image.secure_url || image.url;
-
-  // Upload to Cloudinary 2nd way
+  // Upload to Cloudinary
   const imageUpload = await uploadOnCloudinary(imageLocalPath, publicId);
   if (!imageUpload) {
     throw new ApiError(400, "Post image upload failed");
@@ -63,10 +45,6 @@ const createPost = asyncHandler(async (req, res) => {
   const post = await Post.create({
     // with Login
     user: req.user._id,
-
-    // Now with out login
-    // user: userId,
-
     image: imageUpload.secure_url,
     imagePublicId: imageUpload.public_id,
     imageName,
@@ -84,7 +62,7 @@ const createPost = asyncHandler(async (req, res) => {
 const getAllPost = asyncHandler(async function (req, res) {
   const posts = await Post.find().populate(
     "user",
-    "firstName lastName avatar email"
+    "firstName lastName avatar email",
   );
 
   return res
@@ -100,7 +78,7 @@ const getuserPosts = asyncHandler(async function (req, res) {
 
   const posts = await Post.find({ user: userId }).populate(
     "user",
-    "firstName lastName avatar email"
+    "firstName lastName avatar email",
   );
 
   return res
@@ -117,7 +95,7 @@ const getPostById = asyncHandler(async function (req, res) {
 
   const post = await Post.findById(postId).populate(
     "user",
-    "firstName lastName avatar email"
+    "firstName lastName avatar email",
   );
 
   if (!post) {
