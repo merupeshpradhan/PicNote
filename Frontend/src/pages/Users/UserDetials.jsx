@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-// import axios from "axios";
 import Footer from "../../components/Footer";
 import { toast } from "react-toastify";
 import { data, NavLink, useNavigate, useParams } from "react-router-dom";
@@ -59,18 +58,13 @@ function UserDetials() {
     console.log("userId :- ", userId);
 
     try {
-      // const res = await axios.get(
-      //   `http://localhost:4000/api/v1/posts/user/${userId}`,
-      //   { withCredentials: true }
-      // );
-
       const res = await api.get(`/posts/user/${userId}`);
       console.log("User Image's :- ", res);
 
       if (res.data.data) {
         // Sort latest post first
         const sorted = res.data.data.sort(
-          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
         );
         setUserImages(sorted);
       } else {
@@ -116,10 +110,6 @@ function UserDetials() {
       if (formData.lastName) data.append("lastName", formData.lastName);
       if (formData.email) data.append("email", formData.email);
 
-      // const token = localStorage.getItem("accessToken");
-
-      // const res = await api.put(`/users/update-profile`, data);
-      // const res = await axios.put(`/users/update-profile`, data);
       const res = await api.put(`/users/update-profile`, data);
       const updateUser = res.data.data;
       localStorage.setItem("user", JSON.stringify(updateUser));
@@ -144,7 +134,7 @@ function UserDetials() {
 
       console.log(
         error.response?.data?.message || "Error creation post",
-        error
+        error,
       );
 
       toast.update(toastId, {
@@ -160,20 +150,11 @@ function UserDetials() {
 
   // DELETE handler
   const handleDelete = async (postId) => {
-    // if (!window.confirm("Are you sure you want to delete this post?")) return;
-    // const token = localStorage.getItem("accessToken");
-
     // Loading toast
     const toastId = toast.loading("Deleting image...", {
       closeButton: true,
     });
     try {
-      // await axios.delete(`http://localhost:4000/api/v1/posts/${postId}`, {
-      //   headers: {
-      //     Authorization: `Bearer ${token}`,
-      //   },
-      //   withCredentials: true,
-      // });
       const res = await api.delete(`/posts/${postId}`);
 
       // toast.success("Post deleted successfully!");

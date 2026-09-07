@@ -24,9 +24,7 @@ function UpdatePost() {
     const fetchPost = async () => {
       try {
         window.scrollTo(0, 0);
-        // const res = await axios.get(
-        //   `http://localhost:4000/api/v1/posts/${postId}`
-        // );
+
         const res = await api.get(`/posts/${postId}`);
         const post = res.data.data;
         // console.log(post);
@@ -76,14 +74,6 @@ function UpdatePost() {
     });
 
     try {
-      // const res = await axios.put(
-      //   `http://localhost:4000/api/v1/posts/${postId}`,
-      //   data,
-      //   {
-      //     headers: { "Content-Type": "multipart/form-data" },
-      //     withCredentials: true,
-      //   }
-      // );
       const res = await api.put(`/posts/${postId}`, data);
 
       const successsMsg = res.data?.message || "Post Update success";

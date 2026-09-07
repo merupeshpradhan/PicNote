@@ -1,4 +1,3 @@
-// import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Footer from "../../components/Footer";
@@ -15,17 +14,8 @@ function PostDetail() {
 
   useEffect(() => {
     const getOwnerDetails = async () => {
-      // const token = localStorage.getItem("accessToken");
-      // console.log(token);
       setLoading(true);
       try {
-        // const res = await axios.get(
-        //   `http://localhost:4000/api/v1/posts/${postId}`,
-        //   {
-        //     headers: { Authorization: `Bearer ${token}` },
-        //     withCredentials: true,
-        //   }
-        // );
         const res = await api.get(`/posts/${postId}`);
 
         console.log("owner details", res.data.data);

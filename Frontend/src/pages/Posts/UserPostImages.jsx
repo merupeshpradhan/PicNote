@@ -1,9 +1,7 @@
-// import axios from "axios";
 import { useEffect, useState } from "react";
 import { data, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import api from "../Api/api";
-// import api from "../../utils/axiosInstance";
 
 function UserPostImages() {
   const { userId } = useParams(); // get userId from URL
@@ -11,13 +9,7 @@ function UserPostImages() {
   const navigate = useNavigate();
 
   const getUserPost = async () => {
-    // const token = localStorage.getItem("accessToken");
     try {
-      // const res = await api.get(`/posts/user/${userId}`);
-      // const res = await axios.get(
-      //   `http://localhost:4000/api/v1/posts/user/${userId}`,
-      //   { withCredentials: true }
-      // );
       const res = await api.get(`/posts/user/${userId}`);
 
       if (res.data.data) {
@@ -40,18 +32,6 @@ function UserPostImages() {
   useEffect(() => {
     getUserPost();
   }, [userId]);
-
-  // const userFromStorage = localStorage.getItem("user");
-  // let loggedInUserId = null;
-
-  // if (userFromStorage) {
-  //   try {
-  //     const loggedInUser = JSON.parse(userFromStorage);
-  //     loggedInUserId = loggedInUser?._id || loggedInUser?.id;
-  //   } catch (error) {
-  //     console.log("Error Analysis user:", error);
-  //   }
-  // }
 
   return (
     <div className="w-full  items-center grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 p-5 pt-[160px] lg:pt-[85px] md:pl-[32vw] lg:pl-[48vh] mt-[85px] lg:mt-0">

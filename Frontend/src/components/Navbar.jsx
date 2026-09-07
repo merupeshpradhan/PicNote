@@ -1,10 +1,7 @@
-// import axios from "axios";
-// import api from "../utils/axiosInstance";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import SearchBar from "../pages/Posts/SearchBar";
 import { toast } from "react-toastify";
-// import axios from "axios";
 import api from "../pages/Api/api";
 
 function Navbar({ setPostData }) {

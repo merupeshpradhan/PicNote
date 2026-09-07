@@ -1,4 +1,3 @@
-// import axios from "axios";
 import { useEffect, useState } from "react";
 import { FaSpinner } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -14,7 +13,6 @@ function Post({ postData }) {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        // const res = await axios.get("http://localhost:4000/api/v1/posts");
         const res = await api.get("/posts");
         console.log("Posts response", res);
 

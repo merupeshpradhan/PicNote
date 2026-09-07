@@ -9,7 +9,6 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <App />
-      {/* <ToastContainer /> */}
       <ToastContainer
         position="top-right"
         style={{ marginTop: "40px" }}

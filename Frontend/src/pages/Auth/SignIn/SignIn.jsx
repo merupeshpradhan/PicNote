@@ -1,4 +1,3 @@
-// import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -20,11 +19,6 @@ function SignIn() {
     const toastId = toast.loading("SignIN for PicNote...");
 
     try {
-      // const res = await axios.post(
-      //   "http://localhost:4000/api/v1/users/login",
-      //   { email, password },
-      //   { withCredentials: true }
-      // );
       const res = await api.post("/users/login", { email, password });
       console.log(res.data);
 
@@ -72,7 +66,6 @@ function SignIn() {
           isLoading: false,
           autoClose: "2000",
         });
-        // toast.error("Something went wrong. Please try again.");
       }
     } finally {
       setLoading(false);

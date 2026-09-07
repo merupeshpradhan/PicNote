@@ -1,5 +1,4 @@
 import { useState } from "react";
-// import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import {
   FaEye,
@@ -37,14 +36,6 @@ function Signup() {
       formData.append("email", email);
       formData.append("password", password);
 
-      // const res = await axios.post(
-      // // const res = await axios.get(`http://localhost:4000/api/v1/posts/user/${userId}`);
-
-      //   "http://localhost:4000/api/v1/users/signup",
-      //   formData,
-      //   { headers: { "Content-Type": "multipart/form-data" } }
-      //   // { withCredentials: true }
-      // );
       const res = await api.post("/users/signup", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });

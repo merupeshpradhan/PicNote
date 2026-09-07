@@ -1,9 +1,7 @@
-// import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import api from "../Api/api";
-// import api from "../../utils/axiosInstance";
 
 function PostOwnerDetails() {
   const { userId } = useParams();
@@ -11,16 +9,7 @@ function PostOwnerDetails() {
 
   useEffect(() => {
     const getOwnerDetails = async () => {
-      // const token = localStorage.getItem("accessToken");
-      // console.log(token);
       try {
-        // const res = await api.get(`/posts/user/${userId}`);
-        // const res = await axios.get(
-        //   `http://localhost:4000/api/v1/posts/user/${userId}`,
-        //   {
-        //     withCredentials: true,
-        //   }
-        // );
         const res = await api.get(`/posts/user/${userId}`);
         console.log("owner details", res.data.data);
 

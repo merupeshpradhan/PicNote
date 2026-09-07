@@ -15,7 +15,6 @@ import ScrollToTop from "./components/ScrollToTop";
 function App() {
   const location = useLocation();
   const [postData, setPostData] = useState("");
-  // const [postData, setPostData] = useState([]);
 
   // Chek if current route is login or register
   const hideLayout = ["/signin", "/signup"].includes(location.pathname);

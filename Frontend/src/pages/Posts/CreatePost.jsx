@@ -1,4 +1,3 @@
-// import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -24,16 +23,6 @@ function CreatePost() {
       formData.append("image", image);
       formData.append("imageName", imageName);
       formData.append("description", description);
-
-      // const token = localStorage.getItem("accessToken");
-
-      // await axios.post("http://localhost:4000/api/v1/posts", formData, {
-      //   headers: {
-      //     "Content-Type": "multipart/form-data",
-      //     Authorization: `Bearer ${token}`,
-      //   },
-      //   withCredentials: true,
-      // });
 
       const res = await api.post("/posts", formData);
 
